@@ -1,10 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cp03yccnrohe1"]
+[gd_scene load_steps=14 format=3 uid="uid://cp03yccnrohe1"]
 
 [ext_resource type="Texture2D" uid="uid://c168m4qtp13iq" path="res://assets/tiles/tile_corrupted.png" id="1_3lwho"]
 [ext_resource type="Script" path="res://levels/base_level.gd" id="1_v7j55"]
 [ext_resource type="Texture2D" uid="uid://dkby1cgurwakq" path="res://assets/tiles/tile_normal.png" id="2_kayo5"]
 [ext_resource type="PackedScene" uid="uid://7jekns5y01qt" path="res://player/player.tscn" id="3_ba8e1"]
-[ext_resource type="PackedScene" uid="uid://br7m47vps1buj" path="res://player/weapons/base_weapon.tscn" id="6_0s8x0"]
+[ext_resource type="PackedScene" uid="uid://br7m47vps1buj" path="res://player/weapons/corruption_weapon.tscn" id="6_0s8x0"]
 [ext_resource type="Script" path="res://levels/CorruptionEngine.gd" id="6_bh0is"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dc7rw"]
@@ -29,6 +29,17 @@ physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_dc7rw")
 sources/1 = SubResource("TileSetAtlasSource_050sd")
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ccqom"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8v0nb"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wjl3k"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3iytt"]
+normal = Vector2(-1, 0)
+
 [node name="BaseLevel" type="Node2D"]
 script = ExtResource("1_v7j55")
 
@@ -40,9 +51,6 @@ layer_0/tile_data = PackedInt32Array(0, 1, 0, 65536, 1, 0, 131072, 1, 0, 196608,
 layer_1/name = "Plague"
 layer_1/tile_data = PackedInt32Array()
 
-[node name="Camera2D" type="Camera2D" parent="."]
-enabled = false
-
 [node name="Player" parent="." instance=ExtResource("3_ba8e1")]
 position = Vector2(285, 347)
 scale = Vector2(2, 2)
@@ -50,6 +58,27 @@ scale = Vector2(2, 2)
 [node name="CorruptionWeapons" type="Node2D" parent="Player"]
 position = Vector2(-142.5, -173.5)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("6_bh0is")
 
 [node name="BasicCorrupt" parent="Player/CorruptionWeapons" instance=ExtResource("6_0s8x0")]
+
+[node name="LevelBorders" type="StaticBody2D" parent="."]
+
+[node name="Top" type="CollisionShape2D" parent="LevelBorders"]
+shape = SubResource("WorldBoundaryShape2D_ccqom")
+
+[node name="Left" type="CollisionShape2D" parent="LevelBorders"]
+position = Vector2(0, 656)
+shape = SubResource("WorldBoundaryShape2D_8v0nb")
+
+[node name="Bottom" type="CollisionShape2D" parent="LevelBorders"]
+position = Vector2(1152, 657)
+shape = SubResource("WorldBoundaryShape2D_wjl3k")
+
+[node name="Right" type="CollisionShape2D" parent="LevelBorders"]
+position = Vector2(1152, 0)
+shape = SubResource("WorldBoundaryShape2D_3iytt")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="CorruptionEngine" type="Node" parent="."]
+script = ExtResource("6_bh0is")

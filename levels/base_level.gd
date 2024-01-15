@@ -1,5 +1,6 @@
 extends Node2D
-
+## For now the script is empty. Most likely some features will be managed
+## here, but we'll see in the future
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

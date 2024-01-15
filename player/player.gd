@@ -1,5 +1,10 @@
 extends CharacterBody2D
 
+## Represents player character with it's collision shape, sprite and animation
+##
+## The class doesn't know about player's weapons - they are added in the game as
+## a children of Player class and are shooting by themselves
+
 @onready var animation_player = $AnimationPlayer
 @onready var sprite_2d = $Sprite2D
 

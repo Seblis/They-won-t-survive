@@ -1,5 +1,11 @@
 extends Area2D
 
+## Base class for every weapons changing tiles to corrupted ones.
+##
+## Most properties are set by hand in the Inspector or prepare in _ready().
+## Instances of corruption weapons should be added during the game
+## as children of the dedicated Node2D called CorruptionWeapons
+
 @export var startup_frames: int = 0
 @export var active_frames: int = 3
 @export var cooldown: float = 4.0
