@@ -13,7 +13,6 @@ script = ExtResource("1_cqx4w")
 hitbox = SubResource("CircleShape2D_uxhda")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(281, 367)
 
 [node name="AttackCooldown" type="Timer" parent="."]
 autostart = true
