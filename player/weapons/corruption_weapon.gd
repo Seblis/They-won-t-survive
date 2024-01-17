@@ -25,7 +25,7 @@ func _ready():
 	animated_sprite_2d.global_position = get_parent().get_parent().global_position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _physics_process(_delta):
 	if _attack_enabled:
 		if _startup_left:
 			_startup_left -= 1
