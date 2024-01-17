@@ -1,9 +1,52 @@
-[gd_scene load_steps=3 format=3 uid="uid://br7m47vps1buj"]
+[gd_scene load_steps=9 format=3 uid="uid://br7m47vps1buj"]
 
 [ext_resource type="Script" path="res://player/weapons/corruption_weapon.gd" id="1_cqx4w"]
+[ext_resource type="Texture2D" uid="uid://qxx6en1qctyp" path="res://assets/sprites/Red Effect Bullet Impact Explosion 32x32.png" id="2_mq05l"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uxhda"]
 radius = 25.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jf1p3"]
+atlas = ExtResource("2_mq05l")
+region = Rect2(192, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjuhw"]
+atlas = ExtResource("2_mq05l")
+region = Rect2(224, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f76fj"]
+atlas = ExtResource("2_mq05l")
+region = Rect2(256, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vfu3f"]
+atlas = ExtResource("2_mq05l")
+region = Rect2(288, 160, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kmuha"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jf1p3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pjuhw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f76fj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vfu3f")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
 
 [node name="BaseCorruptionWeapon" type="Area2D"]
 collision_layer = 2
@@ -11,6 +54,10 @@ collision_mask = 2
 monitoring = false
 script = ExtResource("1_cqx4w")
 hitbox = SubResource("CircleShape2D_uxhda")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_kmuha")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 

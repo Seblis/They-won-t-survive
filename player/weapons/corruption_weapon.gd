@@ -12,6 +12,7 @@ extends Area2D
 @export var hitbox: Shape2D
 @onready var attack_cooldown = $AttackCooldown
 @onready var collision_shape_2d = $CollisionShape2D
+@onready var animated_sprite_2d = $AnimatedSprite2D
 
 var _active_left: int = -1
 var _startup_left: int = -1
@@ -20,6 +21,8 @@ var _attack_enabled: bool = false
 func _ready():
 	attack_cooldown.wait_time = cooldown
 	collision_shape_2d.shape = hitbox
+	collision_shape_2d.global_position = get_parent().get_parent().global_position
+	animated_sprite_2d.global_position = get_parent().get_parent().global_position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -42,3 +45,4 @@ func _on_attack_cooldown_timeout():
 	_active_left = active_frames
 	_startup_left = startup_frames
 	_attack_enabled = true
+	animated_sprite_2d.play("default")
