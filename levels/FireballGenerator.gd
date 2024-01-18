@@ -1,9 +1,9 @@
 extends Node2D
 
 const fireball_scene: PackedScene = preload("res://player/weapons/fireball.tscn")
+@onready var player = $"../Player"
 
-func _ready():
-	global_position = get_parent().global_position
+
 
 func _on_fireball_timer_timeout():
 	var new_fireball = fireball_scene.instantiate()
@@ -14,12 +14,6 @@ func _on_fireball_timer_timeout():
 	direction.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	
 	new_fireball.set_target_direction(direction)
+	new_fireball.set_player_position(player.global_position)
 	
-	# TODO choose direction and rotation
 	add_child(new_fireball)
-	
-func _physics_process(delta):
-	pass
-	#print("global/parent global")
-	#print(str(global_position))
-	#print(str(get_parent().global_position))

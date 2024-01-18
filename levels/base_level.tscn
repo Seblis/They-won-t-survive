@@ -57,10 +57,11 @@ script = ExtResource("4_vj0u6")
 cooldown = 5.0
 hitbox = SubResource("CircleShape2D_7onf8")
 
-[node name="FireballGenerator" type="Node2D" parent="Player"]
+[node name="FireballGenerator" type="Node2D" parent="."]
+scale = Vector2(2, 2)
 script = ExtResource("6_x1b8e")
 
-[node name="FireballTimer" type="Timer" parent="Player/FireballGenerator"]
+[node name="FireballTimer" type="Timer" parent="FireballGenerator"]
 wait_time = 2.0
 autostart = true
 
@@ -113,5 +114,5 @@ autostart = true
 [node name="Enemies" type="Node2D" parent="."]
 position = Vector2(-104, -69)
 
-[connection signal="timeout" from="Player/FireballGenerator/FireballTimer" to="Player/FireballGenerator" method="_on_fireball_timer_timeout"]
+[connection signal="timeout" from="FireballGenerator/FireballTimer" to="FireballGenerator" method="_on_fireball_timer_timeout"]
 [connection signal="timeout" from="EnemySpawner/SpawnTimer" to="EnemySpawner" method="_on_spawn_timer_timeout"]
