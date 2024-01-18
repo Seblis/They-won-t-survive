@@ -1,10 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://cp03yccnrohe1"]
+[gd_scene load_steps=14 format=3 uid="uid://cp03yccnrohe1"]
 
 [ext_resource type="Script" path="res://levels/base_level.gd" id="1_v7j55"]
 [ext_resource type="TileSet" uid="uid://8cfel0ses07a" path="res://assets/tiles/base_level_tileset.tres" id="2_ln7d0"]
 [ext_resource type="PackedScene" uid="uid://7jekns5y01qt" path="res://player/player.tscn" id="3_ba8e1"]
 [ext_resource type="PackedScene" uid="uid://br7m47vps1buj" path="res://player/weapons/corruption_weapon.tscn" id="6_0s8x0"]
 [ext_resource type="Script" path="res://levels/CorruptionEngine.gd" id="6_bh0is"]
+[ext_resource type="Script" path="res://levels/enemy_spawner.gd" id="7_t3rld"]
+[ext_resource type="Script" path="res://levels/spawn_point.gd" id="8_5g4ly"]
 
 [sub_resource type="Environment" id="Environment_5v3mb"]
 background_mode = 3
@@ -73,3 +75,32 @@ shape = SubResource("WorldBoundaryShape2D_3iytt")
 
 [node name="CorruptionEngine" type="Node" parent="."]
 script = ExtResource("6_bh0is")
+
+[node name="EnemySpawner" type="Node2D" parent="."]
+position = Vector2(576, 328)
+script = ExtResource("7_t3rld")
+
+[node name="EnemySpawn" type="Marker2D" parent="EnemySpawner"]
+position = Vector2(-656, -371)
+script = ExtResource("8_5g4ly")
+
+[node name="EnemySpawn2" type="Marker2D" parent="EnemySpawner"]
+position = Vector2(626, -371)
+script = ExtResource("8_5g4ly")
+
+[node name="EnemySpawn3" type="Marker2D" parent="EnemySpawner"]
+position = Vector2(626, 396)
+script = ExtResource("8_5g4ly")
+
+[node name="EnemySpawn4" type="Marker2D" parent="EnemySpawner"]
+position = Vector2(-656, 391)
+script = ExtResource("8_5g4ly")
+
+[node name="SpawnTimer" type="Timer" parent="EnemySpawner"]
+wait_time = 3.0
+autostart = true
+
+[node name="Enemies" type="Node2D" parent="."]
+position = Vector2(-104, -69)
+
+[connection signal="timeout" from="EnemySpawner/SpawnTimer" to="EnemySpawner" method="_on_spawn_timer_timeout"]
