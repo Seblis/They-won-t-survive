@@ -1,4 +1,13 @@
+class_name HealthComponent
 extends Node
+
+## Entity component managing its health
+## 
+## Class is responsible for taking damage, healing and notifying concerned
+## parties that the entity's health dropped to zero. It's possible to add
+## certain damage types, resistances etc. in this class in the future
+
+
 
 signal on_entity_died
 

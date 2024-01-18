@@ -1,4 +1,9 @@
+class_name HurtboxComponent
 extends Area2D
+
+## Class responsible for detecting incoming projectiles and weapons
+##
+## Usage requires to add HealthComponent in the node inspector
 
 @export var hurtbox_area: Array[CollisionShape2D] = []
 @export var health: HealthComponent = null
