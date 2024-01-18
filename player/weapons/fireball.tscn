@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://vc2yyo4ol2qk"]
+[gd_scene load_steps=8 format=3 uid="uid://vc2yyo4ol2qk"]
 
 [ext_resource type="Texture2D" uid="uid://cd4cs8hln34in" path="res://assets/sprites/Imp Sprite Sheet.png" id="1_cdlth"]
+[ext_resource type="Script" path="res://player/weapons/fireball.gd" id="2_e8bpu"]
 
 [sub_resource type="Animation" id="Animation_p2d8t"]
 resource_name = "cast"
@@ -101,6 +102,7 @@ texture = ExtResource("1_cdlth")
 hframes = 8
 vframes = 12
 frame = 40
+script = ExtResource("2_e8bpu")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

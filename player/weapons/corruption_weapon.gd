@@ -21,8 +21,8 @@ var _attack_enabled: bool = false
 func _ready():
 	attack_cooldown.wait_time = cooldown
 	collision_shape_2d.shape = hitbox
-	collision_shape_2d.global_position = get_parent().get_parent().global_position
-	animated_sprite_2d.global_position = get_parent().get_parent().global_position
+	collision_shape_2d.global_position = get_parent().global_position
+	animated_sprite_2d.global_position = get_parent().global_position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
