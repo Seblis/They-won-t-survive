@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://7jekns5y01qt"]
+[gd_scene load_steps=14 format=3 uid="uid://7jekns5y01qt"]
 
 [ext_resource type="Texture2D" uid="uid://cd4cs8hln34in" path="res://assets/sprites/Imp Sprite Sheet.png" id="1_8sb3y"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_ukcj2"]
+[ext_resource type="PackedScene" uid="uid://b2go81nmxue1a" path="res://components/HealthComponent.tscn" id="3_gy1g6"]
+[ext_resource type="PackedScene" uid="uid://cflwltu4sv4i1" path="res://components/HurtboxComponent.tscn" id="4_uivmg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c50aw"]
-size = Vector2(16, 14)
+size = Vector2(7, 11)
 
 [sub_resource type="Animation" id="Animation_6h1sl"]
 length = 0.001
@@ -113,7 +115,12 @@ _data = {
 "run": SubResource("Animation_rw37y")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lkj30"]
+size = Vector2(12, 12)
+
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 17
+collision_mask = 5
 script = ExtResource("1_ukcj2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -124,6 +131,7 @@ hframes = 8
 vframes = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 1.5)
 shape = SubResource("RectangleShape2D_c50aw")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -131,3 +139,12 @@ libraries = {
 "": SubResource("AnimationLibrary_kvblq")
 }
 autoplay = "idle"
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_gy1g6")]
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health") instance=ExtResource("4_uivmg")]
+health = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_lkj30")
