@@ -9,4 +9,3 @@ func spawn():
 	new_enemy.global_position = self.global_position
 	new_enemy.set_player_node(player)
 	enemies.add_child(new_enemy)
-	print(self.get_name())
