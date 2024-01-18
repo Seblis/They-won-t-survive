@@ -6,9 +6,9 @@ const GROUP_PLAYER_WEAPON = "player_weapon"
 var _weapon_direction: Vector2 = Vector2(1, 0)
 
 func _process(delta):
-	_set_direction()
+	_set_weapon_direction()
 
-func _set_direction():
+func _set_weapon_direction():
 	var new_x = Input.get_action_strength("Weapon right") - Input.get_action_strength("Weapon left")
 	var new_y = Input.get_action_strength("Weapon down") - Input.get_action_strength("Weapon up")
 	

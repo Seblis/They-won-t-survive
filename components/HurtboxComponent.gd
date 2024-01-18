@@ -12,9 +12,7 @@ func _ready():
 	global_position = get_parent().global_position
 
 func _on_body_entered(body):
-	print(body.name)
 	if body.is_in_group(GameEngine.GROUP_PLAYER_WEAPON):
-		print("Damage = %d" % body.get_damage())
 		health.damage(body.get_damage())
 		# TODO: some collision effect?
 		body.queue_free()

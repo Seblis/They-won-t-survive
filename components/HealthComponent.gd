@@ -7,8 +7,6 @@ extends Node
 ## parties that the entity's health dropped to zero. It's possible to add
 ## certain damage types, resistances etc. in this class in the future
 
-
-
 signal on_entity_died
 
 @export var MAX_HEALTH: int = 10

@@ -2,7 +2,7 @@ class_name Fireball
 extends CharacterBody2D
 
 const FIRE_DELAY: float = 0.15
-@export var damage: int = 12
+@export var damage: int = 5
 @export var SPEED: float = 350.0
 @onready var animation_player = $AnimationPlayer
 @onready var collision_shape_2d = $CollisionShape2D

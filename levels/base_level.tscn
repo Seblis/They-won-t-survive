@@ -44,12 +44,11 @@ layer_1/name = "Plague"
 layer_1/tile_data = PackedInt32Array()
 
 [node name="Player" parent="." instance=ExtResource("3_ba8e1")]
-position = Vector2(23, 20)
+position = Vector2(532, 411)
 scale = Vector2(2, 2)
 
 [node name="CorruptionWeapons" type="Node2D" parent="Player"]
 show_behind_parent = true
-position = Vector2(-142.5, -173.5)
 scale = Vector2(0.5, 0.5)
 script = ExtResource("4_vj0u6")
 
