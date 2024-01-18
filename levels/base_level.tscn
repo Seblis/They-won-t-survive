@@ -90,7 +90,7 @@ position = Vector2(576, 328)
 script = ExtResource("7_t3rld")
 
 [node name="EnemySpawn" type="Marker2D" parent="EnemySpawner"]
-position = Vector2(-626, -371)
+position = Vector2(-656, -371)
 script = ExtResource("8_5g4ly")
 
 [node name="EnemySpawn2" type="Marker2D" parent="EnemySpawner"]
@@ -98,11 +98,11 @@ position = Vector2(626, -371)
 script = ExtResource("8_5g4ly")
 
 [node name="EnemySpawn3" type="Marker2D" parent="EnemySpawner"]
-position = Vector2(-626, 396)
+position = Vector2(626, 396)
 script = ExtResource("8_5g4ly")
 
 [node name="EnemySpawn4" type="Marker2D" parent="EnemySpawner"]
-position = Vector2(626, 396)
+position = Vector2(-656, 391)
 script = ExtResource("8_5g4ly")
 
 [node name="SpawnTimer" type="Timer" parent="EnemySpawner"]
@@ -110,6 +110,6 @@ wait_time = 3.0
 autostart = true
 
 [node name="Enemies" type="Node2D" parent="."]
-position = Vector2(601, -72)
+position = Vector2(-104, -69)
 
 [connection signal="timeout" from="EnemySpawner/SpawnTimer" to="EnemySpawner" method="_on_spawn_timer_timeout"]
