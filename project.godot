@@ -38,7 +38,9 @@ Quit={
 
 [layer_names]
 
+2d_physics/layer_1="Player layer"
 2d_physics/layer_2="Corruption layer"
+2d_physics/layer_3="Enemy weapons layer"
 
 [rendering]
 

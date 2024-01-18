@@ -17,6 +17,7 @@ func _spawn_enemy():
 	if(spawn_counter < 4):
 		self.get_child(spawn_counter).spawn()
 	else:
+		return # TODO for testing purposes - remove later
 		spawn_counter = 0
 		self.get_child(spawn_counter).spawn()
 	spawn_counter+=1
