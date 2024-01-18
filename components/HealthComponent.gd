@@ -29,7 +29,7 @@ func get_current_health():
 	return _current_health
 	
 func damage(dmg_amount: int, hide_damage_label: bool = false):
-	_current_health = set_current_health(_current_health - dmg_amount)
+	_current_health -= dmg_amount
 	# TODO show damage label near the enemy if the second parameter is false
 	
 func heal(heal_amount: int):

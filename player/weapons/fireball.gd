@@ -2,7 +2,7 @@ class_name Fireball
 extends CharacterBody2D
 
 const FIRE_DELAY: float = 0.15
-@export var damage: int = 5
+@export var damage: int = 12
 @export var SPEED: float = 350.0
 @onready var animation_player = $AnimationPlayer
 @onready var collision_shape_2d = $CollisionShape2D
@@ -14,8 +14,8 @@ var _player_position: Vector2
 
 func _ready():
 	_time_active = 0
-	_is_activated = false
 	global_position = _player_position
+	set_target_direction()
 
 func _physics_process(delta):
 	# Finish starting animation before moving fireball
@@ -32,8 +32,8 @@ func _physics_process(delta):
 		
 	move_and_slide()
 
-func set_target_direction(direction: Vector2):
-	_target_vector = direction.normalized()
+func set_target_direction():
+	_target_vector = GameEngine.get_weapon_direction().normalized()
 	look_at(global_position+_target_vector)
 
 func set_player_position(pos: Vector2):
@@ -42,3 +42,6 @@ func set_player_position(pos: Vector2):
 func _on_screen_exited():
 	collision_shape_2d.disabled = true
 	queue_free()
+	
+func get_damage():
+	return damage

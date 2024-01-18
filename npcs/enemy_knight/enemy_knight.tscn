@@ -1,12 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdltal2lm55r2"]
+[gd_scene load_steps=6 format=3 uid="uid://bdltal2lm55r2"]
 
 [ext_resource type="Script" path="res://npcs/enemy_knight/enemy_knight.gd" id="1_m70gr"]
+[ext_resource type="PackedScene" uid="uid://b2go81nmxue1a" path="res://components/HealthComponent.tscn" id="2_qj76r"]
+[ext_resource type="PackedScene" uid="uid://cflwltu4sv4i1" path="res://components/HurtboxComponent.tscn" id="3_ureie"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_suejv"]
 size = Vector2(6, 6)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ixp8k"]
-size = Vector2(12, 12)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kuemm"]
 
 [node name="EnemyKnight" type="CharacterBody2D"]
 collision_layer = 16
@@ -22,7 +23,12 @@ color = Color(0, 0, 0, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_suejv")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="HealthComponent" parent="." instance=ExtResource("2_qj76r")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_ixp8k")
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health") instance=ExtResource("3_ureie")]
+collision_layer = 8
+collision_mask = 8
+health = NodePath("../HealthComponent")
+
+[node name="HurtboxArea" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("RectangleShape2D_kuemm")
