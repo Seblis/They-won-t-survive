@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://n821hov2hp53"]
+[gd_scene load_steps=8 format=3 uid="uid://n821hov2hp53"]
 
 [ext_resource type="PackedScene" uid="uid://dwt0yeulf0y84" path="res://levels/settings/nodes/animated_key/animated_key.tscn" id="1_6n3xh"]
 [ext_resource type="Texture2D" uid="uid://c63vlau6yqwct" path="res://assets/sprites/A-Key.png" id="2_o0ja1"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bl4brjtfyfbbu" path="res://assets/sprites/W-Key.png" id="4_xwo6p"]
 [ext_resource type="Texture2D" uid="uid://txsk734imtqf" path="res://assets/sprites/D-Key.png" id="5_dee12"]
 [ext_resource type="FontFile" uid="uid://dj731tie8fq6k" path="res://assets/fonts/PublicPixel-z84yD.ttf" id="6_65flj"]
+[ext_resource type="PackedScene" uid="uid://csn3g3gspbag2" path="res://levels/menu/menu_animated_background/animated_background.tscn" id="7_1ig3c"]
 
 [node name="SettingsScene" type="Control"]
 layout_mode = 3
@@ -14,6 +15,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="AnimatedBackground" parent="." instance=ExtResource("7_1ig3c")]
 
 [node name="WeaponControls" type="VBoxContainer" parent="."]
 layout_mode = 0

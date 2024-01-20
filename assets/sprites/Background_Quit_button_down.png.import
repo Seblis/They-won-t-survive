@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8fuogcbjkuwh"
-path="res://.godot/imported/A_btn.png-a2ee32deb08a3f1603cb41c007dce500.ctex"
+uid="uid://dyipv72adraaj"
+path="res://.godot/imported/Background_Quit_button_down.png-779aff26f3be971979d86a9afb833d4b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/menu/A_btn.png"
-dest_files=["res://.godot/imported/A_btn.png-a2ee32deb08a3f1603cb41c007dce500.ctex"]
+source_file="res://assets/sprites/Background_Quit_button_down.png"
+dest_files=["res://.godot/imported/Background_Quit_button_down.png-779aff26f3be971979d86a9afb833d4b.ctex"]
 
 [params]
 

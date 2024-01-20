@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dewnmtx6dvdte"
-path="res://.godot/imported/B_btn.png-33afcf98fb455d91f831e084bb656412.ctex"
+uid="uid://dsonyjxyld4id"
+path="res://.godot/imported/Background_Start_button_up.png-a21be4ac55bd83ebf3a3a3594ac8b96d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/menu/B_btn.png"
-dest_files=["res://.godot/imported/B_btn.png-33afcf98fb455d91f831e084bb656412.ctex"]
+source_file="res://assets/sprites/Background_Start_button_up.png"
+dest_files=["res://.godot/imported/Background_Start_button_up.png-a21be4ac55bd83ebf3a3a3594ac8b96d.ctex"]
 
 [params]
 
