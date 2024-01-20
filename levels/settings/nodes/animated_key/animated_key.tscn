@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwt0yeulf0y84"]
+
+[ext_resource type="Script" path="res://levels/settings/nodes/animated_key/animated_key.gd" id="1_hnbmx"]
+[ext_resource type="Texture2D" uid="uid://c63vlau6yqwct" path="res://assets/sprites/A-Key.png" id="2_vypan"]
+
+[sub_resource type="Animation" id="Animation_ljqif"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_fthjh"]
+resource_name = "idle_key_animation"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ahl4o"]
+_data = {
+"RESET": SubResource("Animation_ljqif"),
+"idle_key_animation": SubResource("Animation_fthjh")
+}
+
+[node name="AnimatedKey" type="Node2D"]
+script = ExtResource("1_hnbmx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_vypan")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ahl4o")
+}
+autoplay = "idle_key_animation"

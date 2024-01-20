@@ -1,0 +1,126 @@
+[gd_scene load_steps=14 format=3 uid="uid://n821hov2hp53"]
+
+[ext_resource type="PackedScene" uid="uid://dwt0yeulf0y84" path="res://levels/settings/nodes/animated_key/animated_key.tscn" id="1_6n3xh"]
+[ext_resource type="Script" path="res://levels/settings/settings_scene.gd" id="1_8u73i"]
+[ext_resource type="Texture2D" uid="uid://c63vlau6yqwct" path="res://assets/sprites/A-Key.png" id="2_o0ja1"]
+[ext_resource type="Texture2D" uid="uid://educ4gxs8egn" path="res://assets/sprites/S-Key.png" id="3_7w4cy"]
+[ext_resource type="Texture2D" uid="uid://bl4brjtfyfbbu" path="res://assets/sprites/W-Key.png" id="4_xwo6p"]
+[ext_resource type="Texture2D" uid="uid://txsk734imtqf" path="res://assets/sprites/D-Key.png" id="5_dee12"]
+[ext_resource type="FontFile" uid="uid://dj731tie8fq6k" path="res://assets/fonts/PublicPixel-z84yD.ttf" id="6_65flj"]
+[ext_resource type="PackedScene" uid="uid://csn3g3gspbag2" path="res://levels/menu/menu_animated_background/animated_background.tscn" id="7_1ig3c"]
+[ext_resource type="Texture2D" uid="uid://cwe5w0vcee4yd" path="res://assets/sprites/Buttons_Up_button.png" id="8_ni5kn"]
+[ext_resource type="Texture2D" uid="uid://coggt41yw850s" path="res://assets/sprites/Buttons_Down_button.png" id="9_roc8n"]
+[ext_resource type="Texture2D" uid="uid://bnrkxcv4l2ly8" path="res://assets/sprites/Buttons_Right_button.png" id="10_gra5o"]
+[ext_resource type="Texture2D" uid="uid://nuqitd2y6rvw" path="res://assets/sprites/Buttons_Left_button.png" id="11_fg7rl"]
+[ext_resource type="Texture2D" uid="uid://cpqwn4kjcsxki" path="res://assets/sprites/Esc-Key.png" id="12_bssdy"]
+
+[node name="SettingsScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8u73i")
+
+[node name="AnimatedBackground" parent="." instance=ExtResource("7_1ig3c")]
+
+[node name="WeaponControls" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 200.0
+offset_right = 302.0
+offset_bottom = 320.0
+scale = Vector2(2, 2)
+
+[node name="WSADKeysNode" type="Control" parent="WeaponControls"]
+custom_minimum_size = Vector2(102, 58)
+layout_mode = 2
+
+[node name="AnimatedWKey" parent="WeaponControls/WSADKeysNode" instance=ExtResource("1_6n3xh")]
+position = Vector2(52, 12)
+key_texture = ExtResource("4_xwo6p")
+
+[node name="AnimatedSKey" parent="WeaponControls/WSADKeysNode" instance=ExtResource("1_6n3xh")]
+position = Vector2(52, 42)
+key_texture = ExtResource("3_7w4cy")
+
+[node name="AnimatedDKey" parent="WeaponControls/WSADKeysNode" instance=ExtResource("1_6n3xh")]
+position = Vector2(87, 42)
+key_texture = ExtResource("5_dee12")
+
+[node name="AnimatedAKey" parent="WeaponControls/WSADKeysNode" instance=ExtResource("1_6n3xh")]
+position = Vector2(17, 42)
+key_texture = ExtResource("2_o0ja1")
+
+[node name="WSADLabel" type="Label" parent="WeaponControls"]
+custom_minimum_size = Vector2(102, 40)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_65flj")
+text = "WEAPON MOVEMENT
+"
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 2
+
+[node name="PlayerControls" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 500.0
+offset_top = 200.0
+offset_right = 602.0
+offset_bottom = 320.0
+scale = Vector2(2, 2)
+
+[node name="ArrowKeysNode" type="Control" parent="PlayerControls"]
+custom_minimum_size = Vector2(102, 58)
+layout_mode = 2
+
+[node name="AnimatedWKey" parent="PlayerControls/ArrowKeysNode" instance=ExtResource("1_6n3xh")]
+position = Vector2(52, 12)
+key_texture = ExtResource("8_ni5kn")
+
+[node name="AnimatedSKey" parent="PlayerControls/ArrowKeysNode" instance=ExtResource("1_6n3xh")]
+position = Vector2(52, 42)
+key_texture = ExtResource("9_roc8n")
+
+[node name="AnimatedDKey" parent="PlayerControls/ArrowKeysNode" instance=ExtResource("1_6n3xh")]
+position = Vector2(87, 42)
+key_texture = ExtResource("10_gra5o")
+
+[node name="AnimatedAKey" parent="PlayerControls/ArrowKeysNode" instance=ExtResource("1_6n3xh")]
+position = Vector2(17, 42)
+key_texture = ExtResource("11_fg7rl")
+
+[node name="ArrowKeysLabel" type="Label" parent="PlayerControls"]
+custom_minimum_size = Vector2(102, 40)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_65flj")
+text = "PLAYER MOVEMENT"
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 2
+
+[node name="MainMenu" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 800.0
+offset_top = 200.0
+offset_right = 902.0
+offset_bottom = 320.0
+scale = Vector2(2, 2)
+
+[node name="EscKeyNode" type="Control" parent="MainMenu"]
+custom_minimum_size = Vector2(102, 58)
+layout_mode = 2
+
+[node name="AnimatedWKey" parent="MainMenu/EscKeyNode" instance=ExtResource("1_6n3xh")]
+position = Vector2(52, 26)
+key_texture = ExtResource("12_bssdy")
+
+[node name="EscLabel" type="Label" parent="MainMenu"]
+custom_minimum_size = Vector2(102, 40)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_65flj")
+text = "GO TO MAIN MENU"
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 2
