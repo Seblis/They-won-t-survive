@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crpt8m5ern2um"
-path="res://.godot/imported/Spites_Lobby_background_1.png-6630a949b3b041f7a2e036d65edb9f55.ctex"
+uid="uid://cwe5w0vcee4yd"
+path="res://.godot/imported/Buttons_Up_button.png-82ec996b9625865bd36510afcc4d16f9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Spites_Lobby_background_1.png"
-dest_files=["res://.godot/imported/Spites_Lobby_background_1.png-6630a949b3b041f7a2e036d65edb9f55.ctex"]
+source_file="res://assets/sprites/Buttons_Up_button.png"
+dest_files=["res://.godot/imported/Buttons_Up_button.png-82ec996b9625865bd36510afcc4d16f9.ctex"]
 
 [params]
 
