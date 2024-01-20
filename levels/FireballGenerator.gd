@@ -1,7 +1,7 @@
 extends Node2D
 
 const fireball_scene: PackedScene = preload("res://player/weapons/fireball.tscn")
-@onready var player = $"../Player"
+@onready var player: Node2D = $"../Player"
 
 
 
