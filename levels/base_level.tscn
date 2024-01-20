@@ -1,10 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://cp03yccnrohe1"]
+[gd_scene load_steps=16 format=3 uid="uid://cp03yccnrohe1"]
 
 [ext_resource type="Script" path="res://levels/base_level.gd" id="1_v7j55"]
 [ext_resource type="TileSet" uid="uid://8cfel0ses07a" path="res://assets/tiles/base_level_tileset.tres" id="2_ln7d0"]
 [ext_resource type="PackedScene" uid="uid://7jekns5y01qt" path="res://player/player.tscn" id="3_ba8e1"]
+[ext_resource type="Script" path="res://levels/CorruptionWeapons.gd" id="4_vj0u6"]
 [ext_resource type="PackedScene" uid="uid://br7m47vps1buj" path="res://player/weapons/corruption_weapon.tscn" id="6_0s8x0"]
 [ext_resource type="Script" path="res://levels/CorruptionEngine.gd" id="6_bh0is"]
+[ext_resource type="Script" path="res://levels/FireballGenerator.gd" id="6_x1b8e"]
 [ext_resource type="Script" path="res://levels/enemy_spawner.gd" id="7_t3rld"]
 [ext_resource type="Script" path="res://levels/spawn_point.gd" id="8_5g4ly"]
 
@@ -42,17 +44,25 @@ layer_1/name = "Plague"
 layer_1/tile_data = PackedInt32Array()
 
 [node name="Player" parent="." instance=ExtResource("3_ba8e1")]
-position = Vector2(285, 347)
+position = Vector2(532, 411)
 scale = Vector2(2, 2)
 
 [node name="CorruptionWeapons" type="Node2D" parent="Player"]
 show_behind_parent = true
-position = Vector2(-142.5, -173.5)
 scale = Vector2(0.5, 0.5)
+script = ExtResource("4_vj0u6")
 
 [node name="BasicCorrupt" parent="Player/CorruptionWeapons" instance=ExtResource("6_0s8x0")]
 cooldown = 5.0
 hitbox = SubResource("CircleShape2D_7onf8")
+
+[node name="FireballGenerator" type="Node2D" parent="."]
+scale = Vector2(2, 2)
+script = ExtResource("6_x1b8e")
+
+[node name="FireballTimer" type="Timer" parent="FireballGenerator"]
+wait_time = 2.0
+autostart = true
 
 [node name="LevelBorders" type="StaticBody2D" parent="."]
 
@@ -103,4 +113,5 @@ autostart = true
 [node name="Enemies" type="Node2D" parent="."]
 position = Vector2(-104, -69)
 
+[connection signal="timeout" from="FireballGenerator/FireballTimer" to="FireballGenerator" method="_on_fireball_timer_timeout"]
 [connection signal="timeout" from="EnemySpawner/SpawnTimer" to="EnemySpawner" method="_on_spawn_timer_timeout"]
