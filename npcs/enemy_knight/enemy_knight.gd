@@ -4,6 +4,7 @@ const SPEED: float = 150.0
 const DESIRED_RANGE: float = 48.0
 enum State {CHASE, ATTACK, DEATH}
 
+static var slash_attack: PackedScene = preload("res://npcs/enemy_knight/attack_slash.tscn")
 @onready var animation_player = $AnimationPlayer
 @onready var sprite_2d = $Sprite2D
 
@@ -39,10 +40,16 @@ func _initiate_attack():
 	state = State.ATTACK
 	velocity = Vector2.ZERO
 	animation_player.play("Attack")
+	
+	var slash: CharacterBody2D = slash_attack.instantiate()
+	slash.set_starting_position(Vector2(global_position))
+	slash.set_target_position(Vector2(player.global_position))
+	
+	add_child(slash)
+	
 	_process_attack()
 
 func _process_attack():
-	# TODO: enable attack hitbox at correct frames
 	pass
 
 func _initiate_chase():
