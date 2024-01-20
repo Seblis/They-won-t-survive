@@ -8,6 +8,38 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_suejv"]
 size = Vector2(17, 22)
 
+[sub_resource type="Animation" id="Animation_6lwsb"]
+resource_name = "Attack"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [16, 17, 18, 19, 20, 21]
+}
+
+[sub_resource type="Animation" id="Animation_n1erd"]
+resource_name = "Death"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [24, 25, 26, 27, 28]
+}
+
 [sub_resource type="Animation" id="Animation_6104a"]
 resource_name = "Idle"
 loop_mode = 1
@@ -41,6 +73,8 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_v8ror"]
 resource_name = "Run"
+length = 0.8
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -52,38 +86,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [8, 9, 10, 11, 12, 13, 14, 15]
-}
-
-[sub_resource type="Animation" id="Animation_6lwsb"]
-resource_name = "Attack"
-length = 0.7
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [16, 17, 18, 19, 20, 21]
-}
-
-[sub_resource type="Animation" id="Animation_n1erd"]
-resource_name = "Death"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [24, 25, 26, 27, 28]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h6vhg"]
@@ -116,7 +118,7 @@ shape = SubResource("RectangleShape2D_suejv")
 libraries = {
 "": SubResource("AnimationLibrary_h6vhg")
 }
-autoplay = "Idle"
+autoplay = "Run"
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_qj76r")]
 
@@ -130,4 +132,3 @@ position = Vector2(2, 0)
 shape = SubResource("RectangleShape2D_kuemm")
 
 [connection signal="on_entity_died" from="HealthComponent" to="." method="_on_entity_died"]
-[connection signal="on_entity_died" from="HealthComponent" to="." method="_on_health_component_on_entity_died"]
