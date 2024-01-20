@@ -143,7 +143,9 @@ autoplay = "idle"
 [node name="HealthComponent" parent="." instance=ExtResource("3_gy1g6")]
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health") instance=ExtResource("4_uivmg")]
+unique_name_in_owner = true
 health = NodePath("../HealthComponent")
+invincibility_frames = 15
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtboxComponent"]
 position = Vector2(0, 1)
