@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 const SPEED: float = 150.0
-const DESIRED_RANGE: float = 8.0
-enum State {CHASE, ATTACK, DIE}
+const DESIRED_RANGE: float = 48.0
+enum State {CHASE, ATTACK, DEATH}
 
 @onready var animation_player = $AnimationPlayer
 @onready var sprite_2d = $Sprite2D
@@ -16,27 +16,47 @@ func _ready():
 
 func _physics_process(_delta):
 	if state == State.CHASE:
-		process_chase()
+		_process_chase()
 	elif state == State.ATTACK:
-		process_attack()
-	else:
-		process_death()
-	
-	move_and_slide()
+		_process_attack()
 
 func set_player_node(player_node):
 	player = player_node
 
 func _on_entity_died():
-	state = State.CHASE
+	state = State.DEATH
+	velocity = Vector2.ZERO
+	# animation player also shrinks 
 	animation_player.play("Death")
-	queue_free()
 
-func process_attack():
+func _on_animation_finished(anim_name):
+	if anim_name == "Death":
+		queue_free()
+	elif anim_name == "Attack":
+		_initiate_chase()
+		
+func _initiate_attack():
+	state = State.ATTACK
+	velocity = Vector2.ZERO
+	animation_player.play("Attack")
+	_process_attack()
+
+func _process_attack():
+	# TODO: enable attack hitbox at correct frames
 	pass
 
-func process_chase():
-	var move_to_player = (player.global_position - global_position).normalized()
+func _initiate_chase():
+	state = State.CHASE
+	animation_player.play("Run")
+
+func _process_chase():
+	var move_to_player = player.global_position - global_position
+	
+	if move_to_player.length() < DESIRED_RANGE:
+		_initiate_attack()
+		return
+	
+	move_to_player = move_to_player.normalized()
 	velocity.x = move_to_player.x * SPEED
 	velocity.y = move_to_player.y * SPEED
 	
@@ -44,6 +64,6 @@ func process_chase():
 		sprite_2d.flip_h = false
 	elif velocity.x < 0:
 		sprite_2d.flip_h = true
+		
+	move_and_slide()
 
-func process_death():
-	pass
