@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 const SPEED = 150.0
 var player
+@onready var animation_player = $AnimationPlayer
 
 
 func _ready():
