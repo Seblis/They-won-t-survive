@@ -1,6 +1,7 @@
 extends Node
 
-const GROUP_WEAPON = "weapon"
+const GROUP_WEAPON = "GROUP_WEAPON"
+const GROUP_PROJECTILE = "GROUP_PROJECTILE"
 
 var _weapon_direction: Vector2 = Vector2(1, 0)
 
