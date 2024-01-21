@@ -125,13 +125,12 @@ script = ExtResource("1_ukcj2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(1, -9)
+position = Vector2(0, -10)
 texture = ExtResource("1_8sb3y")
 hframes = 8
 vframes = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 1.5)
 shape = SubResource("RectangleShape2D_c50aw")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -145,6 +144,7 @@ MAX_HEALTH = 20
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health") instance=ExtResource("4_uivmg")]
 unique_name_in_owner = true
+position = Vector2(-1, -1)
 health = NodePath("../HealthComponent")
 invincibility_frames = 15
 

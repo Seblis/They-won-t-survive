@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://cp03yccnrohe1"]
+[gd_scene load_steps=17 format=3 uid="uid://cp03yccnrohe1"]
 
 [ext_resource type="Script" path="res://levels/base_level.gd" id="1_v7j55"]
 [ext_resource type="TileSet" uid="uid://8cfel0ses07a" path="res://assets/tiles/base_level_tileset.tres" id="2_ln7d0"]
 [ext_resource type="PackedScene" uid="uid://7jekns5y01qt" path="res://player/player.tscn" id="3_ba8e1"]
 [ext_resource type="Script" path="res://levels/CorruptionWeapons.gd" id="4_vj0u6"]
 [ext_resource type="PackedScene" uid="uid://br7m47vps1buj" path="res://player/weapons/corruption_weapon.tscn" id="6_0s8x0"]
+[ext_resource type="PackedScene" uid="uid://bls6xcjkc11f2" path="res://player/weapons/weapon_indicator.tscn" id="6_b2cmo"]
 [ext_resource type="Script" path="res://levels/CorruptionEngine.gd" id="6_bh0is"]
 [ext_resource type="Script" path="res://levels/FireballGenerator.gd" id="6_x1b8e"]
 [ext_resource type="Script" path="res://levels/enemy_spawner.gd" id="7_t3rld"]
@@ -55,6 +56,8 @@ script = ExtResource("4_vj0u6")
 [node name="BasicCorrupt" parent="Player/CorruptionWeapons" instance=ExtResource("6_0s8x0")]
 cooldown = 5.0
 hitbox = SubResource("CircleShape2D_7onf8")
+
+[node name="WeaponIndicator" parent="Player" instance=ExtResource("6_b2cmo")]
 
 [node name="FireballGenerator" type="Node2D" parent="."]
 scale = Vector2(2, 2)
