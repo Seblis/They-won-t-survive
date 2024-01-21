@@ -26,4 +26,5 @@ func _on_body_entered(body):
 			_remaining_invincibility = invincibility_frames
 			set_deferred("monitoring", false)
 		# TODO: some collision effect?
-		body.queue_free()
+		if body.is_in_group(GameEngine.GROUP_PROJECTILE):
+			body.queue_free()
