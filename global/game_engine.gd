@@ -5,7 +5,7 @@ const GROUP_PROJECTILE = "GROUP_PROJECTILE"
 
 var _weapon_direction: Vector2 = Vector2(1, 0)
 
-func _process(delta):
+func _process(_delta):
 	_set_weapon_direction()
 
 func _set_weapon_direction():
