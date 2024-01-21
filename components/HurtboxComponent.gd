@@ -20,7 +20,7 @@ func _physics_process(_delta):
 		monitoring = true
 
 func _on_body_entered(body):
-	if body.is_in_group(GameEngine.GROUP_PLAYER_WEAPON):
+	if body.is_in_group(GameEngine.GROUP_WEAPON):
 		health.damage(body.get_damage())
 		if invincibility_frames:
 			_remaining_invincibility = invincibility_frames

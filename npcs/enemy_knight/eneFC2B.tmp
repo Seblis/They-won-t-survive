@@ -7,7 +7,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ju73o"]
 radius = 8.5
-height = 26.0
+height = 28.0
 
 [sub_resource type="Animation" id="Animation_6lwsb"]
 resource_name = "Attack"
@@ -19,7 +19,7 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [16, 17, 18, 19, 20, 21]
@@ -147,7 +147,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kuemm"]
-size = Vector2(32, 35)
+size = Vector2(32, 34)
 
 [node name="EnemyKnight" type="CharacterBody2D"]
 collision_layer = 24
@@ -178,8 +178,8 @@ collision_mask = 8
 health = NodePath("../HealthComponent")
 
 [node name="HurtboxArea" type="CollisionShape2D" parent="HurtboxComponent"]
-position = Vector2(0, -0.5)
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_kuemm")
 
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_death_animation_finished"]
 [connection signal="on_entity_died" from="HealthComponent" to="." method="_on_entity_died"]

@@ -84,11 +84,12 @@ _data = {
 "land": SubResource("Animation_mqes2")
 }
 
-[node name="Fireball" type="CharacterBody2D" groups=["player_weapon"]]
+[node name="Fireball" type="CharacterBody2D" groups=["weapon"]]
 position = Vector2(0, -9)
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("2_e8bpu")
+damage = 10
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(15, -17)

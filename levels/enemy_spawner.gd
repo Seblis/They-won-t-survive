@@ -12,7 +12,7 @@ func _process(delta):
 
 
 func _spawn_enemy():
-	#randomized spawn in future 
+	# TODO: randomized spawn in future 
 	var current_spawn_point
 	if(spawn_counter < 4):
 		self.get_child(spawn_counter).spawn()
