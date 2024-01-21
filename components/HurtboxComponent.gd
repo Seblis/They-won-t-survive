@@ -17,13 +17,13 @@ func _physics_process(_delta):
 	if _remaining_invincibility:
 		_remaining_invincibility -= 1
 	else:
-		monitoring = true
+		set_deferred("monitoring", true)
 
 func _on_body_entered(body):
 	if body.is_in_group(GameEngine.GROUP_WEAPON):
 		health.damage(body.get_damage())
 		if invincibility_frames:
 			_remaining_invincibility = invincibility_frames
-			monitoring = false
+			set_deferred("monitoring", false)
 		# TODO: some collision effect?
 		body.queue_free()
