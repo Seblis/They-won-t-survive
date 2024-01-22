@@ -19,6 +19,7 @@ var _startup_left: int = -1
 var _attack_enabled: bool = false
 
 func _ready():
+	SignalManager.on_new_corruption_weapon.emit(self)
 	attack_cooldown.wait_time = cooldown
 	collision_shape_2d.shape = hitbox
 	collision_shape_2d.global_position = get_parent().global_position
