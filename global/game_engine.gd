@@ -17,8 +17,10 @@ func _process(_delta):
 	_set_weapon_direction()
 
 func _set_weapon_direction():
-	var new_x = Input.get_action_strength("Weapon right") - Input.get_action_strength("Weapon left")
-	var new_y = Input.get_action_strength("Weapon down") - Input.get_action_strength("Weapon up")
+	var new_x = Input.get_action_strength("Weapon right")\
+		- Input.get_action_strength("Weapon left")
+	var new_y = Input.get_action_strength("Weapon down")\
+		- Input.get_action_strength("Weapon up")
 	
 	
 	if new_x or new_y:
