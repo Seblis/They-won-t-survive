@@ -8,19 +8,15 @@ extends Node
 
 const CORRUPTION_LAYER: int = 1
 enum TileType {STANDARD, CORRUPT, HOLY}
-
-@onready var corruption_weapons = $"../Player/CorruptionWeapons"
-@onready var _map: TileMap = $"../TileMap"
+#@onready var _map: TileMap = $"../TileMap"
 
 func _ready():
 	SignalManager.on_new_corruption_weapon.connect(connect_corrupt)
 	SignalManager.on_new_bless_weapon.connect(connect_bless)
-	#for child in corruption_weapons.get_children():
-		#child.body_shape_entered.connect(corrupt_tile)
 
 func corrupt_tile(body_rid: RID, body: Node2D, _body_shape_index: int, _local_shape_index: int):
 	if body is TileMap:
-		_map.set_cell(TileType.CORRUPT, _map.get_coords_for_body_rid(body_rid),
+		body.set_cell(TileType.CORRUPT, body.get_coords_for_body_rid(body_rid),
 			CORRUPTION_LAYER, Vector2i(randi_range(0,3), randi_range(0,2)), 0)
 
 func connect_corrupt(corrupt_attack: Area2D):
@@ -28,7 +24,7 @@ func connect_corrupt(corrupt_attack: Area2D):
 
 func bless_tile(body_rid: RID, body: Node2D, _body_shape_index: int, _local_shape_index: int):
 	if body is TileMap:
-		_map.set_cell(TileType.HOLY, _map.get_coords_for_body_rid(body_rid),
+		body.set_cell(TileType.HOLY, body.get_coords_for_body_rid(body_rid),
 		CORRUPTION_LAYER, Vector2i(randi_range(0,3), randi_range(0,2)), 0)
 
 func connect_bless(bless_attack: Area2D):

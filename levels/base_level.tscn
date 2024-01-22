@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cp03yccnrohe1"]
+[gd_scene load_steps=17 format=3 uid="uid://cp03yccnrohe1"]
 
 [ext_resource type="Script" path="res://levels/base_level.gd" id="1_v7j55"]
 [ext_resource type="TileSet" uid="uid://8cfel0ses07a" path="res://assets/tiles/base_level_tileset.tres" id="2_ln7d0"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://levels/CorruptionWeapons.gd" id="4_vj0u6"]
 [ext_resource type="PackedScene" uid="uid://br7m47vps1buj" path="res://player/weapons/corruption_weapon.tscn" id="6_0s8x0"]
 [ext_resource type="PackedScene" uid="uid://bls6xcjkc11f2" path="res://player/weapons/weapon_indicator.tscn" id="6_b2cmo"]
-[ext_resource type="Script" path="res://levels/CorruptionEngine.gd" id="6_bh0is"]
 [ext_resource type="Script" path="res://levels/FireballGenerator.gd" id="6_x1b8e"]
 [ext_resource type="Script" path="res://levels/enemy_spawner.gd" id="7_t3rld"]
 [ext_resource type="Script" path="res://levels/spawn_point.gd" id="8_5g4ly"]
@@ -33,9 +32,6 @@ normal = Vector2(-1, 0)
 
 [node name="BaseLevel" type="Node2D"]
 script = ExtResource("1_v7j55")
-
-[node name="CorruptionEngine" type="Node" parent="."]
-script = ExtResource("6_bh0is")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_5v3mb")
