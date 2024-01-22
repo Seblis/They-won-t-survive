@@ -1,12 +1,5 @@
 extends Node
 
 signal on_spawn_enemy()
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
+signal on_new_corruption_weapon(weapon: Node2D)
+signal on_new_bless_weapon(weapon: Node2D)

@@ -114,10 +114,10 @@ shape = SubResource("WorldBoundaryShape2D_wjl3k")
 position = Vector2(1152, 0)
 shape = SubResource("WorldBoundaryShape2D_3iytt")
 
-[node name="UI" type="CanvasLayer" parent="."]
-
 [node name="CorruptionEngine" type="Node" parent="."]
 script = ExtResource("6_bh0is")
+
+[node name="UI" type="CanvasLayer" parent="."]
 
 [connection signal="timeout" from="EnemySpawner/SpawnTimer" to="EnemySpawner" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="FireballGenerator/FireballTimer" to="FireballGenerator" method="_on_fireball_timer_timeout"]
