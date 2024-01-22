@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://1rkpgft4va8v"]
+
+[ext_resource type="Script" path="res://npcs/enemy_cleric/enemy_cleric.gd" id="1_eaphc"]
+[ext_resource type="PackedScene" uid="uid://cflwltu4sv4i1" path="res://components/HurtboxComponent.tscn" id="1_k6ue8"]
+[ext_resource type="PackedScene" uid="uid://b2go81nmxue1a" path="res://components/HealthComponent.tscn" id="2_1xwsm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r3l0d"]
+size = Vector2(16, 26)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_87mdq"]
+radius = 16.0
+height = 52.0
+
+[node name="EnemyCleric" type="CharacterBody2D"]
+script = ExtResource("1_eaphc")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -14.0
+offset_top = -17.0
+offset_right = 13.0
+offset_bottom = 17.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_r3l0d")
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health") instance=ExtResource("1_k6ue8")]
+health = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CapsuleShape2D_87mdq")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_1xwsm")]
+
+[connection signal="on_entity_died" from="HealthComponent" to="." method="_on_entity_died"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cp03yccnrohe1"]
+[gd_scene load_steps=18 format=3 uid="uid://cp03yccnrohe1"]
 
 [ext_resource type="Script" path="res://levels/base_level.gd" id="1_v7j55"]
 [ext_resource type="TileSet" uid="uid://8cfel0ses07a" path="res://assets/tiles/base_level_tileset.tres" id="2_ln7d0"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://levels/FireballGenerator.gd" id="6_x1b8e"]
 [ext_resource type="Script" path="res://levels/enemy_spawner.gd" id="7_t3rld"]
 [ext_resource type="Script" path="res://levels/spawn_point.gd" id="8_5g4ly"]
+[ext_resource type="PackedScene" uid="uid://1rkpgft4va8v" path="res://npcs/enemy_cleric/enemy_cleric.tscn" id="11_01rc8"]
 
 [sub_resource type="Environment" id="Environment_5v3mb"]
 background_mode = 3
@@ -114,7 +115,9 @@ wait_time = 3.0
 autostart = true
 
 [node name="Enemies" type="Node2D" parent="."]
-position = Vector2(-104, -69)
+
+[node name="EnemyCleric" parent="Enemies" instance=ExtResource("11_01rc8")]
+position = Vector2(469, 360)
 
 [connection signal="timeout" from="FireballGenerator/FireballTimer" to="FireballGenerator" method="_on_fireball_timer_timeout"]
 [connection signal="timeout" from="EnemySpawner/SpawnTimer" to="EnemySpawner" method="_on_spawn_timer_timeout"]
