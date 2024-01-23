@@ -101,10 +101,10 @@ script = ExtResource("6_x1b8e")
 wait_time = 2.0
 autostart = true
 
-[node name="Sounds" type="AudioStreamPlayer" parent="FireballGenerator"]
+[node name="FireballSound" type="AudioStreamPlayer" parent="FireballGenerator"]
 stream = ExtResource("11_5yh8s")
-volume_db = -10.0
-pitch_scale = 0.9
+volume_db = -28.0
+pitch_scale = 0.8
 
 [node name="LevelBorders" type="StaticBody2D" parent="."]
 

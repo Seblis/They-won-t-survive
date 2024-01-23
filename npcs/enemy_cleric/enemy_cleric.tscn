@@ -174,7 +174,7 @@ shape = SubResource("RectangleShape2D_tqecv")
 
 [node name="BlessSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_y4rxq")
-volume_db = -15.0
+volume_db = -35.0
 pitch_scale = 0.9
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
