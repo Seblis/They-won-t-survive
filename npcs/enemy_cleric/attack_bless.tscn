@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://npcs/enemy_cleric/attack_bless.gd" id="1_a1rr1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jqc2u"]
-radius = 34.2345
+radius = 20.0
 
 [sub_resource type="Animation" id="Animation_18wwb"]
 resource_name = "Cast"
@@ -55,6 +55,8 @@ _data = {
 }
 
 [node name="AttackBless" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
 monitoring = false
 script = ExtResource("1_a1rr1")
 

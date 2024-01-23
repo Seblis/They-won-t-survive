@@ -3,7 +3,8 @@ extends CharacterBody2D
 const SPEED: float = 100.0
 const DESIRED_RANGE: float = 128.0
 const BLESS_SCENE = preload("res://npcs/enemy_cleric/attack_bless.tscn")
-const WAIT_TIME: float = 6.0
+const WAIT_TIME: float = 2.0
+const ATTACK_COOLDOWN: float = 1.0
 
 enum State {WALK, BLESS, WAIT, DEATH}
 
@@ -30,12 +31,11 @@ func _initiate_walk():
 	animation_player.play("Run")
 	_target_position = CorruptionEngine.rand_corrupted_tile_pos()
 	if _target_position == null:
-		_initiate_wait()	
+		_initiate_wait(WAIT_TIME)	
 
 func _update_walk():
 	var move_to_target = _target_position - global_position
 	
-	print("Len is ", move_to_target.length())
 	if move_to_target.length() < DESIRED_RANGE:
 		_initiate_bless()
 		return
@@ -62,9 +62,9 @@ func _initiate_bless():
 func _update_bless():
 	pass
 
-func _initiate_wait():
+func _initiate_wait(time: float):
 	state = State.WAIT
-	_remaining_wait = WAIT_TIME
+	_remaining_wait = time
 	animation_player.play("Idle")
 
 func _update_wait(delta):
@@ -78,6 +78,6 @@ func _on_entity_died():
 
 func _on_animation_finished(anim_name):
 	if anim_name == "Attack":
-		_initiate_walk()
+		_initiate_wait(ATTACK_COOLDOWN)
 	elif anim_name == "Death":
 		queue_free()
