@@ -29,7 +29,7 @@ func corrupt_tile(body_rid: RID, body: Node2D, _body_shape_index: int, _local_sh
 		var coords = body.get_coords_for_body_rid(body_rid)
 		corrupted_tiles[body_rid] = null
 		blessed_tiles.erase(body_rid)
-		body.set_cell(TileType.CORRUPT, coords, CORRUPTION_LAYER,
+		body.set_cell(CORRUPTION_LAYER, coords, TileType.CORRUPT,
 			Vector2i(randi_range(0,3), randi_range(0,2)), 0)
 
 func connect_corrupt(corrupt_attack: Area2D):
@@ -40,7 +40,7 @@ func bless_tile(body_rid: RID, body: Node2D, _body_shape_index: int, _local_shap
 		var coords = body.get_coords_for_body_rid(body_rid)
 		blessed_tiles[body_rid] = null
 		corrupted_tiles.erase(body_rid)
-		body.set_cell(TileType.HOLY, coords, CORRUPTION_LAYER,
+		body.set_cell(CORRUPTION_LAYER, coords, TileType.HOLY,
 			Vector2i(randi_range(0,3), randi_range(0,2)), 0)
 
 func connect_bless(bless_attack: Area2D):
@@ -51,7 +51,6 @@ func rand_corrupted_tile_pos():
 		return null
 	var size = corrupted_tiles.size()
 	var random_rid = corrupted_tiles.keys()[randi() % size]
-	print("Random key is ", random_rid)
 	return _map.map_to_local(_map.get_coords_for_body_rid(random_rid))
 	
 
