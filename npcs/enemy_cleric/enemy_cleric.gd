@@ -53,8 +53,11 @@ func _update_walk():
 
 func _initiate_bless():
 	state = State.BLESS
-	# TODO: start playing bless animation, create bless attack and set its pos
 	animation_player.play("Attack")
+	var new_bless = BLESS_SCENE.instantiate()
+	new_bless.set_target(_target_position)
+	
+	add_child(new_bless)
 
 func _update_bless():
 	pass
