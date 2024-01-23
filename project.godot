@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameEngine="*res://global/game_engine.gd"
 SignalManager="*res://global/signal_manager.gd"
+CorruptionEngine="*res://global/corruption_engine.gd"
 
 [display]
 

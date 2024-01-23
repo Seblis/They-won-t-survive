@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkby1cgurwakq"
-path="res://.godot/imported/tile_normal.png-c47c9c058fe18183bf4d2c004ddc832f.ctex"
+uid="uid://clq2qthsf1bld"
+path="res://.godot/imported/Cleric_sprites.png-1887661503e52e63774bcb7e689c249f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tiles/tile_normal.png"
-dest_files=["res://.godot/imported/tile_normal.png-c47c9c058fe18183bf4d2c004ddc832f.ctex"]
+source_file="res://assets/sprites/Cleric_sprites.png"
+dest_files=["res://.godot/imported/Cleric_sprites.png-1887661503e52e63774bcb7e689c249f.ctex"]
 
 [params]
 

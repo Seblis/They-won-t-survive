@@ -19,6 +19,7 @@ var _startup_left: int = -1
 var _attack_enabled: bool = false
 
 func _ready():
+	self.body_shape_entered.connect(CorruptionEngine.corrupt_tile)
 	attack_cooldown.wait_time = cooldown
 	collision_shape_2d.shape = hitbox
 	collision_shape_2d.global_position = get_parent().global_position
