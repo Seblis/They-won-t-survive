@@ -8,6 +8,7 @@ const ATTACK_COOLDOWN: float = 1.0
 
 enum State {WALK, BLESS, WAIT, DEATH}
 
+@onready var bless_sound = $BlessSound
 @onready var animation_player = $AnimationPlayer
 @onready var sprite_2d = $Sprite2D
 var state: int = State.WALK
@@ -52,6 +53,7 @@ func _update_walk():
 	move_and_slide()
 
 func _initiate_bless():
+	bless_sound.play()
 	state = State.BLESS
 	animation_player.play("Attack")
 	var new_bless = BLESS_SCENE.instantiate()

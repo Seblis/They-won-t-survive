@@ -5,7 +5,6 @@ extends Area2D
 ## Most properties are set by hand in the Inspector or prepare in _ready().
 ## Instances of corruption weapons should be added during the game
 ## as children of the dedicated Node2D called CorruptionWeapons
-
 @export var startup_frames: int = 0
 @export var active_frames: int = 3
 @export var cooldown: float = 4.0
@@ -13,6 +12,7 @@ extends Area2D
 @onready var attack_cooldown = $AttackCooldown
 @onready var collision_shape_2d = $CollisionShape2D
 @onready var animated_sprite_2d = $AnimatedSprite2D
+@onready var corruption_sound = $CorruptionSound
 
 var _active_left: int = -1
 var _startup_left: int = -1
@@ -43,6 +43,7 @@ func _physics_process(_delta):
 		
 
 func _on_attack_cooldown_timeout():
+	corruption_sound.play()
 	_active_left = active_frames
 	_startup_left = startup_frames
 	_attack_enabled = true
