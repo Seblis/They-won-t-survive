@@ -1,12 +1,14 @@
 extends CharacterBody2D
 
-const SPEED: float = 125.0
+const SPEED: float = 100.0
 const DESIRED_RANGE: float = 128.0
 const BLESS_SCENE = preload("res://npcs/enemy_cleric/attack_bless.tscn")
 const WAIT_TIME: float = 6.0
 
 enum State {WALK, BLESS, WAIT, DEATH}
 
+@onready var animation_player = $AnimationPlayer
+@onready var sprite_2d = $Sprite2D
 var state: int = State.WALK
 var _target_position
 var _remaining_wait: float = 0
@@ -25,7 +27,7 @@ func _physics_process(delta):
 
 func _initiate_walk():
 	state = State.WALK
-	# TODO: connect bless animation finished
+	animation_player.play("Run")
 	_target_position = CorruptionEngine.rand_corrupted_tile_pos()
 	if _target_position == null:
 		_initiate_wait()	
@@ -42,16 +44,17 @@ func _update_walk():
 	velocity.x = move_to_target.x * SPEED
 	velocity.y = move_to_target.y * SPEED
 	
-	#if velocity.x > 0:
-		#sprite_2d.flip_h = false
-	#elif velocity.x < 0:
-		#sprite_2d.flip_h = true
+	if velocity.x > 0:
+		sprite_2d.flip_h = false
+	elif velocity.x < 0:
+		sprite_2d.flip_h = true
 		
 	move_and_slide()
 
 func _initiate_bless():
 	state = State.BLESS
 	# TODO: start playing bless animation, create bless attack and set its pos
+	animation_player.play("Attack")
 
 func _update_bless():
 	pass
@@ -59,6 +62,7 @@ func _update_bless():
 func _initiate_wait():
 	state = State.WAIT
 	_remaining_wait = WAIT_TIME
+	animation_player.play("Idle")
 
 func _update_wait(delta):
 	_remaining_wait -= delta
@@ -67,5 +71,10 @@ func _update_wait(delta):
 
 func _on_entity_died():
 	state = State.DEATH
-	# TODO: play death animation, queue free after animation is finished
-	queue_free()
+	animation_player.play("Death")
+
+func _on_animation_finished(anim_name):
+	if anim_name == "Attack":
+		_initiate_walk()
+	elif anim_name == "Death":
+		queue_free()
