@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bts4mwr2j36yl"]
+[gd_scene load_steps=11 format=3 uid="uid://bts4mwr2j36yl"]
 
 [ext_resource type="Script" path="res://levels/menu/main.gd" id="1_6ybr0"]
 [ext_resource type="Texture2D" uid="uid://dsonyjxyld4id" path="res://assets/sprites/Background_Start_button_up.png" id="2_ffvse"]
@@ -8,6 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://bvuf2a7j3qe7m" path="res://assets/sprites/Background_Quit_button_up.png" id="6_63kkq"]
 [ext_resource type="Texture2D" uid="uid://dyipv72adraaj" path="res://assets/sprites/Background_Quit_button_down.png" id="7_txf26"]
 [ext_resource type="PackedScene" uid="uid://csn3g3gspbag2" path="res://levels/menu/menu_animated_background/animated_background.tscn" id="8_cqarn"]
+[ext_resource type="FontFile" uid="uid://dt0r27a4vcyje" path="res://assets/fonts/GothicPixels.ttf" id="9_eur7f"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jx2ly"]
+font = ExtResource("9_eur7f")
+font_size = 72
+font_color = Color(0.643137, 0.470588, 0.298039, 1)
+outline_size = 6
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -54,6 +61,22 @@ texture_pressed = ExtResource("7_txf26")
 texture_hover = ExtResource("7_txf26")
 ignore_texture_size = true
 stretch_mode = 4
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 310.0
+offset_top = 107.0
+offset_right = 1039.0
+offset_bottom = 179.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "They won't survive"
+label_settings = SubResource("LabelSettings_jx2ly")
 
 [connection signal="pressed" from="MenuVBox/PlayButton" to="." method="_on_play_btn_pressed"]
 [connection signal="pressed" from="MenuVBox/SettingsButton" to="." method="_on_settings_btn_pressed"]
