@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://vc2yyo4ol2qk"]
+[gd_scene load_steps=9 format=3 uid="uid://vc2yyo4ol2qk"]
 
 [ext_resource type="Script" path="res://player/weapons/fireball.gd" id="2_e8bpu"]
 [ext_resource type="Texture2D" uid="uid://cd4cs8hln34in" path="res://assets/sprites/Imp Sprite Sheet.png" id="2_lqr5g"]
+[ext_resource type="AudioStream" uid="uid://d2wcaubv1s1bh" path="res://assets/sounds/Fireball.mp3" id="3_sx6u0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ypj7"]
 size = Vector2(24, 8)
@@ -111,5 +112,11 @@ autoplay = "cast"
 [node name="VisibleNotifier" type="VisibleOnScreenEnabler2D" parent="."]
 position = Vector2(10.5, 0)
 scale = Vector2(1.3, 0.25)
+
+[node name="FireballSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_sx6u0")
+volume_db = -30.0
+pitch_scale = 0.8
+autoplay = true
 
 [connection signal="screen_exited" from="VisibleNotifier" to="." method="_on_screen_exited"]

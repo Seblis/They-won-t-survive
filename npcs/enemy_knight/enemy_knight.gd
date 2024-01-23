@@ -7,8 +7,6 @@ enum State {CHASE, ATTACK, DEATH}
 static var slash_attack: PackedScene = preload("res://npcs/enemy_knight/attack_slash.tscn")
 @onready var animation_player = $AnimationPlayer
 @onready var sprite_2d = $Sprite2D
-@onready var attack_sound = $AttackSound
-
 
 var player: Node2D
 var state: int = State.CHASE
@@ -39,7 +37,6 @@ func _on_animation_finished(anim_name):
 		_initiate_chase()
 		
 func _initiate_attack():
-	attack_sound.play()
 	state = State.ATTACK
 	velocity = Vector2.ZERO
 	animation_player.play("Attack")
