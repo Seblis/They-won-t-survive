@@ -56,7 +56,7 @@ _data = {
 "Thrust": SubResource("Animation_a6uoe")
 }
 
-[node name="AttackSlash" type="CharacterBody2D" groups=["weapon"]]
+[node name="AttackSlash" type="CharacterBody2D" groups=["GROUP_WEAPON"]]
 collision_mask = 0
 script = ExtResource("1_ps4xi")
 
