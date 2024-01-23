@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b2go81nmxue1a" path="res://components/HealthComponent.tscn" id="2_qj76r"]
 [ext_resource type="Texture2D" uid="uid://bryqo3mklbi01" path="res://assets/sprites/Knight_Knight_sprites.png" id="2_t370l"]
 [ext_resource type="PackedScene" uid="uid://cflwltu4sv4i1" path="res://components/HurtboxComponent.tscn" id="3_ureie"]
-[ext_resource type="AudioStream" uid="uid://2wcm024176we" path="res://assets/sounds/KnightSkill.mp3" id="5_gxb1e"]
+[ext_resource type="AudioStream" path="res://assets/sounds/KnightSkill.mp3" id="5_gxb1e"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ju73o"]
 radius = 8.5

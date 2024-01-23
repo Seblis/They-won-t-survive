@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://levels/FireballGenerator.gd" id="6_x1b8e"]
 [ext_resource type="Script" path="res://levels/enemy_spawner.gd" id="7_t3rld"]
 [ext_resource type="Script" path="res://levels/spawn_point.gd" id="8_5g4ly"]
-[ext_resource type="AudioStream" uid="uid://d2wcaubv1s1bh" path="res://assets/sounds/Fireball.mp3" id="11_5yh8s"]
+[ext_resource type="AudioStream" path="res://assets/sounds/Fireball.mp3" id="11_5yh8s"]
 
 [sub_resource type="Environment" id="Environment_5v3mb"]
 background_mode = 3

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://player/weapons/corruption_weapon.gd" id="1_cqx4w"]
 [ext_resource type="Texture2D" uid="uid://qxx6en1qctyp" path="res://assets/sprites/Red Effect Bullet Impact Explosion 32x32.png" id="2_mq05l"]
-[ext_resource type="AudioStream" uid="uid://y277b0swvit1" path="res://assets/sounds/ImpSkill.mp3" id="3_dndh6"]
+[ext_resource type="AudioStream" path="res://assets/sounds/ImpSkill.mp3" id="3_dndh6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uxhda"]
 radius = 25.0
