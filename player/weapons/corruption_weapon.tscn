@@ -56,6 +56,11 @@ monitoring = false
 script = ExtResource("1_cqx4w")
 hitbox = SubResource("CircleShape2D_uxhda")
 
+[node name="CorruptionSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_dndh6")
+volume_db = -30.0
+pitch_scale = 0.8
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_kmuha")
@@ -64,10 +69,5 @@ sprite_frames = SubResource("SpriteFrames_kmuha")
 
 [node name="AttackCooldown" type="Timer" parent="."]
 autostart = true
-
-[node name="CorruptionSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_dndh6")
-volume_db = -30.0
-pitch_scale = 0.8
 
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

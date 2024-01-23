@@ -60,6 +60,12 @@ _data = {
 collision_mask = 0
 script = ExtResource("1_ps4xi")
 
+[node name="AttackSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_00gkj")
+volume_db = -35.0
+pitch_scale = 0.7
+autoplay = true
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(48, 0)
 texture = ExtResource("2_0di8j")
@@ -74,11 +80,5 @@ libraries = {
 "": SubResource("AnimationLibrary_ai11r")
 }
 autoplay = "Thrust"
-
-[node name="AttackSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_00gkj")
-volume_db = -35.0
-pitch_scale = 0.7
-autoplay = true
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]

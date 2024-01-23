@@ -61,6 +61,12 @@ collision_mask = 2
 monitoring = false
 script = ExtResource("1_a1rr1")
 
+[node name="BlessSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_2tmvy")
+volume_db = -35.0
+pitch_scale = 0.9
+autoplay = true
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_jqc2u")
 
@@ -76,11 +82,5 @@ libraries = {
 "": SubResource("AnimationLibrary_l5wfd")
 }
 autoplay = "Cast"
-
-[node name="BlessSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_2tmvy")
-volume_db = -35.0
-pitch_scale = 0.9
-autoplay = true
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_animation_finished"]
