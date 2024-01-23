@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://bdltal2lm55r2"]
+[gd_scene load_steps=14 format=3 uid="uid://bdltal2lm55r2"]
 
 [ext_resource type="Script" path="res://npcs/enemy_knight/enemy_knight.gd" id="1_m70gr"]
 [ext_resource type="PackedScene" uid="uid://b2go81nmxue1a" path="res://components/HealthComponent.tscn" id="2_qj76r"]
 [ext_resource type="Texture2D" uid="uid://bryqo3mklbi01" path="res://assets/sprites/Knight_Knight_sprites.png" id="2_t370l"]
 [ext_resource type="PackedScene" uid="uid://cflwltu4sv4i1" path="res://components/HurtboxComponent.tscn" id="3_ureie"]
+[ext_resource type="AudioStream" uid="uid://2wcm024176we" path="res://assets/sounds/KnightSkill.mp3" id="5_gxb1e"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ju73o"]
 radius = 8.5
@@ -180,6 +181,11 @@ health = NodePath("../HealthComponent")
 [node name="HurtboxArea" type="CollisionShape2D" parent="HurtboxComponent"]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_kuemm")
+
+[node name="AttackSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_gxb1e")
+volume_db = -35.0
+pitch_scale = 0.7
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
 [connection signal="on_entity_died" from="HealthComponent" to="." method="_on_entity_died"]

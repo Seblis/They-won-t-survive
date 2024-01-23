@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://levels/FireballGenerator.gd" id="6_x1b8e"]
 [ext_resource type="Script" path="res://levels/enemy_spawner.gd" id="7_t3rld"]
 [ext_resource type="Script" path="res://levels/spawn_point.gd" id="8_5g4ly"]
-[ext_resource type="PackedScene" uid="uid://1rkpgft4va8v" path="res://npcs/enemy_cleric/enemy_cleric.tscn" id="11_01rc8"]
+[ext_resource type="AudioStream" uid="uid://d2wcaubv1s1bh" path="res://assets/sounds/Fireball.mp3" id="11_5yh8s"]
 
 [sub_resource type="Environment" id="Environment_5v3mb"]
 background_mode = 3
@@ -78,9 +78,6 @@ autostart = true
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="EnemyCleric" parent="Enemies" instance=ExtResource("11_01rc8")]
-position = Vector2(267, 191)
-
 [node name="Player" parent="." instance=ExtResource("3_ba8e1")]
 position = Vector2(532, 411)
 scale = Vector2(2, 2)
@@ -103,6 +100,11 @@ script = ExtResource("6_x1b8e")
 [node name="FireballTimer" type="Timer" parent="FireballGenerator"]
 wait_time = 2.0
 autostart = true
+
+[node name="FireballSound" type="AudioStreamPlayer" parent="FireballGenerator"]
+stream = ExtResource("11_5yh8s")
+volume_db = -28.0
+pitch_scale = 0.8
 
 [node name="LevelBorders" type="StaticBody2D" parent="."]
 

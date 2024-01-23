@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://1rkpgft4va8v"]
+[gd_scene load_steps=14 format=3 uid="uid://1rkpgft4va8v"]
 
 [ext_resource type="Script" path="res://npcs/enemy_cleric/enemy_cleric.gd" id="1_eaphc"]
 [ext_resource type="PackedScene" uid="uid://cflwltu4sv4i1" path="res://components/HurtboxComponent.tscn" id="1_k6ue8"]
 [ext_resource type="PackedScene" uid="uid://b2go81nmxue1a" path="res://components/HealthComponent.tscn" id="2_1xwsm"]
 [ext_resource type="Texture2D" uid="uid://clq2qthsf1bld" path="res://assets/sprites/Cleric_sprites.png" id="2_3dppl"]
+[ext_resource type="AudioStream" uid="uid://c8i8q7kobpaof" path="res://assets/sounds/ClericSkill.mp3" id="5_y4rxq"]
 
 [sub_resource type="Animation" id="Animation_gcfgs"]
 resource_name = "Attack"
@@ -170,6 +171,11 @@ position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_tqecv")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_1xwsm")]
+
+[node name="BlessSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_y4rxq")
+volume_db = -35.0
+pitch_scale = 0.9
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
 [connection signal="on_entity_died" from="HealthComponent" to="." method="_on_entity_died"]
