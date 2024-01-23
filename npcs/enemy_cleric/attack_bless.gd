@@ -4,7 +4,7 @@ extends Area2D
 var _target_tile: Vector2
 
 func _ready():
-	SignalManager.on_new_bless_weapon.emit(self)
+	self.body_shape_entered.connect(CorruptionEngine.bless_tile)
 	global_position = _target_tile
 
 func set_target(target: Vector2):

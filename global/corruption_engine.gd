@@ -15,9 +15,6 @@ var corrupted_tiles: Dictionary = {}
 var blessed_tiles: Dictionary = {}
 var _map: TileMap
 
-func _ready():
-	SignalManager.on_new_corruption_weapon.connect(connect_corrupt)
-	SignalManager.on_new_bless_weapon.connect(connect_bless)
 
 func reset_tiles(map):
 	_map = map
@@ -32,9 +29,6 @@ func corrupt_tile(body_rid: RID, body: Node2D, _body_shape_index: int, _local_sh
 		body.set_cell(CORRUPTION_LAYER, coords, TileType.CORRUPT,
 			Vector2i(randi_range(0,3), randi_range(0,2)), 0)
 
-func connect_corrupt(corrupt_attack: Area2D):
-	corrupt_attack.body_shape_entered.connect(corrupt_tile)
-
 func bless_tile(body_rid: RID, body: Node2D, _body_shape_index: int, _local_shape_index: int):
 	if body is TileMap:
 		var coords = body.get_coords_for_body_rid(body_rid)
@@ -42,9 +36,6 @@ func bless_tile(body_rid: RID, body: Node2D, _body_shape_index: int, _local_shap
 		corrupted_tiles.erase(body_rid)
 		body.set_cell(CORRUPTION_LAYER, coords, TileType.HOLY,
 			Vector2i(randi_range(0,3), randi_range(0,2)), 0)
-
-func connect_bless(bless_attack: Area2D):
-	bless_attack.body_shape_entered.connect(bless_tile)
 
 func rand_corrupted_tile_pos():
 	if not corrupted_tiles:
