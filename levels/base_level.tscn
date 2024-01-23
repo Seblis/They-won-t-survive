@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cp03yccnrohe1"]
+[gd_scene load_steps=18 format=3 uid="uid://cp03yccnrohe1"]
 
 [ext_resource type="Script" path="res://levels/base_level.gd" id="1_v7j55"]
 [ext_resource type="TileSet" uid="uid://8cfel0ses07a" path="res://assets/tiles/base_level_tileset.tres" id="2_ln7d0"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://levels/FireballGenerator.gd" id="6_x1b8e"]
 [ext_resource type="Script" path="res://levels/enemy_spawner.gd" id="7_t3rld"]
 [ext_resource type="Script" path="res://levels/spawn_point.gd" id="8_5g4ly"]
+[ext_resource type="PackedScene" uid="uid://cekvrrpspxf05" path="res://levels/menu/menu_game_over_screen/game_over.tscn" id="10_3gq4o"]
 
 [sub_resource type="Environment" id="Environment_5v3mb"]
 background_mode = 3
@@ -117,7 +118,9 @@ shape = SubResource("WorldBoundaryShape2D_wjl3k")
 position = Vector2(1152, 0)
 shape = SubResource("WorldBoundaryShape2D_3iytt")
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="GameOver" parent="." instance=ExtResource("10_3gq4o")]
 
 [connection signal="timeout" from="EnemySpawner/SpawnTimer" to="EnemySpawner" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="FireballGenerator/FireballTimer" to="FireballGenerator" method="_on_fireball_timer_timeout"]
