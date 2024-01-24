@@ -4,8 +4,9 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+  SignalManager.on_game_over.connect(game_over)
+	GameEngine.reset_score()
 	get_tree().paused = false
-	SignalManager.on_game_over.connect(game_over)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

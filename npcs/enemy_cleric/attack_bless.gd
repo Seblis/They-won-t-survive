@@ -11,4 +11,5 @@ func set_target(target: Vector2):
 	_target_tile = target
 
 func _animation_finished(anim_name):
+	GameEngine.update_score(false)
 	queue_free()
