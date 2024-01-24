@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bts4mwr2j36yl"]
+[gd_scene load_steps=11 format=3 uid="uid://bts4mwr2j36yl"]
 
 [ext_resource type="Script" path="res://levels/menu/main.gd" id="1_6ybr0"]
 [ext_resource type="Texture2D" uid="uid://dsonyjxyld4id" path="res://assets/sprites/Background_Start_button_up.png" id="2_ffvse"]
@@ -8,24 +8,44 @@
 [ext_resource type="Texture2D" uid="uid://bvuf2a7j3qe7m" path="res://assets/sprites/Background_Quit_button_up.png" id="6_63kkq"]
 [ext_resource type="Texture2D" uid="uid://dyipv72adraaj" path="res://assets/sprites/Background_Quit_button_down.png" id="7_txf26"]
 [ext_resource type="PackedScene" uid="uid://csn3g3gspbag2" path="res://levels/menu/menu_animated_background/animated_background.tscn" id="8_cqarn"]
+[ext_resource type="FontFile" uid="uid://dt0r27a4vcyje" path="res://assets/fonts/GothicPixels.ttf" id="9_eur7f"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jx2ly"]
+font = ExtResource("9_eur7f")
+font_size = 72
+font_color = Color(0.643137, 0.470588, 0.298039, 1)
+outline_size = 6
 
 [node name="Main" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_6ybr0")
 
 [node name="AnimatedBackground" parent="." instance=ExtResource("8_cqarn")]
 
-[node name="MenuVBox" type="VBoxContainer" parent="."]
-custom_minimum_size = Vector2(152, 400)
-layout_mode = 0
-offset_left = 100.0
-offset_top = 100.0
-offset_right = 252.0
-offset_bottom = 500.0
-scale = Vector2(0.989568, 1)
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 96
+theme_override_constants/margin_top = 96
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 
-[node name="PlayButton" type="TextureButton" parent="MenuVBox"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MenuVBox" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="PlayButton" type="TextureButton" parent="MarginContainer/HBoxContainer/MenuVBox"]
 custom_minimum_size = Vector2(152, 96)
 layout_mode = 2
 texture_normal = ExtResource("2_ffvse")
@@ -34,7 +54,7 @@ texture_hover = ExtResource("3_6skex")
 ignore_texture_size = true
 stretch_mode = 4
 
-[node name="SettingsButton" type="TextureButton" parent="MenuVBox"]
+[node name="SettingsButton" type="TextureButton" parent="MarginContainer/HBoxContainer/MenuVBox"]
 custom_minimum_size = Vector2(152, 96)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -46,7 +66,7 @@ texture_hover = ExtResource("5_4ev2j")
 ignore_texture_size = true
 stretch_mode = 4
 
-[node name="QuitButton" type="TextureButton" parent="MenuVBox"]
+[node name="QuitButton" type="TextureButton" parent="MarginContainer/HBoxContainer/MenuVBox"]
 custom_minimum_size = Vector2(152, 96)
 layout_mode = 2
 texture_normal = ExtResource("6_63kkq")
@@ -55,6 +75,16 @@ texture_hover = ExtResource("7_txf26")
 ignore_texture_size = true
 stretch_mode = 4
 
-[connection signal="pressed" from="MenuVBox/PlayButton" to="." method="_on_play_btn_pressed"]
-[connection signal="pressed" from="MenuVBox/SettingsButton" to="." method="_on_settings_btn_pressed"]
-[connection signal="pressed" from="MenuVBox/QuitButton" to="." method="_on_quit_btn_pressed"]
+[node name="TitleMC" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/HBoxContainer/TitleMC"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "They won't survive"
+label_settings = SubResource("LabelSettings_jx2ly")
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/MenuVBox/PlayButton" to="." method="_on_play_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/MenuVBox/SettingsButton" to="." method="_on_settings_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/MenuVBox/QuitButton" to="." method="_on_quit_btn_pressed"]
