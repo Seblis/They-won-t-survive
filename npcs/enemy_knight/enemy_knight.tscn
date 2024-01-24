@@ -149,7 +149,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kuemm"]
 size = Vector2(32, 35)
 
-[node name="EnemyKnight" type="CharacterBody2D"]
+[node name="EnemyKnight" type="CharacterBody2D" groups=["GROUP_ENEMY"]]
 collision_layer = 24
 collision_mask = 9
 script = ExtResource("1_m70gr")

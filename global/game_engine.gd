@@ -2,12 +2,16 @@ extends Node
 
 const GROUP_WEAPON = "GROUP_WEAPON"
 const GROUP_PROJECTILE = "GROUP_PROJECTILE"
+const GROUP_ENEMY = "GROUP_ENEMY"
 
+const K_SCORE_MULTIPLIER: int = 8
 const BUFFER_FRAMES: int = 3
 
 var _weapon_direction: Vector2 = Vector2(1, 0)
 var _last_diagonal: Vector2 = Vector2.ZERO
 var _current_buffer: int = 0
+var _area_score: int = 0
+var _kill_score: int = 0
 
 func _physics_process(delta):
 	if _current_buffer:
@@ -36,3 +40,21 @@ func _set_weapon_direction():
 
 func get_weapon_direction():
 	return Vector2(_weapon_direction)
+
+func update_score(enemy_killed: bool):
+	if enemy_killed:
+		_kill_score += K_SCORE_MULTIPLIER
+	else:
+		_area_score = CorruptionEngine.get_land_score()
+	print("*********** Score updated ************")
+	print("Kill score: ", _kill_score)
+	print("Area score: ", _area_score)
+	print("*************************************")
+	SignalManager.on_score_updated.emit()
+
+func reset_score():
+	_kill_score = 0
+	_area_score = 0
+
+func get_score():
+	return _kill_score + _area_score

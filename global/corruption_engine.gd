@@ -44,5 +44,7 @@ func rand_corrupted_tile_pos():
 	var random_rid = corrupted_tiles.keys()[randi() % size]
 	return _map.map_to_local(_map.get_coords_for_body_rid(random_rid))
 	
-
+func get_land_score():
+	return corrupted_tiles.size() * C_SCORE_MULTIPLIER\
+	+ blessed_tiles.size() * B_SCORE_MULTIPLIER
 

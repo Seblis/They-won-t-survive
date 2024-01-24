@@ -38,6 +38,7 @@ func _physics_process(_delta):
 			_active_left -= 1
 		else:
 			_attack_enabled = false
+			GameEngine.update_score(false)
 			monitoring = false
 		
 		
