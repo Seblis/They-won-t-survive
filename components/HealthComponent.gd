@@ -19,6 +19,10 @@ func _ready():
 	
 func set_current_health(new_health: int):
 	_current_health = clampi(new_health, 0, MAX_HEALTH)
+	
+	if get_parent().is_in_group(GameEngine.GROUP_PLAYER):
+		SignalManager.on_player_health_updated.emit(_current_health)
+		
 	if not _current_health:
 		_has_died = true
 		on_entity_died.emit()
