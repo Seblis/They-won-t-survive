@@ -22,6 +22,8 @@ func set_current_health(new_health: int):
 	if not _current_health:
 		_has_died = true
 		on_entity_died.emit()
+		if get_parent().is_in_group(GameEngine.GROUP_ENEMY):
+			GameEngine.update_score(true)
 	
 func get_current_health():
 	return _current_health

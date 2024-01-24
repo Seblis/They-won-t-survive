@@ -7,8 +7,6 @@ extends Node
 ## it's 
 
 const CORRUPTION_LAYER: int = 1
-const C_SCORE_MULTIPLIER: int = 10
-const B_SCORE_MULTIPLIER: int = -5
 enum TileType {STANDARD, CORRUPT, HOLY}
 
 var corrupted_tiles: Dictionary = {}
@@ -44,5 +42,9 @@ func rand_corrupted_tile_pos():
 	var random_rid = corrupted_tiles.keys()[randi() % size]
 	return _map.map_to_local(_map.get_coords_for_body_rid(random_rid))
 	
+func get_corrupted_area():
+	return corrupted_tiles.size()
 
+func get_blessed_area():
+	return blessed_tiles.size()
 
