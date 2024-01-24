@@ -26,6 +26,7 @@ font = ExtResource("1_i8asg")
 font_color = Color(0.537255, 0.556863, 0.282353, 1)
 
 [node name="DeathScreen" type="CanvasLayer"]
+process_mode = 2
 visible = false
 script = ExtResource("1_xwlfw")
 

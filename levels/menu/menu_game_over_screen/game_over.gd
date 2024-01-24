@@ -6,7 +6,6 @@ extends CanvasLayer
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	SignalManager.on_game_over.connect(display)
-	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_select"):
