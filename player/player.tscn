@@ -151,3 +151,6 @@ invincibility_frames = 60
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtboxComponent"]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_lkj30")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_player_death_animation_finished"]
+[connection signal="on_entity_died" from="HealthComponent" to="." method="_on_player_death"]
