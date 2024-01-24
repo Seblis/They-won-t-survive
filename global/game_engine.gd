@@ -4,14 +4,17 @@ const GROUP_WEAPON = "GROUP_WEAPON"
 const GROUP_PROJECTILE = "GROUP_PROJECTILE"
 const GROUP_ENEMY = "GROUP_ENEMY"
 
+const C_SCORE_MULTIPLIER: int = 10
+const B_SCORE_MULTIPLIER: int = -5
 const K_SCORE_MULTIPLIER: int = 8
 const BUFFER_FRAMES: int = 3
 
 var _weapon_direction: Vector2 = Vector2(1, 0)
 var _last_diagonal: Vector2 = Vector2.ZERO
 var _current_buffer: int = 0
-var _area_score: int = 0
-var _kill_score: int = 0
+var _blessed_area: int = 0
+var _corrupted_area: int = 0
+var _kill_amount: int = 0
 
 func _physics_process(delta):
 	if _current_buffer:
@@ -43,18 +46,28 @@ func get_weapon_direction():
 
 func update_score(enemy_killed: bool):
 	if enemy_killed:
-		_kill_score += K_SCORE_MULTIPLIER
+		_kill_amount += 1
 	else:
-		_area_score = CorruptionEngine.get_land_score()
+		_corrupted_area = CorruptionEngine.get_corrupted_area()
+		_blessed_area = CorruptionEngine.get_blessed_area()
 	print("*********** Score updated ************")
-	print("Kill score: ", _kill_score)
-	print("Area score: ", _area_score)
+	print("Kills: ", _kill_amount)
+	print("Corrupted area: ", _corrupted_area)
+	print("Blessed area: ", _blessed_area)
 	print("*************************************")
-	SignalManager.on_score_updated.emit()
+	SignalManager.on_score_updated.emit(get_score())
 
 func reset_score():
-	_kill_score = 0
-	_area_score = 0
+	_kill_amount = 0
+	_blessed_area = 0
+	_corrupted_area = 0
+	
+	SignalManager.on_score_updated.emit(get_score())
 
 func get_score():
-	return _kill_score + _area_score
+	var score: int = 0
+	score += _kill_amount * K_SCORE_MULTIPLIER
+	score += _blessed_area * B_SCORE_MULTIPLIER
+	score += _corrupted_area * C_SCORE_MULTIPLIER
+	
+	return score
