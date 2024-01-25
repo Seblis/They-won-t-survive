@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://dp3pwifub2y1u"]
+[gd_scene load_steps=2 format=3 uid="uid://dp3pwifub2y1u"]
+
+[ext_resource type="Texture2D" uid="uid://4ktabiw7tgt3" path="res://assets/sprites/table_border.png" id="1_7lg0h"]
 
 [node name="TableFrame" type="Control"]
 layout_mode = 3
@@ -15,13 +17,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 96
-theme_override_constants/margin_top = 72
-theme_override_constants/margin_right = 96
-theme_override_constants/margin_bottom = 72
 
-[node name="TableBackground" type="TextureRect" parent="TableBackgroundMargins"]
+[node name="TableBackground" type="NinePatchRect" parent="TableBackgroundMargins"]
 layout_mode = 2
+texture = ExtResource("1_7lg0h")
+region_rect = Rect2(0, 0, 48, 48)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
 
 [node name="TableTitle" type="TextureRect" parent="."]
 layout_mode = 1

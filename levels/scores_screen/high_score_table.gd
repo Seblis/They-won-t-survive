@@ -3,7 +3,7 @@ extends Control
 
 const TABLE_ROW: PackedScene = preload("res://levels/scores_screen/table_row.tscn")
 
-@onready var table_rows = $TableMargins/TableRowMargins/TableRows
+@onready var table_rows = $TableMargins/VBoxContainer/TableRowMargins/TableRows
 var entry_list: HighScoreList
 
 # Called when the node enters the scene tree for the first time.

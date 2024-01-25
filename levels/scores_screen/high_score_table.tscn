@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dee25xaf0o4om"]
+[gd_scene load_steps=5 format=3 uid="uid://dee25xaf0o4om"]
 
 [ext_resource type="Script" path="res://levels/scores_screen/high_score_table.gd" id="1_426rr"]
 [ext_resource type="PackedScene" uid="uid://dp3pwifub2y1u" path="res://levels/scores_screen/table_frame.tscn" id="2_uxowo"]
 [ext_resource type="PackedScene" uid="uid://1qnfcy56dtqc" path="res://levels/scores_screen/table_row.tscn" id="3_atum8"]
+[ext_resource type="LabelSettings" uid="uid://bn6w3soe7wukn" path="res://assets/fonts/styles/high_score_table.tres" id="3_ihb24"]
 
 [node name="HighScoreTable" type="Control"]
 layout_mode = 3
@@ -20,28 +21,41 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 96
+theme_override_constants/margin_top = 72
+theme_override_constants/margin_right = 96
+theme_override_constants/margin_bottom = 72
 
 [node name="TableFrame" parent="TableMargins" instance=ExtResource("2_uxowo")]
 layout_mode = 2
 
-[node name="TableTitle" type="Label" parent="TableMargins"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TableMargins"]
+layout_mode = 2
+
+[node name="TitleMargin" type="MarginContainer" parent="TableMargins/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 16
+
+[node name="TableTitle" type="Label" parent="TableMargins/VBoxContainer/TitleMargin"]
 layout_mode = 2
 size_flags_vertical = 0
 text = "High Scores"
+label_settings = ExtResource("3_ihb24")
 horizontal_alignment = 1
 
-[node name="TableRowMargins" type="MarginContainer" parent="TableMargins"]
+[node name="TableRowMargins" type="MarginContainer" parent="TableMargins/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_top = 80
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
 
-[node name="TableRows" type="VBoxContainer" parent="TableMargins/TableRowMargins"]
+[node name="TableRows" type="VBoxContainer" parent="TableMargins/VBoxContainer/TableRowMargins"]
 layout_mode = 2
 
-[node name="Header" parent="TableMargins/TableRowMargins/TableRows" instance=ExtResource("3_atum8")]
+[node name="Header" parent="TableMargins/VBoxContainer/TableRowMargins/TableRows" instance=ExtResource("3_atum8")]
 layout_mode = 2
-default_column_id = "Column ID"
+default_column_id = "Place"
 default_datetime = "Date"
 default_score = "Score"
 
-[node name="Separator" type="HSeparator" parent="TableMargins/TableRowMargins/TableRows"]
+[node name="Separator" type="HSeparator" parent="TableMargins/VBoxContainer/TableRowMargins/TableRows"]
 layout_mode = 2
