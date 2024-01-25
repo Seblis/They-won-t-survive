@@ -23,6 +23,8 @@ func _physics_process(delta):
 func _process(_delta):
 	_set_weapon_direction()
 
+#################### WEAPON SECTION ########################
+
 func _set_weapon_direction():
 	var new_x = Input.get_action_strength("Weapon right")\
 		- Input.get_action_strength("Weapon left")
@@ -43,6 +45,8 @@ func _set_weapon_direction():
 
 func get_weapon_direction():
 	return Vector2(_weapon_direction)
+
+#################### SCORE SECTION ########################
 
 func update_score(enemy_killed: bool):
 	if enemy_killed:
