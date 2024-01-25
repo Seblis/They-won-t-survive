@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://1qnfcy56dtqc"]
+
+[ext_resource type="Script" path="res://levels/scores_screen/table_row.gd" id="1_ep6dw"]
+
+[node name="TableRow" type="HBoxContainer"]
+script = ExtResource("1_ep6dw")
+
+[node name="ColumnID" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+horizontal_alignment = 2
+
+[node name="VSeparator1" type="VSeparator" parent="."]
+layout_mode = 2
+
+[node name="DateTime" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 3.0
+
+[node name="VSeparator2" type="VSeparator" parent="."]
+layout_mode = 2
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 2.0
+
+[node name="VSeparator3" type="VSeparator" parent="."]
+layout_mode = 2

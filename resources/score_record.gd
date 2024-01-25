@@ -1,8 +1,8 @@
 class_name ScoreRecord
 extends Resource
 
-var score: int = 0
-var datetime: String = ""
+@export var score: int = 0
+@export var datetime: String = ""
 
 func initiate_score(score_value: int):
 	score = score_value

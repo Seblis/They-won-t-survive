@@ -4,7 +4,7 @@ extends Resource
 const HIGH_SCORES_PATH: String = "user://highscores.tres"
 const ENTRY_AMOUNT: int = 10
 
-var high_scores: Array[ScoreRecord] = []
+@export var high_scores: Array[Resource] = []
 
 func register_new_score(score: int):
 	var new_score: ScoreRecord = ScoreRecord.new()
@@ -15,7 +15,9 @@ func register_new_score(score: int):
 	save_highscores()
 
 func save_highscores():
-	ResourceSaver.save(self, HIGH_SCORES_PATH)
+	print("attempt to save high score")
+	print("Size ", high_scores.size())
+	print(ResourceSaver.save(self, HIGH_SCORES_PATH))
 
 static func load_highscores():
 	if ResourceLoader.exists(HIGH_SCORES_PATH):
