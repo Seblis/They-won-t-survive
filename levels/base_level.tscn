@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cp03yccnrohe1"]
+[gd_scene load_steps=22 format=3 uid="uid://cp03yccnrohe1"]
 
 [ext_resource type="Script" path="res://levels/base_level.gd" id="1_v7j55"]
 [ext_resource type="TileSet" uid="uid://8cfel0ses07a" path="res://assets/tiles/base_level_tileset.tres" id="2_ln7d0"]
@@ -10,6 +10,10 @@
 [ext_resource type="Script" path="res://levels/enemy_spawner.gd" id="7_t3rld"]
 [ext_resource type="Script" path="res://levels/spawn_point.gd" id="8_5g4ly"]
 [ext_resource type="PackedScene" uid="uid://cekvrrpspxf05" path="res://levels/menu/menu_game_over_screen/game_over.tscn" id="10_3gq4o"]
+[ext_resource type="PackedScene" uid="uid://dnir1x8y7jw7o" path="res://components/score_node.tscn" id="10_a3jai"]
+[ext_resource type="Script" path="res://components/hp_bar.gd" id="11_crmwq"]
+[ext_resource type="Texture2D" uid="uid://dssfbupqyu1lj" path="res://assets/sprites/Y.png" id="12_gcwju"]
+[ext_resource type="Script" path="res://levels/mute_btn.gd" id="14_hvhpb"]
 
 [sub_resource type="Environment" id="Environment_5v3mb"]
 background_mode = 3
@@ -119,6 +123,25 @@ position = Vector2(1152, 0)
 shape = SubResource("WorldBoundaryShape2D_3iytt")
 
 [node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="ScoreNode" parent="HUD" instance=ExtResource("10_a3jai")]
+
+[node name="HpBar" type="ProgressBar" parent="HUD"]
+offset_left = 30.0
+offset_top = 600.0
+offset_right = 230.0
+offset_bottom = 625.0
+step = 1.0
+show_percentage = false
+script = ExtResource("11_crmwq")
+
+[node name="MuteBtn" type="TextureRect" parent="HUD"]
+offset_left = 1090.0
+offset_top = 15.0
+offset_right = 1130.0
+offset_bottom = 55.0
+texture = ExtResource("12_gcwju")
+script = ExtResource("14_hvhpb")
 
 [node name="GameOver" parent="." instance=ExtResource("10_3gq4o")]
 
