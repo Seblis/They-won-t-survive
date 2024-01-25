@@ -9,7 +9,7 @@ func _ready():
 
 
 func _input(ev):
-	if Input.is_key_pressed(KEY_M):
+	if ev is InputEventKey and ev.pressed and ev.keycode == KEY_M:
 		if sound:
 			texture = MUTE_BUTTON_MUTED
 		else:
