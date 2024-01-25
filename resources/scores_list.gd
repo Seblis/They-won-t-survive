@@ -11,7 +11,8 @@ func register_new_score(score: int):
 	new_score.initiate_score(score)
 	high_scores.append(new_score)
 	high_scores.sort_custom(ScoreRecord.compare)
-	high_scores.remove_at(ENTRY_AMOUNT)
+	if high_scores.size() > ENTRY_AMOUNT:
+		high_scores.remove_at(ENTRY_AMOUNT)
 	save_highscores()
 
 func save_highscores():
