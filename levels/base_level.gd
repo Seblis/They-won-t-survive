@@ -15,4 +15,6 @@ func _process(_delta):
 
 func game_over(player_dead: bool):
 	get_tree().paused = true
+	var scores_list: HighScoreList = HighScoreList.load_highscores()
+	scores_list.register_new_score(GameEngine.get_score())
 	
