@@ -4,6 +4,7 @@ extends CharacterBody2D
 ##
 ## The class doesn't know about player's weapons - they are added in the game as
 ## a children of Player class and are shooting by themselves
+
 const SPEED = 250.0
 
 @onready var animation_player = $AnimationPlayer
@@ -19,9 +20,11 @@ func _ready():
 func _physics_process(_delta):
 	if state == State.RUN:
 		update_run()
-		
 
 func update_run():
+	if Input.is_action_just_pressed("Attack boost"):
+		SignalManager.on_player_attack_boost.emit(true)
+	
 	var direction = Vector2.ZERO
 	direction.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	direction.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
@@ -42,7 +45,6 @@ func update_run():
 func _on_player_death():
 	state = State.DEATH
 	animation_player.play("death")
-
 
 func _on_player_death_animation_finished(anim_name):
 	if anim_name == "death":

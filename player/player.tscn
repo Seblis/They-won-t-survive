@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://7jekns5y01qt"]
+[gd_scene load_steps=15 format=3 uid="uid://7jekns5y01qt"]
 
 [ext_resource type="Texture2D" uid="uid://cd4cs8hln34in" path="res://assets/sprites/Imp Sprite Sheet.png" id="1_8sb3y"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_ukcj2"]
@@ -115,6 +115,22 @@ _data = {
 "run": SubResource("Animation_rw37y")
 }
 
+[sub_resource type="GDScript" id="GDScript_1f7nh"]
+script/source = "extends Timer
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	SignalManager.on_player_attack_boost.connect(boost_switched)
+
+func boost_switched(boost_enabled: bool):
+	if boost_enabled:
+		start()
+
+func _on_timeout():
+	SignalManager.on_player_attack_boost.emit(false)
+"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lkj30"]
 size = Vector2(12, 12)
 
@@ -139,6 +155,10 @@ libraries = {
 }
 autoplay = "idle"
 
+[node name="BoostTimer" type="Timer" parent="."]
+wait_time = 4.0
+script = SubResource("GDScript_1f7nh")
+
 [node name="HealthComponent" parent="." instance=ExtResource("3_gy1g6")]
 MAX_HEALTH = 20
 
@@ -153,4 +173,5 @@ position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_lkj30")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_player_death_animation_finished"]
+[connection signal="timeout" from="BoostTimer" to="BoostTimer" method="_on_timeout"]
 [connection signal="on_entity_died" from="HealthComponent" to="." method="_on_player_death"]
