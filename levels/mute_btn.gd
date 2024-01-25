@@ -1,18 +1,19 @@
 extends TextureRect
-const N: = preload("res://assets/sprites/N.png")
-const Y = preload("res://assets/sprites/Y.png")
+
+const MUTE_BUTTON_MUTED = preload("res://assets/sprites/Mute_button_muted.png")
+const MUTE_BUTTON_UNMUTED = preload("res://assets/sprites/Mute_button_unmuted.png")
 var sound = true
 
 func _ready():
-	texture = Y
+	texture = MUTE_BUTTON_UNMUTED
 
 
 func _input(ev):
 	if Input.is_key_pressed(KEY_M):
 		if sound:
-			texture = N
+			texture = MUTE_BUTTON_MUTED
 		else:
-			texture = Y
+			texture = MUTE_BUTTON_UNMUTED
 			
 		sound = !sound
 		AudioServer.set_bus_mute(0, not AudioServer.is_bus_mute(0))
