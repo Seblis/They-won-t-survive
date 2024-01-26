@@ -1,0 +1,107 @@
+[gd_scene load_steps=10 format=3 uid="uid://d35scto40h1yy"]
+
+[ext_resource type="Texture2D" uid="uid://dvkw7h67y57sl" path="res://assets/sprites/HUD_bg.png" id="1_jcyg5"]
+[ext_resource type="PackedScene" uid="uid://dnir1x8y7jw7o" path="res://components/score_node.tscn" id="1_xkr5k"]
+[ext_resource type="Texture2D" uid="uid://cb38yaseqx46m" path="res://assets/sprites/boost_available.png" id="2_7ocgv"]
+[ext_resource type="Script" path="res://components/hp_bar.gd" id="2_lmpkn"]
+[ext_resource type="Texture2D" uid="uid://bhi4qhfxma4sa" path="res://assets/sprites/ult_available.png" id="3_cuht3"]
+[ext_resource type="Texture2D" uid="uid://dssfbupqyu1lj" path="res://assets/sprites/Y.png" id="3_dcibr"]
+[ext_resource type="Script" path="res://levels/mute_btn.gd" id="4_jafow"]
+
+[sub_resource type="GDScript" id="GDScript_sbqxe"]
+script/source = "extends TextureRect
+
+const BOOST_AVAILABLE = preload(\"res://assets/sprites/boost_available.png\")
+const BOOST_COOLDOWN = preload(\"res://assets/sprites/boost_cooldown.png\")
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	SignalManager.on_boost_available_switch.connect(change_texture)
+
+
+func change_texture(available: bool):
+	if available:
+		texture = BOOST_AVAILABLE
+	else:
+		texture = BOOST_COOLDOWN
+"
+
+[sub_resource type="GDScript" id="GDScript_ap6g5"]
+script/source = "extends TextureRect
+
+const ULT_AVAILABLE = preload(\"res://assets/sprites/ult_available.png\")
+const ULT_USED = preload(\"res://assets/sprites/ult_used.png\")
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	SignalManager.on_ult_available_switch.connect(switch_texture)
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func switch_texture(ult_available: bool):
+	if ult_available:
+		texture = ULT_AVAILABLE
+	else:
+		texture = ULT_USED
+"
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 48.0
+grow_horizontal = 2
+texture = ExtResource("1_jcyg5")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -576.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 32
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="HpBar" type="ProgressBar" parent="MarginContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(192, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+step = 1.0
+show_percentage = false
+script = ExtResource("2_lmpkn")
+
+[node name="BoostIcon" type="TextureRect" parent="MarginContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_7ocgv")
+script = SubResource("GDScript_sbqxe")
+
+[node name="UltIcon" type="TextureRect" parent="MarginContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("3_cuht3")
+script = SubResource("GDScript_ap6g5")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="ScoreNode" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_xkr5k")]
+layout_mode = 2
+
+[node name="MuteBtn" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture = ExtResource("3_dcibr")
+script = ExtResource("4_jafow")

@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
-const SPEED: float = 150.0
+const STARTING_SPEED: float = 150.0
+const DIFFICULTY_MULTIPLIER: float = 1.3
 const DESIRED_RANGE: float = 48.0
 enum State {CHASE, ATTACK, DEATH}
 
@@ -10,10 +11,11 @@ static var slash_attack: PackedScene = preload("res://npcs/enemy_knight/attack_s
 
 var player: Node2D
 var state: int = State.CHASE
+var _speed
 
 
 func _ready():
-	pass
+	_speed = STARTING_SPEED
 
 func _physics_process(_delta):
 	if state == State.CHASE:
@@ -64,8 +66,8 @@ func _process_chase():
 		return
 	
 	move_to_player = move_to_player.normalized()
-	velocity.x = move_to_player.x * SPEED
-	velocity.y = move_to_player.y * SPEED
+	velocity.x = move_to_player.x * _speed
+	velocity.y = move_to_player.y * _speed
 	
 	if velocity.x > 0:
 		sprite_2d.flip_h = false
@@ -74,3 +76,5 @@ func _process_chase():
 		
 	move_and_slide()
 
+func _on_speed_up():
+	_speed *= DIFFICULTY_MULTIPLIER
