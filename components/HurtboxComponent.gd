@@ -27,4 +27,4 @@ func _on_body_entered(body):
 			set_deferred("monitoring", false)
 		# TODO: some collision effect?
 		if body.is_in_group(GameEngine.GROUP_PROJECTILE):
-			body.queue_free()
+			body.destroy()
