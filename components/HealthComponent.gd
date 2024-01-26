@@ -34,7 +34,6 @@ func get_current_health():
 	
 func damage(dmg_amount: int, hide_damage_label: bool = false):
 	_current_health -= dmg_amount
-	print(get_parent().name, " received ", dmg_amount, " and has ", _current_health, " hp")
 	# TODO show damage label near the enemy if the second parameter is false
 	
 func heal(heal_amount: int):
