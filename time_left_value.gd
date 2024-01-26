@@ -1,6 +1,6 @@
 extends Label
 
-@onready var gameLeftTimer:Timer = $"../../GameWinTimer"
+@onready var gameLeftTimer:Timer = $"../../../../../GameWinTimer"
 
 func _ready():
 	pass
