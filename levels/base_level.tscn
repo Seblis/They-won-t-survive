@@ -30,7 +30,15 @@ func _on_timeout():
 [sub_resource type="Environment" id="Environment_5v3mb"]
 background_mode = 3
 background_color = Color(0.847059, 0, 0, 1)
+background_canvas_max_layer = 1
 glow_enabled = true
+glow_normalized = true
+glow_intensity = 1.2
+glow_blend_mode = 1
+glow_hdr_threshold = 0.1
+adjustment_enabled = true
+adjustment_brightness = 0.9
+adjustment_saturation = 1.2
 
 [sub_resource type="GDScript" id="GDScript_qnxkm"]
 script/source = "extends TileMap
@@ -67,7 +75,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func boost_switch(enabled: bool):
-	print(\"Boost switch: \", enabled)
 	if enabled:
 		wait_time = BOOST_COOLDOWN
 	else:
@@ -182,7 +189,7 @@ position = Vector2(1152, 0)
 shape = SubResource("WorldBoundaryShape2D_3iytt")
 
 [node name="HUD" parent="." instance=ExtResource("10_jlt4q")]
-layer = -1
+layer = 50
 
 [node name="GameOver" parent="." instance=ExtResource("10_3gq4o")]
 

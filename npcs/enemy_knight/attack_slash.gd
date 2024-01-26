@@ -13,7 +13,6 @@ func _ready():
 	global_position = _starting_position
 	look_at(_target_position)
 	if _rage:
-		print("enraged attack")
 		animation_player.play("RageThrust")
 
 func set_starting_position(pos: Vector2):

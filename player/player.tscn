@@ -160,7 +160,7 @@ wait_time = 4.0
 script = SubResource("GDScript_1f7nh")
 
 [node name="BoostCooldown" type="Timer" parent="."]
-wait_time = 20.0
+wait_time = 30.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_gy1g6")]
 MAX_HEALTH = 20
@@ -170,7 +170,7 @@ HIDE_DAMAGE_LABEL = true
 unique_name_in_owner = true
 position = Vector2(-1, -1)
 health = NodePath("../HealthComponent")
-invincibility_frames = 60
+invincibility_frames = 30
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtboxComponent"]
 position = Vector2(0, 1)

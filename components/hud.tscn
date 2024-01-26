@@ -47,8 +47,10 @@ func switch_texture(ult_available: bool):
 "
 
 [node name="HUD" type="CanvasLayer"]
+layer = 100
 
 [node name="HudBackground" type="NinePatchRect" parent="."]
+light_mask = 0
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 48.0
@@ -57,6 +59,7 @@ texture = ExtResource("1_wa55u")
 region_rect = Rect2(16, 16, 16, 16)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+light_mask = 0
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -69,11 +72,13 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 32
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer"]
+light_mask = 0
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="HpBar" type="ProgressBar" parent="MarginContainer/HBoxContainer2"]
+light_mask = 0
 custom_minimum_size = Vector2(192, 32)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -82,6 +87,7 @@ show_percentage = false
 script = ExtResource("2_lmpkn")
 
 [node name="BoostIcon" type="TextureRect" parent="MarginContainer/HBoxContainer2"]
+light_mask = 0
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -89,26 +95,32 @@ texture = ExtResource("2_7ocgv")
 script = SubResource("GDScript_sbqxe")
 
 [node name="UltIcon" type="TextureRect" parent="MarginContainer/HBoxContainer2"]
+light_mask = 0
 layout_mode = 2
 texture = ExtResource("3_cuht3")
 script = SubResource("GDScript_ap6g5")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+light_mask = 0
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 
 [node name="TimeLeftNode" parent="MarginContainer/HBoxContainer" instance=ExtResource("5_6infc")]
+light_mask = 0
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+light_mask = 0
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 
 [node name="ScoreNode" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_xkr5k")]
+light_mask = 0
 layout_mode = 2
 
 [node name="MuteBtn" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+light_mask = 0
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0

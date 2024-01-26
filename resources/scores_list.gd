@@ -16,9 +16,7 @@ func register_new_score(score: int):
 	save_highscores()
 
 func save_highscores():
-	print("attempt to save high score")
-	print("Size ", high_scores.size())
-	print(ResourceSaver.save(self, HIGH_SCORES_PATH))
+	ResourceSaver.save(self, HIGH_SCORES_PATH)
 
 static func load_highscores():
 	if ResourceLoader.exists(HIGH_SCORES_PATH):

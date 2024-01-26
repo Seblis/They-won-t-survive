@@ -9,7 +9,6 @@ var enemy_randomizer = RandomNumberGenerator.new()
 func spawn():
 	var new_random_enemy = enemy_randomizer.randi_range(0, 4)
 	var enemy_to_spawn
-	print(new_random_enemy)
 	if new_random_enemy == 4 :
 		enemy_to_spawn = ENEMY_CLERIC.instantiate()
 	else:
