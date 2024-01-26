@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://d35scto40h1yy"]
+[gd_scene load_steps=10 format=3 uid="uid://d35scto40h1yy"]
 
+[ext_resource type="Texture2D" uid="uid://dvkw7h67y57sl" path="res://assets/sprites/HUD_bg.png" id="1_jcyg5"]
 [ext_resource type="PackedScene" uid="uid://dnir1x8y7jw7o" path="res://components/score_node.tscn" id="1_xkr5k"]
 [ext_resource type="Texture2D" uid="uid://cb38yaseqx46m" path="res://assets/sprites/boost_available.png" id="2_7ocgv"]
 [ext_resource type="Script" path="res://components/hp_bar.gd" id="2_lmpkn"]
@@ -46,16 +47,24 @@ func switch_texture(ult_available: bool):
 
 [node name="HUD" type="CanvasLayer"]
 
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 48.0
+grow_horizontal = 2
+texture = ExtResource("1_jcyg5")
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -576.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_vertical = 0
 theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
+theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -63,7 +72,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="HpBar" type="ProgressBar" parent="MarginContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(256, 32)
+custom_minimum_size = Vector2(192, 32)
 layout_mode = 2
 size_flags_horizontal = 0
 step = 1.0
