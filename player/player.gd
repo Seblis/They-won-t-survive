@@ -24,19 +24,23 @@ func _physics_process(_delta):
 	if state == State.RUN:
 		update_run()
 
-func update_run():
-	if Input.is_action_just_pressed("Attack boost"):
-		SignalManager.on_player_attack_boost.emit(true)
-		_boost_available = false
-		SignalManager.on_boost_available_swith(_boost_available)
-		$BoostCooldown.start()
+func _input(event):
+	if state == State.RUN:
+		if event.is_action_pressed("Attack boost"):
+			_boost_available = false
+			SignalManager.on_player_attack_boost.emit(true)
+			SignalManager.on_boost_available_switch.emit(_boost_available)
+			$BoostCooldown.start()
+			get_viewport().set_input_as_handled()
 
-	if _ult_available and Input.is_action_just_pressed("Ultimate skill"):
-		var ult = ULT_SKILL.instantiate()
-		add_child(ult)
-		_ult_available = false
-		SignalManager.on_ult_available_switch(_ult_available)
-	
+		if _ult_available and event.is_action_pressed("Ultimate skill"):
+			var ult = ULT_SKILL.instantiate()
+			add_child(ult)
+			_ult_available = false
+			SignalManager.on_ult_available_switch.emit(_ult_available)
+			get_viewport().set_input_as_handled()
+
+func update_run():
 	var direction = Vector2.ZERO
 	direction.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	direction.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
@@ -65,4 +69,4 @@ func _on_player_death_animation_finished(anim_name):
 
 func _on_boost_cooldown_timeout():
 	_boost_available = true
-	SignalManager.on_boost_available_swith(_boost_available)
+	SignalManager.on_boost_available_switch.emit(_boost_available)

@@ -1,6 +1,6 @@
 extends ProgressBar
 
-@onready var player = $"../../Player"
+@onready var player = $"../../../../Player"
 @onready var hp_bar = $"."
 
 
