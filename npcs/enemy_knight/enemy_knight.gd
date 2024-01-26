@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 const STARTING_SPEED: float = 150.0
-const DIFFICULTY_MULTIPLIER: float = 1.2
+const DIFFICULTY_MULTIPLIER: float = 1.3
 const DESIRED_RANGE: float = 48.0
 enum State {CHASE, ATTACK, DEATH}
 
@@ -15,7 +15,7 @@ var _speed
 
 
 func _ready():
-	SignalManager.on_difficulty_up.connect(increase_speed)
+	_speed = STARTING_SPEED
 
 func _physics_process(_delta):
 	if state == State.CHASE:
@@ -76,5 +76,5 @@ func _process_chase():
 		
 	move_and_slide()
 
-func increase_speed():
+func _on_speed_up():
 	_speed *= DIFFICULTY_MULTIPLIER
