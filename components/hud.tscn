@@ -1,12 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://d35scto40h1yy"]
+[gd_scene load_steps=11 format=3 uid="uid://d35scto40h1yy"]
 
 [ext_resource type="Texture2D" uid="uid://dvkw7h67y57sl" path="res://assets/sprites/HUD_bg.png" id="1_jcyg5"]
 [ext_resource type="PackedScene" uid="uid://dnir1x8y7jw7o" path="res://components/score_node.tscn" id="1_xkr5k"]
 [ext_resource type="Texture2D" uid="uid://cb38yaseqx46m" path="res://assets/sprites/boost_available.png" id="2_7ocgv"]
 [ext_resource type="Script" path="res://components/hp_bar.gd" id="2_lmpkn"]
 [ext_resource type="Texture2D" uid="uid://bhi4qhfxma4sa" path="res://assets/sprites/ult_available.png" id="3_cuht3"]
-[ext_resource type="Texture2D" uid="uid://dssfbupqyu1lj" path="res://assets/sprites/Y.png" id="3_dcibr"]
 [ext_resource type="Script" path="res://levels/mute_btn.gd" id="4_jafow"]
+[ext_resource type="PackedScene" uid="uid://tfc2xqsxsyri" path="res://time_left_node.tscn" id="5_6infc"]
+[ext_resource type="Texture2D" uid="uid://cv17imjbnoc3r" path="res://assets/sprites/Mute_button_unmuted.png" id="6_srkoh"]
 
 [sub_resource type="GDScript" id="GDScript_sbqxe"]
 script/source = "extends TextureRect
@@ -96,6 +97,13 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 
+[node name="TimeLeftNode" parent="MarginContainer/HBoxContainer" instance=ExtResource("5_6infc")]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+
 [node name="ScoreNode" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_xkr5k")]
 layout_mode = 2
 
@@ -103,5 +111,5 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
-texture = ExtResource("3_dcibr")
+texture = ExtResource("6_srkoh")
 script = ExtResource("4_jafow")

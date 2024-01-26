@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://n821hov2hp53"]
+[gd_scene load_steps=19 format=3 uid="uid://n821hov2hp53"]
 
 [ext_resource type="PackedScene" uid="uid://dwt0yeulf0y84" path="res://levels/settings/nodes/animated_key/animated_key.tscn" id="1_6n3xh"]
 [ext_resource type="Script" path="res://levels/settings/settings_scene.gd" id="1_8u73i"]
@@ -13,7 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://bnrkxcv4l2ly8" path="res://assets/sprites/Buttons_Right_button.png" id="10_gra5o"]
 [ext_resource type="Texture2D" uid="uid://nuqitd2y6rvw" path="res://assets/sprites/Buttons_Left_button.png" id="11_fg7rl"]
 [ext_resource type="Texture2D" uid="uid://cpqwn4kjcsxki" path="res://assets/sprites/Esc-Key.png" id="12_bssdy"]
-[ext_resource type="Texture2D" path="res://assets/sprites/Mute_button.png" id="14_hhp7v"]
+[ext_resource type="Texture2D" uid="uid://cb0vi4cl8wj4q" path="res://assets/sprites/H-Key.png" id="13_mj3n0"]
+[ext_resource type="Texture2D" uid="uid://bctbidc5ik7tu" path="res://assets/sprites/Mute_button.png" id="14_hhp7v"]
+[ext_resource type="Texture2D" uid="uid://be0wavdl83dbf" path="res://assets/sprites/E-Key.png" id="14_vnpea"]
+[ext_resource type="Texture2D" uid="uid://c28s1wiy53xd5" path="res://assets/sprites/R-Key.png" id="15_6jdkj"]
 [ext_resource type="Texture2D" uid="uid://3vbts3on3qy1" path="res://assets/sprites/M-Key.png" id="15_oxdvj"]
 
 [node name="SettingsScene" type="Control"]
@@ -27,73 +30,105 @@ script = ExtResource("1_8u73i")
 
 [node name="AnimatedBackground" parent="." instance=ExtResource("7_1ig3c")]
 
-[node name="WeaponControls" type="VBoxContainer" parent="."]
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(512, 100)
 layout_mode = 0
-offset_left = 50.0
-offset_top = 200.0
-offset_right = 152.0
-offset_bottom = 320.0
+offset_left = 76.0
+offset_top = 50.0
+offset_right = 588.0
+offset_bottom = 166.0
 scale = Vector2(2, 2)
 
-[node name="WSADKeysNode" type="Control" parent="WeaponControls"]
+[node name="WeaponControls" type="VBoxContainer" parent="HBoxContainer2"]
+custom_minimum_size = Vector2(125, 116)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="WSADKeysNode" type="Control" parent="HBoxContainer2/WeaponControls"]
 custom_minimum_size = Vector2(102, 58)
 layout_mode = 2
+size_flags_horizontal = 4
 
-[node name="AnimatedWKey" parent="WeaponControls/WSADKeysNode" instance=ExtResource("1_6n3xh")]
+[node name="AnimatedWKey" parent="HBoxContainer2/WeaponControls/WSADKeysNode" instance=ExtResource("1_6n3xh")]
 position = Vector2(52, 12)
 key_texture = ExtResource("4_xwo6p")
 
-[node name="AnimatedSKey" parent="WeaponControls/WSADKeysNode" instance=ExtResource("1_6n3xh")]
+[node name="AnimatedSKey" parent="HBoxContainer2/WeaponControls/WSADKeysNode" instance=ExtResource("1_6n3xh")]
 position = Vector2(52, 42)
 key_texture = ExtResource("3_7w4cy")
 
-[node name="AnimatedDKey" parent="WeaponControls/WSADKeysNode" instance=ExtResource("1_6n3xh")]
+[node name="AnimatedDKey" parent="HBoxContainer2/WeaponControls/WSADKeysNode" instance=ExtResource("1_6n3xh")]
 position = Vector2(87, 42)
 key_texture = ExtResource("5_dee12")
 
-[node name="AnimatedAKey" parent="WeaponControls/WSADKeysNode" instance=ExtResource("1_6n3xh")]
+[node name="AnimatedAKey" parent="HBoxContainer2/WeaponControls/WSADKeysNode" instance=ExtResource("1_6n3xh")]
 position = Vector2(17, 42)
 key_texture = ExtResource("2_o0ja1")
 
-[node name="WSADLabel" type="Label" parent="WeaponControls"]
+[node name="WSADLabel" type="Label" parent="HBoxContainer2/WeaponControls"]
 custom_minimum_size = Vector2(102, 40)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_65flj")
-text = "WEAPON MOVEMENT
+text = "WEAPON DIRECTION
 "
 horizontal_alignment = 1
 vertical_alignment = 2
 autowrap_mode = 2
 
-[node name="PlayerControls" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 350.0
-offset_top = 200.0
-offset_right = 452.0
-offset_bottom = 320.0
-scale = Vector2(2, 2)
+[node name="Highscore" type="VBoxContainer" parent="HBoxContainer2"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+size_flags_vertical = 4
 
-[node name="ArrowKeysNode" type="Control" parent="PlayerControls"]
+[node name="EscKeyNode" type="Control" parent="HBoxContainer2/Highscore"]
 custom_minimum_size = Vector2(102, 58)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="AnimatedWKey" parent="PlayerControls/ArrowKeysNode" instance=ExtResource("1_6n3xh")]
+[node name="AnimatedEscKey" parent="HBoxContainer2/Highscore/EscKeyNode" instance=ExtResource("1_6n3xh")]
+position = Vector2(52, 26)
+key_texture = ExtResource("13_mj3n0")
+
+[node name="EscLabel" type="Label" parent="HBoxContainer2/Highscore"]
+custom_minimum_size = Vector2(102, 40)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_65flj")
+text = "(MAINMENU)
+HIGHSCORE"
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 2
+
+[node name="PlayerControls" type="VBoxContainer" parent="HBoxContainer2"]
+custom_minimum_size = Vector2(125, 116)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="ArrowKeysNode" type="Control" parent="HBoxContainer2/PlayerControls"]
+custom_minimum_size = Vector2(102, 58)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="AnimatedWKey" parent="HBoxContainer2/PlayerControls/ArrowKeysNode" instance=ExtResource("1_6n3xh")]
 position = Vector2(52, 12)
 key_texture = ExtResource("8_ni5kn")
 
-[node name="AnimatedSKey" parent="PlayerControls/ArrowKeysNode" instance=ExtResource("1_6n3xh")]
+[node name="AnimatedSKey" parent="HBoxContainer2/PlayerControls/ArrowKeysNode" instance=ExtResource("1_6n3xh")]
 position = Vector2(52, 42)
 key_texture = ExtResource("9_roc8n")
 
-[node name="AnimatedDKey" parent="PlayerControls/ArrowKeysNode" instance=ExtResource("1_6n3xh")]
+[node name="AnimatedDKey" parent="HBoxContainer2/PlayerControls/ArrowKeysNode" instance=ExtResource("1_6n3xh")]
 position = Vector2(87, 42)
 key_texture = ExtResource("10_gra5o")
 
-[node name="AnimatedAKey" parent="PlayerControls/ArrowKeysNode" instance=ExtResource("1_6n3xh")]
+[node name="AnimatedAKey" parent="HBoxContainer2/PlayerControls/ArrowKeysNode" instance=ExtResource("1_6n3xh")]
 position = Vector2(17, 42)
 key_texture = ExtResource("11_fg7rl")
 
-[node name="ArrowKeysLabel" type="Label" parent="PlayerControls"]
+[node name="ArrowKeysLabel" type="Label" parent="HBoxContainer2/PlayerControls"]
 custom_minimum_size = Vector2(102, 40)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_65flj")
@@ -102,23 +137,30 @@ horizontal_alignment = 1
 vertical_alignment = 2
 autowrap_mode = 2
 
-[node name="MainMenu" type="VBoxContainer" parent="."]
-layout_mode = 2
-offset_left = 650.0
-offset_top = 200.0
-offset_right = 752.0
-offset_bottom = 320.0
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 338.0
+offset_right = 576.0
+offset_bottom = 454.0
 scale = Vector2(2, 2)
 
-[node name="EscKeyNode" type="Control" parent="MainMenu"]
+[node name="MainMenu" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="EscKeyNode" type="Control" parent="HBoxContainer/MainMenu"]
 custom_minimum_size = Vector2(102, 58)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="AnimatedEscKey" parent="MainMenu/EscKeyNode" instance=ExtResource("1_6n3xh")]
+[node name="AnimatedEscKey" parent="HBoxContainer/MainMenu/EscKeyNode" instance=ExtResource("1_6n3xh")]
 position = Vector2(52, 26)
 key_texture = ExtResource("12_bssdy")
 
-[node name="EscLabel" type="Label" parent="MainMenu"]
+[node name="EscLabel" type="Label" parent="HBoxContainer/MainMenu"]
 custom_minimum_size = Vector2(102, 40)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_65flj")
@@ -127,31 +169,78 @@ horizontal_alignment = 1
 vertical_alignment = 2
 autowrap_mode = 2
 
-[node name="MuteButton" type="VBoxContainer" parent="."]
+[node name="Rage" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(125, 116)
 layout_mode = 2
-offset_left = 900.0
-offset_top = 200.0
-offset_right = 1002.0
-offset_bottom = 320.0
-scale = Vector2(2, 2)
+size_flags_vertical = 4
 
-[node name="KeyNode" type="Control" parent="MuteButton"]
+[node name="EKeyNode" type="Control" parent="HBoxContainer/Rage"]
 custom_minimum_size = Vector2(102, 58)
 layout_mode = 2
+size_flags_horizontal = 4
 
-[node name="AnimatedMuteKey" parent="MuteButton/KeyNode" instance=ExtResource("1_6n3xh")]
-position = Vector2(20, 26)
+[node name="AnimatedEscKey" parent="HBoxContainer/Rage/EKeyNode" instance=ExtResource("1_6n3xh")]
+position = Vector2(52, 26)
+key_texture = ExtResource("14_vnpea")
+
+[node name="Rage" type="Label" parent="HBoxContainer/Rage"]
+custom_minimum_size = Vector2(102, 40)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_65flj")
+text = "RAGE"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Explosion" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(125, 116)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="RKeyNode" type="Control" parent="HBoxContainer/Explosion"]
+custom_minimum_size = Vector2(102, 58)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="AnimatedEscKey" parent="HBoxContainer/Explosion/RKeyNode" instance=ExtResource("1_6n3xh")]
+position = Vector2(52, 26)
+key_texture = ExtResource("15_6jdkj")
+
+[node name="RLabel" type="Label" parent="HBoxContainer/Explosion"]
+custom_minimum_size = Vector2(102, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_65flj")
+text = "EXPLOSION"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MuteButton" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(125, 116)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="KeyNode" type="Control" parent="HBoxContainer/MuteButton"]
+custom_minimum_size = Vector2(102, 58)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="AnimatedMuteKey" parent="HBoxContainer/MuteButton/KeyNode" instance=ExtResource("1_6n3xh")]
+position = Vector2(32.4999, 26)
 key_texture = ExtResource("14_hhp7v")
 
-[node name="AnimatedMKey2" parent="MuteButton/KeyNode" instance=ExtResource("1_6n3xh")]
-position = Vector2(75, 26)
+[node name="AnimatedMKey2" parent="HBoxContainer/MuteButton/KeyNode" instance=ExtResource("1_6n3xh")]
+position = Vector2(67.4999, 26)
 key_texture = ExtResource("15_oxdvj")
 
-[node name="EscLabel" type="Label" parent="MuteButton"]
+[node name="MuteLabel" type="Label" parent="HBoxContainer/MuteButton"]
 custom_minimum_size = Vector2(102, 40)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_65flj")
 text = "MUTE GAME"
 horizontal_alignment = 1
-vertical_alignment = 2
+vertical_alignment = 1
 autowrap_mode = 2

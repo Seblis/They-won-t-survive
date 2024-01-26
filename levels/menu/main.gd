@@ -16,6 +16,6 @@ func _on_settings_btn_pressed():
 
 func _input(event):
 	if event is InputEventKey:
-		if event.is_pressed() and event.keycode == KEY_S:
+		if event.is_pressed() and event.keycode == KEY_H:
 			var high_scores = SCORES_POPUP.instantiate()
 			add_child(high_scores)
