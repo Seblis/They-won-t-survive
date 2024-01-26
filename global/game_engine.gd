@@ -8,6 +8,7 @@ const GROUP_PLAYER = "GROUP_PLAYER"
 const C_SCORE_MULTIPLIER: int = 10
 const B_SCORE_MULTIPLIER: int = -5
 const K_SCORE_MULTIPLIER: int = 8
+const SURVIVE_BONUS: int = 10000
 const BUFFER_FRAMES: int = 3
 
 var _weapon_direction: Vector2 = Vector2(1, 0)
@@ -16,6 +17,10 @@ var _current_buffer: int = 0
 var _blessed_area: int = 0
 var _corrupted_area: int = 0
 var _kill_amount: int = 0
+var _game_win_bonus: int = 0
+
+func _ready():
+	SignalManager.on_game_over.connect(is_player_killed)
 
 func _physics_process(delta):
 	if _current_buffer:
@@ -55,11 +60,7 @@ func update_score(enemy_killed: bool):
 	else:
 		_corrupted_area = CorruptionEngine.get_corrupted_area()
 		_blessed_area = CorruptionEngine.get_blessed_area()
-	print("*********** Score updated ************")
-	print("Kills: ", _kill_amount)
-	print("Corrupted area: ", _corrupted_area)
-	print("Blessed area: ", _blessed_area)
-	print("*************************************")
+
 	SignalManager.on_score_updated.emit(get_score())
 
 func reset_score():
@@ -69,8 +70,12 @@ func reset_score():
 	
 	SignalManager.on_score_updated.emit(get_score())
 
+func is_player_killed(player_killed: bool):
+	if not player_killed:
+		_game_win_bonus = SURVIVE_BONUS
+
 func get_score():
-	var score: int = 0
+	var score: int = _game_win_bonus
 	score += _kill_amount * K_SCORE_MULTIPLIER
 	score += _blessed_area * B_SCORE_MULTIPLIER
 	score += _corrupted_area * C_SCORE_MULTIPLIER

@@ -11,11 +11,15 @@ offset_bottom = 55.0
 
 [node name="ScoreLabel" type="Label" parent="."]
 layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("1_ts1u4")
 text = "Score:"
 
 [node name="ScoreValueLabel" type="Label" parent="."]
 layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("1_ts1u4")
 text = "0
 "

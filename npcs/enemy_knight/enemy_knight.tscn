@@ -170,7 +170,12 @@ libraries = {
 }
 autoplay = "Run"
 
+[node name="SpeedUpTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
 [node name="HealthComponent" parent="." instance=ExtResource("2_qj76r")]
+MAX_HEALTH = 15
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health") instance=ExtResource("3_ureie")]
 collision_layer = 8
@@ -182,4 +187,5 @@ position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_kuemm")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
+[connection signal="timeout" from="SpeedUpTimer" to="." method="_on_speed_up"]
 [connection signal="on_entity_died" from="HealthComponent" to="." method="_on_entity_died"]
