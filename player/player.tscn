@@ -159,8 +159,12 @@ autoplay = "idle"
 wait_time = 4.0
 script = SubResource("GDScript_1f7nh")
 
+[node name="BoostCooldown" type="Timer" parent="."]
+wait_time = 20.0
+
 [node name="HealthComponent" parent="." instance=ExtResource("3_gy1g6")]
 MAX_HEALTH = 20
+HIDE_DAMAGE_LABEL = true
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health") instance=ExtResource("4_uivmg")]
 unique_name_in_owner = true
@@ -174,4 +178,5 @@ shape = SubResource("RectangleShape2D_lkj30")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_player_death_animation_finished"]
 [connection signal="timeout" from="BoostTimer" to="BoostTimer" method="_on_timeout"]
+[connection signal="timeout" from="BoostCooldown" to="." method="_on_boost_cooldown_timeout"]
 [connection signal="on_entity_died" from="HealthComponent" to="." method="_on_player_death"]

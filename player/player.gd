@@ -5,6 +5,7 @@ extends CharacterBody2D
 ## The class doesn't know about player's weapons - they are added in the game as
 ## a children of Player class and are shooting by themselves
 
+const ULT_SKILL: PackedScene = preload("res://player/weapons/ultimate_skill.tscn")
 const SPEED = 250.0
 
 @onready var animation_player = $AnimationPlayer
@@ -13,6 +14,8 @@ const SPEED = 250.0
 enum State {RUN, DEATH}
 
 var state: int
+var _ult_available = true
+var _boost_available = true
 
 func _ready():
 	state = State.RUN
@@ -24,6 +27,15 @@ func _physics_process(_delta):
 func update_run():
 	if Input.is_action_just_pressed("Attack boost"):
 		SignalManager.on_player_attack_boost.emit(true)
+		_boost_available = false
+		SignalManager.on_boost_available_swith(_boost_available)
+		$BoostCooldown.start()
+
+	if _ult_available and Input.is_action_just_pressed("Ultimate skill"):
+		var ult = ULT_SKILL.instantiate()
+		add_child(ult)
+		_ult_available = false
+		SignalManager.on_ult_available_switch(_ult_available)
 	
 	var direction = Vector2.ZERO
 	direction.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
@@ -49,3 +61,8 @@ func _on_player_death():
 func _on_player_death_animation_finished(anim_name):
 	if anim_name == "death":
 		SignalManager.on_game_over.emit(true)
+
+
+func _on_boost_cooldown_timeout():
+	_boost_available = true
+	SignalManager.on_boost_available_swith(_boost_available)
