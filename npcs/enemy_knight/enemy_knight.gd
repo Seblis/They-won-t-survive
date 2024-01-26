@@ -1,8 +1,7 @@
 extends CharacterBody2D
 
-const STARTING_SPEED: float = 150.0
 const DIFFICULTY_MULTIPLIER: float = 1.3
-const DESIRED_RANGE: float = 48.0
+const MAX_RAGE: int = 3
 enum State {CHASE, ATTACK, DEATH}
 
 static var slash_attack: PackedScene = preload("res://npcs/enemy_knight/attack_slash.tscn")
@@ -11,11 +10,11 @@ static var slash_attack: PackedScene = preload("res://npcs/enemy_knight/attack_s
 
 var player: Node2D
 var state: int = State.CHASE
-var _speed
+var _speed: float = 150.0
+var _rage_level: int = 0
+var _enraged: bool = false
+var _desired_range: float = 48.0
 
-
-func _ready():
-	_speed = STARTING_SPEED
 
 func _physics_process(_delta):
 	if state == State.CHASE:
@@ -43,9 +42,12 @@ func _initiate_attack():
 	velocity = Vector2.ZERO
 	animation_player.play("Attack")
 	
-	var slash: CharacterBody2D = slash_attack.instantiate()
+	var slash: KnightSlash = slash_attack.instantiate()
 	slash.set_starting_position(Vector2(global_position))
 	slash.set_target_position(Vector2(player.global_position))
+	
+	if _enraged:
+		slash.enrage()
 	
 	add_child(slash)
 	
@@ -61,7 +63,7 @@ func _initiate_chase():
 func _process_chase():
 	var move_to_player = player.global_position - global_position
 	
-	if move_to_player.length() < DESIRED_RANGE:
+	if move_to_player.length() < _desired_range:
 		_initiate_attack()
 		return
 	
@@ -77,4 +79,14 @@ func _process_chase():
 	move_and_slide()
 
 func _on_speed_up():
-	_speed *= DIFFICULTY_MULTIPLIER
+	if _rage_level < MAX_RAGE:
+		_rage_level += 1
+		_speed *= DIFFICULTY_MULTIPLIER
+		
+		if _rage_level == MAX_RAGE:
+			enter_rage()
+
+func enter_rage():
+	_enraged = true
+	_desired_range *= 0.5
+	$EnrageAnimation.play("Enrage")
