@@ -1,125 +1,55 @@
-[gd_scene load_steps=9 format=3 uid="uid://vc2yyo4ol2qk"]
+[gd_scene load_steps=4 format=3 uid="uid://b2ai8x2q3rblp"]
 
-[ext_resource type="Script" path="res://player/weapons/fireball.gd" id="2_e8bpu"]
-[ext_resource type="Texture2D" uid="uid://cd4cs8hln34in" path="res://assets/sprites/Imp Sprite Sheet.png" id="2_lqr5g"]
-[ext_resource type="AudioStream" uid="uid://d2wcaubv1s1bh" path="res://assets/sounds/Fireball.mp3" id="3_sx6u0"]
+[ext_resource type="Script" path="res://player/weapons/Fireball.gd" id="1_o737f"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ypj7"]
-size = Vector2(24, 8)
+[sub_resource type="GDScript" id="GDScript_1f7nh"]
+script/source = "extends Timer
 
-[sub_resource type="Animation" id="Animation_dmc5q"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [40]
-}
 
-[sub_resource type="Animation" id="Animation_p2d8t"]
-resource_name = "cast"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [40, 41, 42, 44]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	SignalManager.on_player_attack_boost.connect(boost_switched)
 
-[sub_resource type="Animation" id="Animation_mqes2"]
-resource_name = "land"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [44, 45, 46]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
+func boost_switched(boost_enabled: bool):
+	if boost_enabled:
+		start()
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_k40pd"]
-_data = {
-"RESET": SubResource("Animation_dmc5q"),
-"cast": SubResource("Animation_p2d8t"),
-"land": SubResource("Animation_mqes2")
-}
+func _on_timeout():
+	SignalManager.on_player_attack_boost.emit(false)
+"
 
-[node name="Fireball" type="CharacterBody2D" groups=["GROUP_PROJECTILE", "GROUP_WEAPON"]]
-collision_layer = 8
-collision_mask = 0
-script = ExtResource("2_e8bpu")
-damage = 10
+[sub_resource type="GDScript" id="GDScript_h27e5"]
+script/source = "extends Timer
 
-[node name="FireballSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_sx6u0")
-volume_db = -30.0
-pitch_scale = 0.8
-autoplay = true
+const STANDARD_COOLDOWN: float = 1.5
+const BOOST_COOLDOWN: float = 0.75
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(15, -19)
-scale = Vector2(2, 2)
-texture = ExtResource("2_lqr5g")
-hframes = 8
-vframes = 12
-frame = 40
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	SignalManager.on_player_attack_boost.connect(boost_switch)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(31, 0)
-shape = SubResource("RectangleShape2D_2ypj7")
-disabled = true
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func boost_switch(enabled: bool):
+	if enabled:
+		wait_time = BOOST_COOLDOWN
+	else:
+		wait_time = STANDARD_COOLDOWN
+"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_k40pd")
-}
-autoplay = "cast"
+[node name="Fireball" type="Node"]
+script = ExtResource("1_o737f")
 
-[node name="VisibleNotifier" type="VisibleOnScreenEnabler2D" parent="."]
-position = Vector2(10.5, 0)
-scale = Vector2(1.3, 0.25)
+[node name="BoostTimer" type="Timer" parent="."]
+wait_time = 4.0
+script = SubResource("GDScript_1f7nh")
 
-[connection signal="finished" from="FireballSound" to="." method="_on_fireball_sound_finished"]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
-[connection signal="screen_exited" from="VisibleNotifier" to="." method="_on_screen_exited"]
+[node name="BoostCooldown" type="Timer" parent="."]
+wait_time = 30.0
+
+[node name="FireballTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+script = SubResource("GDScript_h27e5")
+
+[connection signal="timeout" from="BoostTimer" to="BoostTimer" method="_on_timeout"]
+[connection signal="timeout" from="FireballTimer" to="." method="_on_fireball_timer_timeout"]

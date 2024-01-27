@@ -17,10 +17,15 @@ const BUFFER_FRAMES: int = 3
 var _weapon_direction: Vector2 = Vector2(1, 0)
 var _last_diagonal: Vector2 = Vector2.ZERO
 var _current_buffer: int = 0
+
 var _blessed_area: int = 0
 var _corrupted_area: int = 0
 var _kill_amount: int = 0
 var _game_win_bonus: int = 0
+
+var _projectile_container: Node2D
+var _enemy_container: Node2D
+var _player: PlayerCharacter
 
 func _physics_process(delta):
 	if _current_buffer:
@@ -91,3 +96,35 @@ func player_won():
 
 func game_time_left():
 	return game_win_timer.time_left
+
+################ ENTITY CONTAINERS ################
+
+func set_enemy_container(enemy_container: Node2D):
+	_enemy_container = enemy_container
+
+func get_enemy_container():
+	return _enemy_container
+
+func add_enemy(enemy: Node2D):
+	_enemy_container.add_child(enemy)
+	
+func set_projectile_container(projectile_container: Node2D):
+	_projectile_container = projectile_container
+
+func get_projectile_container():
+	return _projectile_container
+
+func add_projectile(enemy: Node2D):
+	_projectile_container.add_child(enemy)
+
+func set_player(player: PlayerCharacter):
+	_player = player
+
+func get_player():
+	return _player
+
+func get_player_position():
+	if _player is PlayerCharacter:
+		return _player.global_position
+	else:
+		return null
