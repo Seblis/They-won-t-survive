@@ -7,11 +7,11 @@ var enemy_randomizer = RandomNumberGenerator.new()
 func spawn():
 	var new_random_enemy = enemy_randomizer.randi_range(0, 4)
 	var enemy_to_spawn
+	
 	if new_random_enemy == 4 :
 		enemy_to_spawn = ENEMY_CLERIC.instantiate()
 	else:
 		enemy_to_spawn = ENEMY_KNIGHT.instantiate()
-		enemy_to_spawn.set_player_node(GameEngine.get_player())
 	
 	enemy_to_spawn.global_position = self.global_position
 	GameEngine.get_enemy_container().add_child(enemy_to_spawn)

@@ -1,6 +1,9 @@
-extends Node
+extends Node2D
 
 var spawn_counter = 1
+
+func _read():
+	GameEngine.set_enemy_container(self)
 
 func _spawn_enemy():
 	# TODO: randomized spawn in future 

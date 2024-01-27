@@ -84,6 +84,10 @@ layer_1/name = "Plague"
 layer_1/tile_data = PackedInt32Array()
 script = SubResource("GDScript_qnxkm")
 
+[node name="Player" parent="." instance=ExtResource("3_ba8e1")]
+position = Vector2(532, 411)
+scale = Vector2(2, 2)
+
 [node name="EnemyGenerator" type="Node2D" parent="."]
 position = Vector2(576, 328)
 script = ExtResource("7_t3rld")
@@ -112,10 +116,6 @@ script = SubResource("GDScript_3xnds")
 wait_time = 3.0
 autostart = true
 script = SubResource("GDScript_ur7c7")
-
-[node name="Player" parent="." instance=ExtResource("3_ba8e1")]
-position = Vector2(532, 411)
-scale = Vector2(2, 2)
 
 [node name="ProjectileContainer" type="Node2D" parent="."]
 scale = Vector2(2, 2)
