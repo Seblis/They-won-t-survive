@@ -8,7 +8,7 @@ static var slash_attack: PackedScene = preload("res://npcs/enemy_knight/attack_s
 @onready var animation_player = $AnimationPlayer
 @onready var sprite_2d = $Sprite2D
 
-var player: Node2D
+var player: Node2D = GameEngine.get_player()
 var state: int = State.CHASE
 var _speed: float = 150.0
 var _rage_level: int = 0
@@ -21,9 +21,6 @@ func _physics_process(_delta):
 		_process_chase()
 	elif state == State.ATTACK:
 		_process_attack()
-
-func set_player_node(player_node):
-	player = player_node
 
 func _on_entity_died():
 	state = State.DEATH
@@ -43,8 +40,7 @@ func _initiate_attack():
 	animation_player.play("Attack")
 	
 	var slash: KnightSlash = slash_attack.instantiate()
-	slash.set_starting_position(Vector2(global_position))
-	slash.set_target_position(Vector2(player.global_position))
+	slash.set_starting_position(global_position)
 	
 	if _enraged:
 		slash.enrage()

@@ -11,16 +11,21 @@ const K_SCORE_MULTIPLIER: int = 8
 const SURVIVE_BONUS: int = 10000
 const BUFFER_FRAMES: int = 3
 
+@onready var game_win_timer = $GameWinTimer
+@onready var difficulty_up_timer = $DifficultyUpTimer
+
 var _weapon_direction: Vector2 = Vector2(1, 0)
 var _last_diagonal: Vector2 = Vector2.ZERO
 var _current_buffer: int = 0
+
 var _blessed_area: int = 0
 var _corrupted_area: int = 0
 var _kill_amount: int = 0
 var _game_win_bonus: int = 0
 
-func _ready():
-	SignalManager.on_game_over.connect(is_player_killed)
+var _projectile_container: Node2D
+var _enemy_container: Node2D
+var _player: PlayerCharacter
 
 func _physics_process(delta):
 	if _current_buffer:
@@ -54,6 +59,18 @@ func get_weapon_direction():
 
 #################### SCORE SECTION ########################
 
+func start_game():
+	_kill_amount = 0
+	_blessed_area = 0
+	_corrupted_area = 0
+	
+	SignalManager.on_score_updated.emit(get_score())
+	
+	game_win_timer.start()
+	difficulty_up_timer.start()
+	
+	get_tree().paused = false
+
 func update_score(enemy_killed: bool):
 	if enemy_killed:
 		_kill_amount += 1
@@ -63,17 +80,6 @@ func update_score(enemy_killed: bool):
 
 	SignalManager.on_score_updated.emit(get_score())
 
-func reset_score():
-	_kill_amount = 0
-	_blessed_area = 0
-	_corrupted_area = 0
-	
-	SignalManager.on_score_updated.emit(get_score())
-
-func is_player_killed(player_killed: bool):
-	if not player_killed:
-		_game_win_bonus = SURVIVE_BONUS
-
 func get_score():
 	var score: int = _game_win_bonus
 	score += _kill_amount * K_SCORE_MULTIPLIER
@@ -81,3 +87,44 @@ func get_score():
 	score += _corrupted_area * C_SCORE_MULTIPLIER
 	
 	return score
+
+################# TIME SECTION ###############
+
+func player_won():
+	_game_win_bonus = SURVIVE_BONUS
+	SignalManager.on_game_over.emit(false)
+
+func game_time_left():
+	return game_win_timer.time_left
+
+################ ENTITY CONTAINERS ################
+
+func set_enemy_container(enemy_container: Node2D):
+	_enemy_container = enemy_container
+
+func get_enemy_container():
+	return _enemy_container
+
+func add_enemy(enemy: Node2D):
+	_enemy_container.add_child(enemy)
+	
+func set_projectile_container(projectile_container: Node2D):
+	_projectile_container = projectile_container
+
+func get_projectile_container():
+	return _projectile_container
+
+func add_projectile(enemy: Node2D):
+	_projectile_container.add_child(enemy)
+
+func set_player(player: PlayerCharacter):
+	_player = player
+
+func get_player():
+	return _player
+
+func get_player_position():
+	if _player is PlayerCharacter:
+		return _player.global_position
+	else:
+		return null

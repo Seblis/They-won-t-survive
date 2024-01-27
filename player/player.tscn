@@ -1,9 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://7jekns5y01qt"]
+[gd_scene load_steps=18 format=3 uid="uid://7jekns5y01qt"]
 
 [ext_resource type="Texture2D" uid="uid://cd4cs8hln34in" path="res://assets/sprites/Imp Sprite Sheet.png" id="1_8sb3y"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_ukcj2"]
 [ext_resource type="PackedScene" uid="uid://b2go81nmxue1a" path="res://components/HealthComponent.tscn" id="3_gy1g6"]
+[ext_resource type="PackedScene" uid="uid://bls6xcjkc11f2" path="res://player/weapons/weapon_indicator.tscn" id="3_nra7j"]
 [ext_resource type="PackedScene" uid="uid://cflwltu4sv4i1" path="res://components/HurtboxComponent.tscn" id="4_uivmg"]
+[ext_resource type="PackedScene" uid="uid://br7m47vps1buj" path="res://player/weapons/corruption_outburst.tscn" id="5_63ygj"]
+[ext_resource type="PackedScene" uid="uid://b2ai8x2q3rblp" path="res://player/weapons/fireball.tscn" id="7_7q3qh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c50aw"]
 size = Vector2(7, 11)
@@ -115,24 +118,11 @@ _data = {
 "run": SubResource("Animation_rw37y")
 }
 
-[sub_resource type="GDScript" id="GDScript_1f7nh"]
-script/source = "extends Timer
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	SignalManager.on_player_attack_boost.connect(boost_switched)
-
-func boost_switched(boost_enabled: bool):
-	if boost_enabled:
-		start()
-
-func _on_timeout():
-	SignalManager.on_player_attack_boost.emit(false)
-"
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lkj30"]
 size = Vector2(12, 12)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_copgm"]
+radius = 32.0
 
 [node name="Player" type="CharacterBody2D" groups=["GROUP_PLAYER"]]
 collision_layer = 17
@@ -155,13 +145,6 @@ libraries = {
 }
 autoplay = "idle"
 
-[node name="BoostTimer" type="Timer" parent="."]
-wait_time = 4.0
-script = SubResource("GDScript_1f7nh")
-
-[node name="BoostCooldown" type="Timer" parent="."]
-wait_time = 30.0
-
 [node name="HealthComponent" parent="." instance=ExtResource("3_gy1g6")]
 MAX_HEALTH = 20
 HIDE_DAMAGE_LABEL = true
@@ -176,7 +159,17 @@ invincibility_frames = 30
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_lkj30")
 
+[node name="WeaponIndicator" parent="." instance=ExtResource("3_nra7j")]
+
+[node name="PlayerWeapons" type="Node2D" parent="."]
+show_behind_parent = true
+scale = Vector2(0.5, 0.5)
+
+[node name="CorruptOutburst" parent="PlayerWeapons" instance=ExtResource("5_63ygj")]
+cooldown = 5.0
+hitbox = SubResource("CircleShape2D_copgm")
+
+[node name="Fireball" parent="PlayerWeapons" instance=ExtResource("7_7q3qh")]
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_player_death_animation_finished"]
-[connection signal="timeout" from="BoostTimer" to="BoostTimer" method="_on_timeout"]
-[connection signal="timeout" from="BoostCooldown" to="." method="_on_boost_cooldown_timeout"]
 [connection signal="on_entity_died" from="HealthComponent" to="." method="_on_player_death"]

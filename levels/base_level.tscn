@@ -1,31 +1,12 @@
-[gd_scene load_steps=23 format=3 uid="uid://cp03yccnrohe1"]
+[gd_scene load_steps=17 format=3 uid="uid://cp03yccnrohe1"]
 
 [ext_resource type="Script" path="res://levels/base_level.gd" id="1_v7j55"]
 [ext_resource type="TileSet" uid="uid://8cfel0ses07a" path="res://assets/tiles/base_level_tileset.tres" id="2_ln7d0"]
 [ext_resource type="PackedScene" uid="uid://7jekns5y01qt" path="res://player/player.tscn" id="3_ba8e1"]
-[ext_resource type="Script" path="res://levels/CorruptionWeapons.gd" id="4_vj0u6"]
-[ext_resource type="PackedScene" uid="uid://br7m47vps1buj" path="res://player/weapons/corruption_weapon.tscn" id="6_0s8x0"]
-[ext_resource type="PackedScene" uid="uid://bls6xcjkc11f2" path="res://player/weapons/weapon_indicator.tscn" id="6_b2cmo"]
-[ext_resource type="Script" path="res://levels/FireballGenerator.gd" id="6_x1b8e"]
 [ext_resource type="Script" path="res://levels/enemy_spawner.gd" id="7_t3rld"]
 [ext_resource type="Script" path="res://levels/spawn_point.gd" id="8_5g4ly"]
 [ext_resource type="PackedScene" uid="uid://cekvrrpspxf05" path="res://levels/menu/menu_game_over_screen/game_over.tscn" id="10_3gq4o"]
 [ext_resource type="PackedScene" uid="uid://d35scto40h1yy" path="res://components/hud.tscn" id="10_jlt4q"]
-
-[sub_resource type="GDScript" id="GDScript_62t1d"]
-script/source = "extends Timer
-
-
-func _on_timeout():
-	SignalManager.on_game_over.emit(false)
-"
-
-[sub_resource type="GDScript" id="GDScript_3f0yd"]
-script/source = "extends Timer
-
-func _on_timeout():
-	SignalManager.on_difficulty_up.emit()
-"
 
 [sub_resource type="Environment" id="Environment_5v3mb"]
 background_mode = 3
@@ -47,38 +28,32 @@ func _ready():
 	CorruptionEngine.reset_tiles(self)
 "
 
+[sub_resource type="GDScript" id="GDScript_3xnds"]
+script/source = "extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	GameEngine.set_enemy_container(self)
+"
+
 [sub_resource type="GDScript" id="GDScript_ur7c7"]
 script/source = "extends Timer
 
 const SPAWN_RATE_INCREASE: float = 0.95
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	SignalManager.on_difficulty_up.connect(difficulty_up)
-
+	GameEngine.difficulty_up_timer.timeout.connect(difficulty_up)
 
 func difficulty_up():
 	wait_time *= SPAWN_RATE_INCREASE
 "
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_7onf8"]
-radius = 32.0
+[sub_resource type="GDScript" id="GDScript_kycae"]
+script/source = "extends Node2D
 
-[sub_resource type="GDScript" id="GDScript_8hwy8"]
-script/source = "extends Timer
-
-const STANDARD_COOLDOWN: float = 1.5
-const BOOST_COOLDOWN: float = 0.75
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	SignalManager.on_player_attack_boost.connect(boost_switch)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func boost_switch(enabled: bool):
-	if enabled:
-		wait_time = BOOST_COOLDOWN
-	else:
-		wait_time = STANDARD_COOLDOWN
+	GameEngine.set_projectile_container(self)
 "
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ccqom"]
@@ -97,17 +72,6 @@ normal = Vector2(-1, 0)
 [node name="BaseLevel" type="Node2D"]
 script = ExtResource("1_v7j55")
 
-[node name="GameWinTimer" type="Timer" parent="."]
-wait_time = 600.0
-one_shot = true
-autostart = true
-script = SubResource("GDScript_62t1d")
-
-[node name="DifficultyUpTimer" type="Timer" parent="."]
-wait_time = 30.0
-autostart = true
-script = SubResource("GDScript_3f0yd")
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_5v3mb")
 
@@ -120,56 +84,42 @@ layer_1/name = "Plague"
 layer_1/tile_data = PackedInt32Array()
 script = SubResource("GDScript_qnxkm")
 
-[node name="EnemySpawner" type="Node2D" parent="."]
+[node name="EnemyGenerator" type="Node2D" parent="."]
 position = Vector2(576, 328)
 script = ExtResource("7_t3rld")
 
-[node name="EnemySpawn" type="Marker2D" parent="EnemySpawner"]
+[node name="EnemySpawn" type="Marker2D" parent="EnemyGenerator"]
 position = Vector2(-656, -371)
 script = ExtResource("8_5g4ly")
 
-[node name="EnemySpawn2" type="Marker2D" parent="EnemySpawner"]
+[node name="EnemySpawn2" type="Marker2D" parent="EnemyGenerator"]
 position = Vector2(626, -371)
 script = ExtResource("8_5g4ly")
 
-[node name="EnemySpawn3" type="Marker2D" parent="EnemySpawner"]
+[node name="EnemySpawn3" type="Marker2D" parent="EnemyGenerator"]
 position = Vector2(626, 396)
 script = ExtResource("8_5g4ly")
 
-[node name="EnemySpawn4" type="Marker2D" parent="EnemySpawner"]
+[node name="EnemySpawn4" type="Marker2D" parent="EnemyGenerator"]
 position = Vector2(-656, 391)
 script = ExtResource("8_5g4ly")
 
-[node name="SpawnTimer" type="Timer" parent="EnemySpawner"]
+[node name="EnemyContainer" type="Node2D" parent="EnemyGenerator"]
+position = Vector2(-576, -328)
+script = SubResource("GDScript_3xnds")
+
+[node name="SpawnTimer" type="Timer" parent="EnemyGenerator"]
 wait_time = 3.0
 autostart = true
 script = SubResource("GDScript_ur7c7")
-
-[node name="Enemies" type="Node2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("3_ba8e1")]
 position = Vector2(532, 411)
 scale = Vector2(2, 2)
 
-[node name="CorruptionWeapons" type="Node2D" parent="Player"]
-show_behind_parent = true
-scale = Vector2(0.5, 0.5)
-script = ExtResource("4_vj0u6")
-
-[node name="BasicCorrupt" parent="Player/CorruptionWeapons" instance=ExtResource("6_0s8x0")]
-cooldown = 5.0
-hitbox = SubResource("CircleShape2D_7onf8")
-
-[node name="WeaponIndicator" parent="Player" instance=ExtResource("6_b2cmo")]
-
-[node name="FireballGenerator" type="Node2D" parent="."]
+[node name="ProjectileContainer" type="Node2D" parent="."]
 scale = Vector2(2, 2)
-script = ExtResource("6_x1b8e")
-
-[node name="FireballTimer" type="Timer" parent="FireballGenerator"]
-wait_time = 2.0
-autostart = true
-script = SubResource("GDScript_8hwy8")
+script = SubResource("GDScript_kycae")
 
 [node name="LevelBorders" type="StaticBody2D" parent="."]
 
@@ -189,11 +139,8 @@ position = Vector2(1152, 0)
 shape = SubResource("WorldBoundaryShape2D_3iytt")
 
 [node name="HUD" parent="." instance=ExtResource("10_jlt4q")]
-layer = 50
+layer = 2
 
 [node name="GameOver" parent="." instance=ExtResource("10_3gq4o")]
 
-[connection signal="timeout" from="GameWinTimer" to="GameWinTimer" method="_on_timeout"]
-[connection signal="timeout" from="DifficultyUpTimer" to="DifficultyUpTimer" method="_on_timeout"]
-[connection signal="timeout" from="EnemySpawner/SpawnTimer" to="EnemySpawner" method="_on_spawn_timer_timeout"]
-[connection signal="timeout" from="FireballGenerator/FireballTimer" to="FireballGenerator" method="_on_fireball_timer_timeout"]
+[connection signal="timeout" from="EnemyGenerator/SpawnTimer" to="EnemyGenerator" method="_on_spawn_timer_timeout"]

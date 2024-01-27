@@ -1,3 +1,4 @@
+class_name PlayerCharacter
 extends CharacterBody2D
 
 ## Represents player character with it's collision shape, sprite and animation
@@ -13,12 +14,12 @@ const SPEED = 250.0
 
 enum State {RUN, DEATH}
 
-var state: int
+var state: int = State.RUN
 var _ult_available = true
 var _boost_available = true
 
 func _ready():
-	state = State.RUN
+	GameEngine.set_player(self)
 
 func _physics_process(_delta):
 	if state == State.RUN:
@@ -26,16 +27,17 @@ func _physics_process(_delta):
 
 func _input(event):
 	if state == State.RUN:
-		if event.is_action_pressed("Attack boost"):
+		if _boost_available and event.is_action_pressed("Attack boost"):
 			_boost_available = false
 			SignalManager.on_player_attack_boost.emit(true)
 			SignalManager.on_boost_available_switch.emit(_boost_available)
-			$BoostCooldown.start()
+			# TODO: change input handling for abilities
+			$PlayerWeapons/Fireball/BoostCooldown.start()
 			get_viewport().set_input_as_handled()
 
 		if _ult_available and event.is_action_pressed("Ultimate skill"):
 			var ult = ULT_SKILL.instantiate()
-			add_child(ult)
+			add_weapon(ult)
 			_ult_available = false
 			SignalManager.on_ult_available_switch.emit(_ult_available)
 			get_viewport().set_input_as_handled()
@@ -66,7 +68,11 @@ func _on_player_death_animation_finished(anim_name):
 	if anim_name == "death":
 		SignalManager.on_game_over.emit(true)
 
+####################################################
 
 func _on_boost_cooldown_timeout():
 	_boost_available = true
 	SignalManager.on_boost_available_switch.emit(_boost_available)
+
+func add_weapon(weapon: Node2D):
+	$PlayerWeapons.add_child(weapon)
