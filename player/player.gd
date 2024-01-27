@@ -26,7 +26,7 @@ func _physics_process(_delta):
 
 func _input(event):
 	if state == State.RUN:
-		if event.is_action_pressed("Attack boost"):
+		if _boost_available and event.is_action_pressed("Attack boost"):
 			_boost_available = false
 			SignalManager.on_player_attack_boost.emit(true)
 			SignalManager.on_boost_available_switch.emit(_boost_available)
