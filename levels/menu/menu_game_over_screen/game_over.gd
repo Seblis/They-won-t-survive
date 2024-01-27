@@ -23,4 +23,3 @@ func game_over(player_dead: bool):
 	visible = true
 	
 	HighScoreList.register_new_score()
-	

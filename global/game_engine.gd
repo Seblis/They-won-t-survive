@@ -22,9 +22,6 @@ var _corrupted_area: int = 0
 var _kill_amount: int = 0
 var _game_win_bonus: int = 0
 
-func _ready():
-	SignalManager.on_game_over.connect(is_player_killed)
-
 func _physics_process(delta):
 	if _current_buffer:
 		_current_buffer -= 1
@@ -78,10 +75,6 @@ func update_score(enemy_killed: bool):
 
 	SignalManager.on_score_updated.emit(get_score())
 
-func is_player_killed(player_killed: bool):
-	if not player_killed:
-		_game_win_bonus = SURVIVE_BONUS
-
 func get_score():
 	var score: int = _game_win_bonus
 	score += _kill_amount * K_SCORE_MULTIPLIER
@@ -91,6 +84,10 @@ func get_score():
 	return score
 
 ################# TIME SECTION ###############
+
+func player_won():
+	_game_win_bonus = SURVIVE_BONUS
+	SignalManager.on_game_over.emit(false)
 
 func game_time_left():
 	return game_win_timer.time_left

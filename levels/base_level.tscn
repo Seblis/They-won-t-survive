@@ -38,8 +38,7 @@ script/source = "extends Timer
 const SPAWN_RATE_INCREASE: float = 0.95
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	SignalManager.on_difficulty_up.connect(difficulty_up)
-
+	GameEngine.difficulty_up_timer.timeout.connect(difficulty_up)
 
 func difficulty_up():
 	wait_time *= SPAWN_RATE_INCREASE
