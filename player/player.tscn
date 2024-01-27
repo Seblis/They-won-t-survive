@@ -155,7 +155,7 @@ position = Vector2(-1, -1)
 health = NodePath("../HealthComponent")
 invincibility_frames = 30
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtboxComponent"]
+[node name="HurtboxShape" type="CollisionShape2D" parent="HurtboxComponent"]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_lkj30")
 

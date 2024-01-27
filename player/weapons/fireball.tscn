@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b2ai8x2q3rblp"]
 
-[ext_resource type="Script" path="res://player/weapons/Fireball.gd" id="1_o737f"]
+[ext_resource type="Script" path="res://player/weapons/fireball.gd" id="1_e2631"]
 
 [sub_resource type="GDScript" id="GDScript_1f7nh"]
 script/source = "extends Timer
@@ -37,7 +37,7 @@ func boost_switch(enabled: bool):
 "
 
 [node name="Fireball" type="Node"]
-script = ExtResource("1_o737f")
+script = ExtResource("1_e2631")
 
 [node name="BoostTimer" type="Timer" parent="."]
 wait_time = 4.0
