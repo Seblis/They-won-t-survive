@@ -47,7 +47,6 @@ func switch_texture(ult_available: bool):
 "
 
 [node name="HUD" type="CanvasLayer"]
-layer = 100
 
 [node name="HudBackground" type="NinePatchRect" parent="."]
 light_mask = 0

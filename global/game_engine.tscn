@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2ml6ot2os12u"]
+
+[ext_resource type="Script" path="res://global/game_engine.gd" id="1_300s7"]
+
+[sub_resource type="GDScript" id="GDScript_8op47"]
+script/source = "extends Timer
+
+
+func _on_timeout():
+	SignalManager.on_game_over.emit(false)
+"
+
+[sub_resource type="GDScript" id="GDScript_skk71"]
+script/source = "extends Timer
+
+func _on_timeout():
+	SignalManager.on_difficulty_up.emit()
+"
+
+[node name="GameEngine" type="Node"]
+script = ExtResource("1_300s7")
+
+[node name="GameWinTimer" type="Timer" parent="."]
+wait_time = 600.0
+one_shot = true
+script = SubResource("GDScript_8op47")
+
+[node name="DifficultyUpTimer" type="Timer" parent="."]
+wait_time = 30.0
+script = SubResource("GDScript_skk71")
+
+[connection signal="timeout" from="GameWinTimer" to="GameWinTimer" method="_on_timeout"]
+[connection signal="timeout" from="DifficultyUpTimer" to="DifficultyUpTimer" method="_on_timeout"]

@@ -11,6 +11,9 @@ const K_SCORE_MULTIPLIER: int = 8
 const SURVIVE_BONUS: int = 10000
 const BUFFER_FRAMES: int = 3
 
+@onready var game_win_timer = $GameWinTimer
+@onready var difficulty_up_timer = $DifficultyUpTimer
+
 var _weapon_direction: Vector2 = Vector2(1, 0)
 var _last_diagonal: Vector2 = Vector2.ZERO
 var _current_buffer: int = 0
@@ -54,6 +57,18 @@ func get_weapon_direction():
 
 #################### SCORE SECTION ########################
 
+func start_game():
+	_kill_amount = 0
+	_blessed_area = 0
+	_corrupted_area = 0
+	
+	SignalManager.on_score_updated.emit(get_score())
+	
+	game_win_timer.start()
+	difficulty_up_timer.start()
+	
+	get_tree().paused = false
+
 func update_score(enemy_killed: bool):
 	if enemy_killed:
 		_kill_amount += 1
@@ -61,13 +76,6 @@ func update_score(enemy_killed: bool):
 		_corrupted_area = CorruptionEngine.get_corrupted_area()
 		_blessed_area = CorruptionEngine.get_blessed_area()
 
-	SignalManager.on_score_updated.emit(get_score())
-
-func reset_score():
-	_kill_amount = 0
-	_blessed_area = 0
-	_corrupted_area = 0
-	
 	SignalManager.on_score_updated.emit(get_score())
 
 func is_player_killed(player_killed: bool):
@@ -81,3 +89,8 @@ func get_score():
 	score += _corrupted_area * C_SCORE_MULTIPLIER
 	
 	return score
+
+################# TIME SECTION ###############
+
+func game_time_left():
+	return game_win_timer.time_left
