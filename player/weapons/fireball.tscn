@@ -1,39 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://b2ai8x2q3rblp"]
+[gd_scene load_steps=3 format=3 uid="uid://b2ai8x2q3rblp"]
 
 [ext_resource type="Script" path="res://player/weapons/fireball.gd" id="1_e2631"]
 
-[sub_resource type="GDScript" id="GDScript_1f7nh"]
+[sub_resource type="GDScript" id="GDScript_dx627"]
 script/source = "extends Timer
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	SignalManager.on_player_attack_boost.connect(boost_switched)
-
-func boost_switched(boost_enabled: bool):
-	if boost_enabled:
-		start()
 
 func _on_timeout():
-	SignalManager.on_player_attack_boost.emit(false)
-"
-
-[sub_resource type="GDScript" id="GDScript_h27e5"]
-script/source = "extends Timer
-
-const STANDARD_COOLDOWN: float = 1.5
-const BOOST_COOLDOWN: float = 0.75
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	SignalManager.on_player_attack_boost.connect(boost_switch)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func boost_switch(enabled: bool):
-	if enabled:
-		wait_time = BOOST_COOLDOWN
-	else:
-		wait_time = STANDARD_COOLDOWN
+	SignalManager.on_ability_used.emit(true)
 "
 
 [node name="Fireball" type="Node"]
@@ -41,15 +14,17 @@ script = ExtResource("1_e2631")
 
 [node name="BoostTimer" type="Timer" parent="."]
 wait_time = 4.0
-script = SubResource("GDScript_1f7nh")
+one_shot = true
 
 [node name="BoostCooldown" type="Timer" parent="."]
 wait_time = 30.0
+one_shot = true
+script = SubResource("GDScript_dx627")
 
 [node name="FireballTimer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
-script = SubResource("GDScript_h27e5")
 
-[connection signal="timeout" from="BoostTimer" to="BoostTimer" method="_on_timeout"]
-[connection signal="timeout" from="FireballTimer" to="." method="_on_fireball_timer_timeout"]
+[connection signal="timeout" from="BoostTimer" to="." method="_on_boost_timer_timeout"]
+[connection signal="timeout" from="BoostCooldown" to="BoostCooldown" method="_on_timeout"]
+[connection signal="timeout" from="FireballTimer" to="." method="_fire_projectile"]

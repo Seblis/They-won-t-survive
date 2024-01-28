@@ -6,6 +6,9 @@ extends CharacterBody2D
 ## The class doesn't know about player's weapons - they are added in the game as
 ## a children of Player class and are shooting by themselves
 
+signal on_ability_pressed()
+signal on_ult_pressed()
+
 const ULT_SKILL: PackedScene = preload("res://player/weapons/ultimate_skill.tscn")
 const SPEED = 250.0
 
@@ -16,10 +19,11 @@ enum State {RUN, DEATH}
 
 var state: int = State.RUN
 var _ult_available = true
-var _boost_available = true
+var _ability_on_cooldown = false
 
 func _ready():
 	GameEngine.set_player(self)
+	SignalManager.on_ability_used.connect(ability_cooldown_switch)
 
 func _physics_process(_delta):
 	if state == State.RUN:
@@ -27,19 +31,16 @@ func _physics_process(_delta):
 
 func _input(event):
 	if state == State.RUN:
-		if _boost_available and event.is_action_pressed("Attack boost"):
-			_boost_available = false
-			SignalManager.on_player_attack_boost.emit(true)
-			SignalManager.on_boost_available_switch.emit(_boost_available)
+		if event.is_action_pressed("Basic ability") and not _ability_on_cooldown:
 			# TODO: change input handling for abilities
-			$PlayerWeapons/Fireball/BoostCooldown.start()
+			SignalManager.on_ability_used.emit(false)
 			get_viewport().set_input_as_handled()
 
-		if _ult_available and event.is_action_pressed("Ultimate skill"):
+		if _ult_available and event.is_action_pressed("Ultimate ability"):
+			_ult_available = false
 			var ult = ULT_SKILL.instantiate()
 			add_weapon(ult)
-			_ult_available = false
-			SignalManager.on_ult_available_switch.emit(_ult_available)
+			SignalManager.on_ultimate_used.emit(_ult_available)
 			get_viewport().set_input_as_handled()
 
 func update_run():
@@ -70,9 +71,8 @@ func _on_player_death_animation_finished(anim_name):
 
 ####################################################
 
-func _on_boost_cooldown_timeout():
-	_boost_available = true
-	SignalManager.on_boost_available_switch.emit(_boost_available)
+func ability_cooldown_switch(ability_used: bool):
+	_ability_on_cooldown = not _ability_on_cooldown
 
 func add_weapon(weapon: Node2D):
 	$PlayerWeapons.add_child(weapon)
