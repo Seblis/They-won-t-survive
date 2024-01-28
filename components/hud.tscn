@@ -39,8 +39,8 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func switch_texture(ult_available: bool):
-	if ult_available:
+func switch_texture(was_on_cooldown: bool):
+	if was_on_cooldown:
 		texture = ULT_AVAILABLE
 	else:
 		texture = ULT_USED

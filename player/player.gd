@@ -18,7 +18,7 @@ const SPEED = 250.0
 enum State {RUN, DEATH}
 
 var state: int = State.RUN
-var _ult_available = true
+var _ult_on_cooldown = false
 var _ability_on_cooldown = false
 
 func _ready():
@@ -31,16 +31,16 @@ func _physics_process(_delta):
 
 func _input(event):
 	if state == State.RUN:
-		if event.is_action_pressed("Basic ability") and not _ability_on_cooldown:
+		if not _ability_on_cooldown and event.is_action_pressed("Basic ability"):
 			# TODO: change input handling for abilities
 			SignalManager.on_ability_used.emit(false)
 			get_viewport().set_input_as_handled()
 
-		if _ult_available and event.is_action_pressed("Ultimate ability"):
-			_ult_available = false
+		if not _ult_on_cooldown and event.is_action_pressed("Ultimate ability"):
 			var ult = ULT_SKILL.instantiate()
 			add_weapon(ult)
-			SignalManager.on_ultimate_used.emit(_ult_available)
+			SignalManager.on_ultimate_used.emit(_ult_on_cooldown)
+			_ult_on_cooldown = true
 			get_viewport().set_input_as_handled()
 
 func update_run():
