@@ -4,7 +4,6 @@
 [ext_resource type="TileSet" uid="uid://8cfel0ses07a" path="res://assets/tiles/base_level_tileset.tres" id="2_ln7d0"]
 [ext_resource type="PackedScene" uid="uid://7jekns5y01qt" path="res://player/player.tscn" id="3_ba8e1"]
 [ext_resource type="Script" path="res://levels/enemy_spawner.gd" id="7_t3rld"]
-[ext_resource type="Script" path="res://levels/spawn_point.gd" id="8_5g4ly"]
 [ext_resource type="PackedScene" uid="uid://cekvrrpspxf05" path="res://levels/menu/menu_game_over_screen/game_over.tscn" id="10_3gq4o"]
 [ext_resource type="PackedScene" uid="uid://d35scto40h1yy" path="res://components/hud.tscn" id="10_jlt4q"]
 
@@ -28,14 +27,11 @@ func _ready():
 	CorruptionEngine.reset_tiles(self)
 "
 
-[sub_resource type="GDScript" id="GDScript_3xnds"]
-script/source = "extends Node2D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	GameEngine.set_enemy_container(self)
-"
+[sub_resource type="Curve2D" id="Curve2D_50o6c"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -585, -288, 0, 0, 0, 0, 583, -284, 0, 0, 0, 0, 588, 333, 0, 0, 0, 0, -586, 334, 0, 0, 0, 0, -585, -288)
+}
+point_count = 5
 
 [sub_resource type="GDScript" id="GDScript_ur7c7"]
 script/source = "extends Timer
@@ -47,6 +43,15 @@ func _ready():
 
 func difficulty_up():
 	wait_time *= SPAWN_RATE_INCREASE
+"
+
+[sub_resource type="GDScript" id="GDScript_3xnds"]
+script/source = "extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	GameEngine.set_enemy_container(self)
 "
 
 [sub_resource type="GDScript" id="GDScript_kycae"]
@@ -84,34 +89,22 @@ layer_1/name = "Plague"
 layer_1/tile_data = PackedInt32Array()
 script = SubResource("GDScript_qnxkm")
 
-[node name="EnemyGenerator" type="Node2D" parent="."]
+[node name="EnemySpawner" type="Path2D" parent="."]
 position = Vector2(576, 328)
+curve = SubResource("Curve2D_50o6c")
 script = ExtResource("7_t3rld")
 
-[node name="EnemySpawn" type="Marker2D" parent="EnemyGenerator"]
-position = Vector2(-656, -371)
-script = ExtResource("8_5g4ly")
+[node name="EnemySpawnLocation" type="PathFollow2D" parent="EnemySpawner"]
+position = Vector2(-585, -288)
+rotation = 0.00342464
 
-[node name="EnemySpawn2" type="Marker2D" parent="EnemyGenerator"]
-position = Vector2(626, -371)
-script = ExtResource("8_5g4ly")
-
-[node name="EnemySpawn3" type="Marker2D" parent="EnemyGenerator"]
-position = Vector2(626, 396)
-script = ExtResource("8_5g4ly")
-
-[node name="EnemySpawn4" type="Marker2D" parent="EnemyGenerator"]
-position = Vector2(-656, 391)
-script = ExtResource("8_5g4ly")
-
-[node name="EnemyContainer" type="Node2D" parent="EnemyGenerator"]
-position = Vector2(-576, -328)
-script = SubResource("GDScript_3xnds")
-
-[node name="SpawnTimer" type="Timer" parent="EnemyGenerator"]
+[node name="SpawnTimer" type="Timer" parent="EnemySpawner"]
 wait_time = 3.0
 autostart = true
 script = SubResource("GDScript_ur7c7")
+
+[node name="EnemyContainer" type="Node2D" parent="."]
+script = SubResource("GDScript_3xnds")
 
 [node name="Player" parent="." instance=ExtResource("3_ba8e1")]
 position = Vector2(532, 411)
@@ -143,4 +136,4 @@ layer = 2
 
 [node name="GameOver" parent="." instance=ExtResource("10_3gq4o")]
 
-[connection signal="timeout" from="EnemyGenerator/SpawnTimer" to="EnemyGenerator" method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="EnemySpawner/SpawnTimer" to="EnemySpawner" method="_on_spawn_timer_timeout"]
