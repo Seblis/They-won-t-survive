@@ -17,11 +17,11 @@ const BOOST_COOLDOWN = preload(\"res://assets/sprites/boost_cooldown.png\")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	SignalManager.on_boost_available_switch.connect(change_texture)
+	SignalManager.on_ability_used.connect(ability_cooldown_switched)
 
 
-func change_texture(available: bool):
-	if available:
+func ability_cooldown_switched(on_cooldown: bool):
+	if on_cooldown:
 		texture = BOOST_AVAILABLE
 	else:
 		texture = BOOST_COOLDOWN
@@ -35,12 +35,12 @@ const ULT_USED = preload(\"res://assets/sprites/ult_used.png\")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	SignalManager.on_ult_available_switch.connect(switch_texture)
+	SignalManager.on_ultimate_used.connect(switch_texture)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func switch_texture(ult_available: bool):
-	if ult_available:
+func switch_texture(was_on_cooldown: bool):
+	if was_on_cooldown:
 		texture = ULT_AVAILABLE
 	else:
 		texture = ULT_USED
