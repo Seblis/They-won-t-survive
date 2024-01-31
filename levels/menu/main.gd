@@ -14,8 +14,5 @@ func _on_settings_btn_pressed():
 	get_tree().change_scene_to_file("res://levels/settings/settings_scene.tscn")
 	
 
-func _input(event):
-	if event is InputEventKey:
-		if event.is_pressed() and event.keycode == KEY_H:
-			var high_scores = SCORES_POPUP.instantiate()
-			add_child(high_scores)
+func _on_high_scores_button_pressed():
+	add_child(SCORES_POPUP.instantiate())
