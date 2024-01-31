@@ -44,7 +44,7 @@ label_settings = SubResource("LabelSettings_jx2ly")
 horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(152, 100)
+custom_minimum_size = Vector2(152, 80)
 layout_mode = 2
 
 [node name="PlayButton" type="TextureButton" parent="VBoxContainer"]
@@ -70,6 +70,18 @@ texture_hover = ExtResource("5_4ev2j")
 ignore_texture_size = true
 stretch_mode = 4
 
+[node name="HighScoresButton" type="TextureButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(152, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+texture_normal = ExtResource("4_5pph5")
+texture_pressed = ExtResource("5_4ev2j")
+texture_hover = ExtResource("5_4ev2j")
+ignore_texture_size = true
+stretch_mode = 4
+
 [node name="QuitButton" type="TextureButton" parent="VBoxContainer"]
 custom_minimum_size = Vector2(152, 96)
 layout_mode = 2
@@ -83,4 +95,5 @@ stretch_mode = 4
 
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_btn_pressed"]
 [connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="_on_settings_btn_pressed"]
+[connection signal="pressed" from="VBoxContainer/HighScoresButton" to="." method="_on_high_scores_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_btn_pressed"]
