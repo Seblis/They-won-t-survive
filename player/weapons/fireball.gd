@@ -6,21 +6,20 @@ const BOOST_COOLDOWN: float = 0.75
 
 
 func _ready():
-	SignalManager.on_ability_used.connect(enable_boost)
+	SignalManager.on_player_attack_boost.connect(enable_boost)
 
 func _fire_projectile():
 	var new_fireball = FIREBALL_SCENE.instantiate()
 	
 	GameEngine.get_projectile_container().add_child(new_fireball)
 
-func enable_boost(on_cooldown: bool):
-	if not on_cooldown:
-		$FireballTimer.wait_time = BOOST_COOLDOWN
-		$FireballTimer.start()
-		$BoostCooldown.start()
-		$BoostTimer.start()
-		
-		_fire_projectile()
+func enable_boost():
+	$FireballTimer.wait_time = BOOST_COOLDOWN
+	$FireballTimer.start()
+	$BoostCooldown.start()
+	$BoostTimer.start()
+	
+	_fire_projectile()
 
 
 func _on_boost_timer_timeout():

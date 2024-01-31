@@ -18,12 +18,16 @@ const SPEED = 250.0
 enum State {RUN, DEATH}
 
 var state: int = State.RUN
+var _ability: Callable = Callable(self, "attack_boost")
+var _ultimate: Callable = Callable(self, "global_explosion")
 var _ult_on_cooldown = false
 var _ability_on_cooldown = false
 
 func _ready():
 	GameEngine.set_player(self)
 	SignalManager.on_ability_used.connect(ability_cooldown_switch)
+	SignalManager.on_ultimate_used.connect(ultimate_cooldown_switch)
+	
 
 func _physics_process(_delta):
 	if state == State.RUN:
@@ -33,14 +37,13 @@ func _input(event):
 	if state == State.RUN:
 		if not _ability_on_cooldown and event.is_action_pressed("Basic ability"):
 			# TODO: change input handling for abilities
+			_ability.call()
 			SignalManager.on_ability_used.emit(false)
 			get_viewport().set_input_as_handled()
 
 		if not _ult_on_cooldown and event.is_action_pressed("Ultimate ability"):
-			var ult = ULT_SKILL.instantiate()
-			add_weapon(ult)
-			SignalManager.on_ultimate_used.emit(_ult_on_cooldown)
-			_ult_on_cooldown = true
+			_ultimate.call()
+			SignalManager.on_ultimate_used.emit(false)
 			get_viewport().set_input_as_handled()
 
 func update_run():
@@ -73,6 +76,18 @@ func _on_player_death_animation_finished(anim_name):
 
 func ability_cooldown_switch(ability_used: bool):
 	_ability_on_cooldown = not _ability_on_cooldown
+	
+func ultimate_cooldown_switch(ultimate_used: bool):
+	_ult_on_cooldown = not _ult_on_cooldown
 
 func add_weapon(weapon: Node2D):
 	$PlayerWeapons.add_child(weapon)
+
+################ STARTING WEAPONS #################
+
+func attack_boost():
+	SignalManager.on_player_attack_boost.emit()
+
+func global_explosion():
+	var ult = ULT_SKILL.instantiate()
+	add_weapon(ult)
