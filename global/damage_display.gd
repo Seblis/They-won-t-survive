@@ -9,3 +9,7 @@ func display_number(value: int, position: Vector2, is_critical: bool = false):
 	new_label.text = str(value)
 	new_label.global_position = position + LABEL_OFFSET
 	call_deferred("add_child", new_label)
+
+func clear_labels():
+	for child in get_children():
+		child.queue_free()

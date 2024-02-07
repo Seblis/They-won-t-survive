@@ -15,7 +15,10 @@ func _ready():
 	tween.set_parallel(true)
 	tween.tween_property(self, \"position:y\", position.y - 36, 0.4)
 	tween.tween_property(self, \"modulate:a\", 0, 0.4)
-	SignalManager.on_game_over.connect(queue_free)
+	SignalManager.on_game_over.connect(clear_label)
+
+func clear_label(_player_dead: bool):
+	queue_free()
 "
 
 [node name="DamageLabel" type="Label"]
