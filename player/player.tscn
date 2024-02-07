@@ -146,8 +146,7 @@ libraries = {
 autoplay = "idle"
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_gy1g6")]
-MAX_HEALTH = 20
-HIDE_DAMAGE_LABEL = true
+hide_damage_label = true
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health") instance=ExtResource("4_uivmg")]
 unique_name_in_owner = true

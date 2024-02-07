@@ -6,6 +6,7 @@ extends Area2D
 ## Usage requires to add HealthComponent in the node inspector
 
 @export var health: HealthComponent = null
+@export var suppress_damage_display: bool = false
 @export var invincibility_frames: int = 0
 var _remaining_invincibility: int = 0
 # we can add hit animation here
@@ -22,6 +23,7 @@ func _physics_process(_delta):
 func _on_body_entered(body):
 	if body.is_in_group(GameEngine.GROUP_WEAPON):
 		health.damage(body.get_damage())
+		
 		if invincibility_frames:
 			_remaining_invincibility = invincibility_frames
 			set_deferred("monitoring", false)

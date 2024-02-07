@@ -23,6 +23,7 @@ boot_splash/minimum_display_time=1500
 GameEngine="*res://global/game_engine.tscn"
 SignalManager="*res://global/signal_manager.gd"
 CorruptionEngine="*res://global/corruption_engine.gd"
+DamageDisplay="*res://global/damage_display.gd"
 
 [display]
 
