@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://tfc2xqsxsyri"]
 
 [ext_resource type="FontFile" uid="uid://dj731tie8fq6k" path="res://assets/fonts/PublicPixel-z84yD.ttf" id="1_bwkg1"]
-[ext_resource type="Script" path="res://components/time_left_value.gd" id="2_lv0wi"]
+[ext_resource type="Script" path="res://components/hud/time_left_value.gd" id="2_lv0wi"]
 
 [node name="TimeLeftNode" type="HBoxContainer"]
 

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://7jekns5y01qt" path="res://player/player.tscn" id="3_ba8e1"]
 [ext_resource type="Script" path="res://levels/enemy_spawner.gd" id="7_t3rld"]
 [ext_resource type="PackedScene" uid="uid://cekvrrpspxf05" path="res://levels/menu/menu_game_over_screen/game_over.tscn" id="10_3gq4o"]
-[ext_resource type="PackedScene" uid="uid://d35scto40h1yy" path="res://components/hud.tscn" id="10_jlt4q"]
+[ext_resource type="PackedScene" uid="uid://d35scto40h1yy" path="res://components/hud/hud.tscn" id="10_jlt4q"]
 
 [sub_resource type="Environment" id="Environment_5v3mb"]
 background_mode = 3
