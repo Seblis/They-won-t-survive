@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7sfyaupd0yij"]
+
+[ext_resource type="PackedScene" uid="uid://dp3pwifub2y1u" path="res://components/table_frame.tscn" id="1_6ggtl"]
+[ext_resource type="LabelSettings" uid="uid://bn6w3soe7wukn" path="res://assets/fonts/styles/high_score_table.tres" id="2_y2oap"]
+
+[node name="UpgradesTable" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 192
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_right = 192
+theme_override_constants/margin_bottom = 128
+
+[node name="TableFrame" parent="MarginContainer" instance=ExtResource("1_6ggtl")]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TitleMargin" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/TitleMargin"]
+layout_mode = 2
+text = "Choose the upgrade"
+label_settings = ExtResource("2_y2oap")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16

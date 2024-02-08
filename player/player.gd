@@ -10,7 +10,8 @@ signal on_ability_pressed()
 signal on_ult_pressed()
 
 const ULT_SKILL: PackedScene = preload("res://player/weapons/ultimate_skill.tscn")
-const SPEED = 250.0
+
+@export var speed = 250.0
 
 @onready var animation_player = $AnimationPlayer
 @onready var sprite_2d = $Sprite2D
@@ -51,7 +52,7 @@ func update_run():
 	direction.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	direction.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 
-	velocity = direction.normalized() * SPEED
+	velocity = direction.normalized() * speed
 
 	if direction.x or direction.y:
 		animation_player.play("run")
