@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dnir1x8y7jw7o"]
 
 [ext_resource type="FontFile" uid="uid://dj731tie8fq6k" path="res://assets/fonts/PublicPixel-z84yD.ttf" id="1_ts1u4"]
-[ext_resource type="Script" path="res://components/score_value_label.gd" id="2_xcajn"]
+[ext_resource type="Script" path="res://components/hud/score_value_label.gd" id="2_xcajn"]
 
 [node name="ScoreNode" type="HBoxContainer"]
 offset_left = 30.0

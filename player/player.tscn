@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://cd4cs8hln34in" path="res://assets/sprites/Imp Sprite Sheet.png" id="1_8sb3y"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_ukcj2"]
-[ext_resource type="PackedScene" uid="uid://b2go81nmxue1a" path="res://components/HealthComponent.tscn" id="3_gy1g6"]
+[ext_resource type="PackedScene" uid="uid://b2go81nmxue1a" path="res://components/entity components/HealthComponent.tscn" id="3_gy1g6"]
 [ext_resource type="PackedScene" uid="uid://bls6xcjkc11f2" path="res://player/weapons/weapon_indicator.tscn" id="3_nra7j"]
-[ext_resource type="PackedScene" uid="uid://cflwltu4sv4i1" path="res://components/HurtboxComponent.tscn" id="4_uivmg"]
+[ext_resource type="PackedScene" uid="uid://cflwltu4sv4i1" path="res://components/entity components/HurtboxComponent.tscn" id="4_uivmg"]
 [ext_resource type="PackedScene" uid="uid://br7m47vps1buj" path="res://player/weapons/corruption_outburst.tscn" id="5_63ygj"]
 [ext_resource type="PackedScene" uid="uid://b2ai8x2q3rblp" path="res://player/weapons/fireball.tscn" id="7_7q3qh"]
 
