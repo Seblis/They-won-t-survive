@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://7jekns5y01qt"]
+[gd_scene load_steps=19 format=3 uid="uid://7jekns5y01qt"]
 
 [ext_resource type="Texture2D" uid="uid://cd4cs8hln34in" path="res://assets/sprites/Imp Sprite Sheet.png" id="1_8sb3y"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_ukcj2"]
@@ -124,6 +124,26 @@ size = Vector2(12, 12)
 [sub_resource type="CircleShape2D" id="CircleShape2D_copgm"]
 radius = 32.0
 
+[sub_resource type="GDScript" id="GDScript_pkjg5"]
+script/source = "extends Timer
+
+var upgrades_table: PackedScene = preload(\"res://player/upgrades/upgrades_table.tscn\")
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+
+func _on_timeout():
+	var table = upgrades_table.instantiate()
+	add_child(table)
+"
+
 [node name="Player" type="CharacterBody2D" groups=["GROUP_PLAYER"]]
 collision_layer = 17
 collision_mask = 13
@@ -171,5 +191,12 @@ hitbox = SubResource("CircleShape2D_copgm")
 
 [node name="Fireball" parent="PlayerWeapons" instance=ExtResource("7_7q3qh")]
 
+[node name="TmpUpgradeTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+script = SubResource("GDScript_pkjg5")
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_player_death_animation_finished"]
 [connection signal="on_entity_died" from="HealthComponent" to="." method="_on_player_death"]
+[connection signal="timeout" from="TmpUpgradeTimer" to="TmpUpgradeTimer" method="_on_timeout"]

@@ -14,5 +14,8 @@ func _ready():
 	hp_bar.value = hp_bar.max_value
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _update_bar(value:int):
-	hp_bar.value = value
+func _update_bar(value:int, is_max_hp: bool):
+	if is_max_hp:
+		hp_bar.max_value = value
+	else:
+		hp_bar.value = value

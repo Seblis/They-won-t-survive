@@ -1,15 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7sfyaupd0yij"]
+[gd_scene load_steps=6 format=3 uid="uid://b7sfyaupd0yij"]
 
 [ext_resource type="PackedScene" uid="uid://dp3pwifub2y1u" path="res://components/table_frame.tscn" id="1_6ggtl"]
+[ext_resource type="Script" path="res://player/upgrades/upgrades_table.gd" id="1_o4p4k"]
 [ext_resource type="LabelSettings" uid="uid://bn6w3soe7wukn" path="res://assets/fonts/styles/high_score_table.tres" id="2_y2oap"]
+[ext_resource type="PackedScene" uid="uid://chcuh4p1byl40" path="res://player/upgrades/upgrade_hp_up.tscn" id="4_3m58l"]
+[ext_resource type="PackedScene" uid="uid://cve7k05kbrvcb" path="res://player/upgrades/upgrade_heal.tscn" id="5_1x74p"]
 
 [node name="UpgradesTable" type="Control"]
+process_mode = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_o4p4k")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -44,7 +49,15 @@ vertical_alignment = 1
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="UpgradesContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
 theme_override_constants/separation = 16
+alignment = 1
+
+[node name="UpgradeHpUp" parent="MarginContainer/VBoxContainer/UpgradesContainer" instance=ExtResource("4_3m58l")]
+visible = false
+layout_mode = 2
+
+[node name="UpgradeHeal" parent="MarginContainer/VBoxContainer/UpgradesContainer" instance=ExtResource("5_1x74p")]
+visible = false
+layout_mode = 2

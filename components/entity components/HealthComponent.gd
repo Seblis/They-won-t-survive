@@ -21,7 +21,7 @@ func set_current_health(new_health: int):
 	_current_health = clampi(new_health, 0, max_health)
 	
 	if get_parent().is_in_group(GameEngine.GROUP_PLAYER):
-		SignalManager.on_player_health_updated.emit(_current_health)
+		SignalManager.on_player_health_updated.emit(_current_health, false)
 		
 	if not _current_health:
 		_has_died = true
@@ -39,4 +39,10 @@ func damage(dmg_amount: int, force_hide_label: bool = false):
 	
 func heal(heal_amount: int):
 	damage(-heal_amount, true)
+	
+func modify_max_hp(diff: int):
+	max_health += diff
+	_current_health += diff
+	if get_parent().is_in_group(GameEngine.GROUP_PLAYER):	
+		SignalManager.on_player_health_updated.emit(max_health, true)
 	

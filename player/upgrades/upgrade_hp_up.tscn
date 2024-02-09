@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://chcuh4p1byl40"]
+
+[ext_resource type="Script" path="res://player/upgrades/upgrade_hp_up.gd" id="1_x1hc3"]
+[ext_resource type="PackedScene" uid="uid://c7rnscdhgo7oq" path="res://player/upgrades/generic_upgrade.tscn" id="2_2r3pu"]
+
+[node name="UpgradeHpUp" type="Control"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x1hc3")
+
+[node name="GenericUpgrade" parent="." instance=ExtResource("2_2r3pu")]
+layout_mode = 0
+_title = "HP UP"
+_desc = "MAX HP +5"
+
+[connection signal="pressed" from="GenericUpgrade" to="." method="_apply_upgrade"]

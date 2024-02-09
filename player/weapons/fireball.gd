@@ -24,3 +24,4 @@ func enable_boost():
 
 func _on_boost_timer_timeout():
 	$FireballTimer.wait_time = standard_cooldown
+
