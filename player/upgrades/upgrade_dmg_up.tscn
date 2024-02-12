@@ -23,6 +23,6 @@ anchor_bottom = 0.148
 offset_right = -95.616
 offset_bottom = -95.904
 _title = "DMG UP"
-_desc = "Attack damage +5"
+_desc = "Attack dmg +5"
 
 [connection signal="pressed" from="GenericUpgrade" to="." method="_apply_upgrade"]
