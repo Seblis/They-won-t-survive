@@ -3,11 +3,13 @@ extends CharacterBody2D
 
 const FIRE_DELAY: float = 0.15
 const RECOIL_SPEED: float = 96.0
-@export var damage: int = 5
+const DAMAGE_BONUS: int = 5
+const starting_damage: int = 10
 @export var starting_speed: float = 350.0
 @onready var animation_player = $AnimationPlayer
 @onready var collision_shape_2d = $CollisionShape2D
 
+static var damage: int = starting_damage
 var _speed: float
 var _time_active: float
 var _target_vector: Vector2
@@ -16,8 +18,10 @@ var _hit_target: bool = false
 var _sfx_finished: bool = false
 
 func _ready():
-	_time_active = 0
+	SignalManager.on_game_over.connect(reset_damage)
+	
 	global_position = Vector2(GameEngine.get_player_position())
+	_time_active = 0
 	_speed = starting_speed
 	set_target_direction()
 
@@ -45,7 +49,11 @@ func _on_screen_exited():
 	queue_free()
 	
 func get_damage():
-	return damage
+	if _hit_target:
+		return -1
+	else:
+		_hit_target = true
+		return damage
 	
 func destroy():
 	animation_player.play("land")
@@ -56,7 +64,6 @@ func _on_animation_finished(anim_name = null):
 		if _sfx_finished:
 			queue_free()
 		else:
-			_hit_target = true
 			collision_shape_2d.set_deferred("disabled", true)
 
 func _on_fireball_sound_finished():
@@ -64,3 +71,9 @@ func _on_fireball_sound_finished():
 		queue_free()
 	else:
 		_sfx_finished = true
+		
+static func apply_bonus():
+	damage += DAMAGE_BONUS
+
+func reset_damage(_player_dead: bool):
+	damage = starting_damage

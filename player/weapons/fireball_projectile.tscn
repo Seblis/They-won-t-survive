@@ -89,7 +89,6 @@ _data = {
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("2_e8bpu")
-damage = 10
 
 [node name="FireballSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_sx6u0")

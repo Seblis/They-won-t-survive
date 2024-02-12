@@ -33,6 +33,9 @@ func get_current_health():
 	return _current_health
 	
 func damage(dmg_amount: int, force_hide_label: bool = false):
+	if dmg_amount < 0:
+		return
+
 	_current_health -= dmg_amount
 	if not hide_damage_label and not force_hide_label:
 		DamageDisplay.display_number(dmg_amount, global_position)

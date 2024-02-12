@@ -34,4 +34,4 @@ horizontal_alignment = 1
 
 [node name="Description" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "MAX HP +5"
+text = "DAMAGE UP +5"

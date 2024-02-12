@@ -2,5 +2,5 @@ extends Control
 
 
 func _apply_upgrade():
-	# TODO
+	Fireball.apply_bonus()
 	SignalManager.on_upgrade_chosen.emit()
