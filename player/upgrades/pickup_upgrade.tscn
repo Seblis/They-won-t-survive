@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://bn32m37adilsk"]
+
+[sub_resource type="GDScript" id="GDScript_cnt6n"]
+script/source = "extends Area2D
+
+const upgrades_table: PackedScene = preload(\"res://player/upgrades/upgrades_table.tscn\")
+
+
+func _on_body_entered(body: Node2D):
+	if body.is_in_group(GameEngine.GROUP_PLAYER):
+		var table = upgrades_table.instantiate()
+		get_parent().get_parent().get_parent().add_child(table)
+		queue_free()
+
+
+func _on_expire():
+	queue_free()
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iubjc"]
+
+[node name="PickupUpgrade" type="Area2D"]
+script = SubResource("GDScript_cnt6n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(10, 10)
+shape = SubResource("RectangleShape2D_iubjc")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 20.0
+offset_bottom = 20.0
+
+[node name="ExpireTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="ExpireTimer" to="." method="_on_expire"]

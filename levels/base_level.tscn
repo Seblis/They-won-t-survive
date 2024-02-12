@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cp03yccnrohe1"]
+[gd_scene load_steps=18 format=3 uid="uid://cp03yccnrohe1"]
 
 [ext_resource type="Script" path="res://levels/base_level.gd" id="1_v7j55"]
 [ext_resource type="TileSet" uid="uid://8cfel0ses07a" path="res://assets/tiles/base_level_tileset.tres" id="2_ln7d0"]
@@ -43,6 +43,28 @@ func _ready():
 
 func difficulty_up():
 	wait_time *= SPAWN_RATE_INCREASE
+"
+
+[sub_resource type="GDScript" id="GDScript_w7fot"]
+script/source = "extends Node2D
+
+const pickup_upgrade_scene: PackedScene = preload(\"res://player/upgrades/pickup_upgrade.tscn\")
+@onready var top_left: Marker2D = $TopLeft
+@onready var bottom_right: Marker2D = $BottomRight
+
+func _ready():
+	GameEngine.set_pickup_container(self)
+	
+func _randomize_spawn_point():
+	var x = randf_range(top_left.position.x, bottom_right.position.x)
+	var y = randf_range(top_left.position.y, bottom_right.position.y)
+	
+	return Vector2(x, y)
+
+func _on_upgrade_timer_timeout():
+	var pickup = pickup_upgrade_scene.instantiate()
+	pickup.position = _randomize_spawn_point()
+	GameEngine.add_pickup(pickup)
 "
 
 [sub_resource type="GDScript" id="GDScript_3xnds"]
@@ -103,6 +125,19 @@ wait_time = 3.0
 autostart = true
 script = SubResource("GDScript_ur7c7")
 
+[node name="PickupContainer" type="Node2D" parent="."]
+script = SubResource("GDScript_w7fot")
+
+[node name="UpgradeTimer" type="Timer" parent="PickupContainer"]
+wait_time = 30.0
+autostart = true
+
+[node name="TopLeft" type="Marker2D" parent="PickupContainer"]
+position = Vector2(13, 66)
+
+[node name="BottomRight" type="Marker2D" parent="PickupContainer"]
+position = Vector2(1130, 634)
+
 [node name="EnemyContainer" type="Node2D" parent="."]
 script = SubResource("GDScript_3xnds")
 
@@ -137,3 +172,4 @@ layer = 2
 [node name="GameOver" parent="." instance=ExtResource("10_3gq4o")]
 
 [connection signal="timeout" from="EnemySpawner/SpawnTimer" to="EnemySpawner" method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="PickupContainer/UpgradeTimer" to="PickupContainer" method="_on_upgrade_timer_timeout"]

@@ -25,6 +25,7 @@ var _game_win_bonus: int = 0
 
 var _projectile_container: Node2D
 var _enemy_container: Node2D
+var _pickup_container: Node2D
 var _player: PlayerCharacter
 
 func _physics_process(delta):
@@ -116,6 +117,12 @@ func get_projectile_container():
 
 func add_projectile(enemy: Node2D):
 	_projectile_container.add_child(enemy)
+
+func set_pickup_container(container: Node2D):
+	_pickup_container = container
+
+func add_pickup(pickup: Node2D):
+	_pickup_container.add_child(pickup)
 
 func set_player(player: PlayerCharacter):
 	_player = player
